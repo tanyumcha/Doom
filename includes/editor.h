@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/10/08 13:01:53 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/10 14:33:33 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,6 @@ void					draw_hors(t_sdl *sdl, t_point *grid_field);
 void					draw(t_sdl *sdl, t_sector *head, t_point *grid_field);
 void					draw_a_sector(t_sdl *sdl, t_sector *sector, int i);
 void					draw_a_point(t_sdl *sdl, t_point *point, int i);
+void					remove_last_point(t_sdl *sdl, t_sector *head, t_point *grid_field, t_sector **sector);
 
 #endif

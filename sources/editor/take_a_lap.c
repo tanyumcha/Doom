@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:46:30 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/10 14:05:24 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/10 14:40:35 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,8 +48,8 @@ int		check_intersect(t_sector *head, int x1, int y1, int x2, int y2)
 
 void	last_point(t_sdl *sdl, t_sector *head, t_point *grid_field, t_sector **sector, int i)
 {
-	if (check_intersect(head, (*sector)->point[(*sector)->size - 1].x, (*sector)->point[(*sector)->size - 1].y, grid_field[i].x, grid_field[i].y) == 0)
-	{
+	// if (check_intersect(head, (*sector)->point[(*sector)->size - 1].x, (*sector)->point[(*sector)->size - 1].y, grid_field[i].x, grid_field[i].y) == 0)
+	// {
 		(*sector)->point[(*sector)->size].x = grid_field[i].x;
 		(*sector)->point[(*sector)->size].y = grid_field[i].y;
 		draw(sdl, head, grid_field);
@@ -58,7 +58,7 @@ void	last_point(t_sdl *sdl, t_sector *head, t_point *grid_field, t_sector **sect
 		printf("SAVE\n");
 	//	save_the_sector(sector->point);
 		(*sector)->size = 0;
-	}
+	// }
 }
 
 int		check_the_touch(t_sector *head, t_sector **sector, int x, int y)
@@ -89,23 +89,23 @@ int		check_the_touch(t_sector *head, t_sector **sector, int x, int y)
 
 void	middle_points(t_sdl *sdl, t_sector *head, t_point *grid_field, t_sector **sector, int i)
 {
-	if ((*sector)->size > 0)
-	{
-		if (check_intersect(head, (*sector)->point[(*sector)->size - 1].x, (*sector)->point[(*sector)->size - 1].y, grid_field[i].x, grid_field[i].y) == 0)
-		{
-			(*sector)->point[(*sector)->size].x = grid_field[i].x;
-			(*sector)->point[(*sector)->size].y = grid_field[i].y;
-			draw(sdl, head, grid_field);
-			(*sector)->size++;
-		}
-	}
-	else
-	{
+	// if ((*sector)->size > 0)
+	// {
+	// 	if (check_intersect(head, (*sector)->point[(*sector)->size - 1].x, (*sector)->point[(*sector)->size - 1].y, grid_field[i].x, grid_field[i].y) == 0)
+	// 	{
+	// 		(*sector)->point[(*sector)->size].x = grid_field[i].x;
+	// 		(*sector)->point[(*sector)->size].y = grid_field[i].y;
+	// 		draw(sdl, head, grid_field);
+	// 		(*sector)->size++;
+	// 	}
+	// }
+	// else
+	// {
 		(*sector)->point[(*sector)->size].x = grid_field[i].x;
 		(*sector)->point[(*sector)->size].y = grid_field[i].y;
 		draw(sdl, head, grid_field);
 		(*sector)->size++;
-	}
+	// }
 }
 
 void	take_a_lap(t_sdl *sdl, t_point *grid_field, t_sector *head, t_sector **sector)
@@ -141,20 +141,20 @@ void	take_a_lap(t_sdl *sdl, t_point *grid_field, t_sector *head, t_sector **sect
 	{
 		if ((i = check_the_grid(grid_field, sdl->mouse_position.x, sdl->mouse_position.y)) >= 0)
 		{
-			if (sect_num > 0 && check_the_touch(head, sector, sdl->mouse_position.x, sdl->mouse_position.y) == 1)
-				{
-					printf("in\n");
-					(*sector)->point[(*sector)->size].x = sdl->mouse_position.x;
-					(*sector)->point[(*sector)->size].y = sdl->mouse_position.y;
-					draw(sdl, head, grid_field);
-					(*sector)->size++;
-					printf("touch\n");
-				}
-			else if (sect_num < 0 || (sect_num > -1 && (*sector)->size > 2)) // для первого сектора и следующей точки после двух касаний
-			// (*sector)->point[(*sector)->size].x = grid_field[i].x;
-			// (*sector)->point[(*sector)->size].y = grid_field[i].y;
-			// draw(sdl, head, grid_field);
-			// (*sector)->size++;
+			// if (sect_num > 0 && check_the_touch(head, sector, sdl->mouse_position.x, sdl->mouse_position.y) == 1)
+			// 	{
+			// 		printf("in\n");
+			// 		(*sector)->point[(*sector)->size].x = sdl->mouse_position.x;
+			// 		(*sector)->point[(*sector)->size].y = sdl->mouse_position.y;
+			// 		draw(sdl, head, grid_field);
+			// 		(*sector)->size++;
+			// 		printf("touch\n");
+			// 	}
+			// else if (sect_num < 0 || (sect_num > -1 && (*sector)->size > 2)) // для первого сектора и следующей точки после двух касаний
+			// // (*sector)->point[(*sector)->size].x = grid_field[i].x;
+			// // (*sector)->point[(*sector)->size].y = grid_field[i].y;
+			// // draw(sdl, head, grid_field);
+			// // (*sector)->size++;
 				middle_points(sdl, head, grid_field, sector, i);
 		}
 	}

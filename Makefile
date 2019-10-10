@@ -6,7 +6,7 @@
 #    By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/15 17:18:06 by djast             #+#    #+#              #
-#    Updated: 2019/10/08 12:47:43 by eharrag-         ###   ########.fr        #
+#    Updated: 2019/10/10 14:40:16 by eharrag-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,18 +43,7 @@ EDITOR_FILES =	editor.c \
 				init_grid.c \
 				bigloop.c \
 				take_a_lap.c \
-				# init.c \
-				# action_mouse.c \
-				# action_keyboard.c \
-				# right_panel.c \
-				# draw_text.c \
-				# create_sdl_var.c \
-				# change_map_size.c \
-				# save_map.c \
-				# load_map.c \
-				# utils.c \
-				# sdl.c \
-				# free.c
+				remover.c \
 
 SRC_DIRECTORY = ./sources/
 SRC_DIRECTORY_EDITOR = $(SRC_DIRECTORY)editor/
