@@ -3,23 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   editor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 13:05:37 by djast             #+#    #+#             */
-/*   Updated: 2019/10/08 15:38:31 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/10 17:02:09 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-t_sector	*init_sector()
+t_sector	*init_sector(int id)
 {
 	t_sector *sector;
 
 	sector = (t_sector *)malloc(sizeof(t_sector));
+	sector->id = id;
 	ft_bzero(sector->point, 100);
 	sector->size = 0;
+	sector->contact_sector_id = -1;
+	sector->count_contact = 0;
 	sector->next = NULL;
+	printf("sector %d created\n", sector->id);
 	return (sector);
 }
 
@@ -31,6 +35,7 @@ void		init_sdl(t_sdl *sdl)
 					SDL_WINDOW_OPENGL);
 	sdl->renderer = SDL_CreateRenderer(sdl->window, -1,
 					SDL_RENDERER_ACCELERATED);
+	sdl->sect_count = 0;
 	SDL_ShowCursor(1);
 }
 
@@ -83,7 +88,7 @@ int			main ()
 
 	i = 0;
 	sdl = (t_sdl *)malloc(sizeof(t_sdl));
-	sector = init_sector();;
+	sector = init_sector(0);
 	head = sector;
 	init_sdl(sdl);
 	init_grid(grid_field);

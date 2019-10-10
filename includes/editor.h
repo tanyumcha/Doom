@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/10/08 13:01:53 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/10 17:01:34 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ typedef struct			s_sdl
 	SDL_Renderer		*renderer;
 	SDL_Event			window_event;
 	SDL_Point			mouse_position;
+	int					sect_count;
+
 }						t_sdl;
 
 typedef struct			s_point
@@ -43,14 +45,17 @@ typedef struct			s_point
 
 typedef struct			s_sector
 {
+	int					id;
 	t_point				point[100];
 	int					size;
 	struct s_sector		*next;
+	int					contact_sector_id;
+	int					count_contact;
 }						t_sector;
 
 void					init_sdl(t_sdl *sdl);
 void					init_grid(t_point *grid_field);
-t_sector				*init_sector();
+t_sector				*init_sector(int id);
 void					big_loop(t_sdl *sdl, t_point *grid_field, t_sector *head, t_sector *sector);
 void					save_the_grid(t_point *grid_field, int start_x, int start_y, int width, int height);
 void					take_a_lap(t_sdl *sdl, t_point *grid_field, t_sector *head, t_sector **sector);

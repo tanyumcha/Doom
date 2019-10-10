@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 10:11:40 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/08 14:25:25 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/10 16:05:23 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	draw_a_sector(t_sdl *sdl, t_sector *sector, int dots)
 	SDL_SetRenderDrawColor(sdl->renderer, 153, 204, 255, 0);
 	draw_a_point(sdl, sector->point, 0);
 	j = 1;
-	while (j < dots + 1)
+	while (j < dots)
 	{
 		draw_a_point(sdl, sector->point, j);
 		SDL_RenderDrawLine(sdl->renderer, sector->point[j - 1].x, sector->point[j - 1].y,
