@@ -6,7 +6,7 @@
 #    By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/15 17:18:06 by djast             #+#    #+#              #
-#    Updated: 2019/10/10 14:40:16 by eharrag-         ###   ########.fr        #
+#    Updated: 2019/10/11 11:16:26 by eharrag-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ EDITOR_FILES =	editor.c \
 				bigloop.c \
 				take_a_lap.c \
 				remover.c \
+				put_stuff.c \
 
 SRC_DIRECTORY = ./sources/
 SRC_DIRECTORY_EDITOR = $(SRC_DIRECTORY)editor/

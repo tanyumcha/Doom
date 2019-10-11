@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:46:30 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/10 14:40:35 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/11 13:13:02 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void	last_point(t_sdl *sdl, t_sector *head, t_point *grid_field, t_sector **sect
 		draw(sdl, head, grid_field);
 		(*sector)->next = init_sector();
 		(*sector) = (*sector)->next;
+		(*sector)->num_of_sector++;
 		printf("SAVE\n");
 	//	save_the_sector(sector->point);
 		(*sector)->size = 0;

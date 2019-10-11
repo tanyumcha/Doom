@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 13:05:37 by djast             #+#    #+#             */
-/*   Updated: 2019/10/10 14:33:49 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/11 13:11:43 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ t_sector	*init_sector()
 	sector = (t_sector *)malloc(sizeof(t_sector));
 	ft_bzero(sector->point, 100);
 	sector->size = 0;
+	sector->num_of_sector = 0;
+	sector->type_of_point = 0;
 	sector->next = NULL;
 	return (sector);
 }
@@ -33,45 +35,6 @@ void		init_sdl(t_sdl *sdl)
 					SDL_RENDERER_ACCELERATED);
 	SDL_ShowCursor(1);
 }
-
-// void		take_a_lap(t_sdl *sdl, t_point *grid_field, t_sector *head, t_sector **sector)
-// {
-// 	int i;
-
-// 	i = 0;
-// 	SDL_GetMouseState(&sdl->mouse_position.x, &sdl->mouse_position.y);
-// //	SDL_Log("Mouse position: x=%i y=%i", sdl->mouse_position.x, sdl->mouse_position.y);
-// 	if ((*sector)->size > 2 && ((sdl->mouse_position.x >= (*sector)->point[0].x - POINT_SIZE / 2 &&
-// 			sdl->mouse_position.x <= (*sector)->point[0].x + POINT_SIZE / 2) &&
-// 			(sdl->mouse_position.y >= (*sector)->point[0].y - POINT_SIZE / 2 &&
-// 			sdl->mouse_position.y <= (*sector)->point[0].y + POINT_SIZE / 2)))
-// 	// if ((*sector)->size > 2 && (i = check_the_grid(grid_field, sdl->mouse_position.x, sdl->mouse_position.y)) >= 0)
-// 	{
-// 		if ((i = check_the_grid(grid_field, sdl->mouse_position.x, sdl->mouse_position.y)) >= 1)
-// 		{
-// 			(*sector)->point[(*sector)->size].x = (*sector)->point[0].x;
-// 			(*sector)->point[(*sector)->size].y = (*sector)->point[0].y;
-// 			// (*sector)->point[(*sector)->size].x = grid_field[i].x;
-// 			// (*sector)->point[(*sector)->size].y = grid_field[i].y;
-// 			draw(sdl, head, grid_field);
-// 			(*sector)->next = init_sector();
-// 			(*sector) = (*sector)->next;
-// 			printf("SAVE\n");
-// 	//		save_the_sector(sector->point);
-// 			(*sector)->size = 0;
-// 		}
-// 	}
-// 	else if (sdl->mouse_position.x < (int)(SIZE_WIN_X * 0.8))
-// 	{
-// 		if ((i = check_the_grid(grid_field, sdl->mouse_position.x, sdl->mouse_position.y)) >= 0)
-// 		{
-// 			(*sector)->point[(*sector)->size].x = grid_field[i].x;
-// 			(*sector)->point[(*sector)->size].y = grid_field[i].y;
-// 			draw(sdl, head, grid_field);
-// 			(*sector)->size++;
-// 		}
-// 	}
-// }
 
 int			main ()
 {
