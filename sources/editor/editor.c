@@ -6,59 +6,26 @@
 /*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 13:05:37 by djast             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2019/10/11 13:11:43 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/14 17:38:02 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-t_sector	*init_sector(int id)
-{
-	t_sector *sector;
-
-	sector = (t_sector *)malloc(sizeof(t_sector));
-	sector->id = id;
-	ft_bzero(sector->point, 100);
-	sector->size = 0;
-	sector->contact_sector_id = -1;
-	sector->count_contact = 0;
-	sector->num_of_sector = 0;
-	sector->type_of_point = 0;
-	sector->next = NULL;
-	printf("sector %d created\n", sector->id);
-	return (sector);
-}
-
-void		init_sdl(t_sdl *sdl)
-{
-	SDL_Init(SDL_INIT_VIDEO);
-	sdl->window = SDL_CreateWindow("Wolf3d", SDL_WINDOWPOS_UNDEFINED,
-					SDL_WINDOWPOS_UNDEFINED, SIZE_WIN_X, SIZE_WIN_Y,
-					SDL_WINDOW_OPENGL);
-	sdl->renderer = SDL_CreateRenderer(sdl->window, -1,
-					SDL_RENDERER_ACCELERATED);
-	sdl->sect_count = 0;
-	SDL_ShowCursor(1);
-}
-
 int			main ()
 {
 	t_sdl		*sdl;
-	t_sector	*sector;
-	t_sector	*head;
-	t_point		grid_field[GRID_SIZE];
 	int			i;
 
 	i = 0;
 	sdl = (t_sdl *)malloc(sizeof(t_sdl));
-	sector = init_sector(0);
-	head = sector;
 	init_sdl(sdl);
-	init_grid(grid_field);
-	redraw(sdl, grid_field);
+	sdl->sectors = init_sector();
+	
+	init_grid(sdl->grid_field);
+	redraw(sdl);
 	SDL_RenderPresent(sdl->renderer);
-	big_loop(sdl, grid_field, head, sector);
+	big_loop(sdl);
 	// while (1)
 	// {
 	// 	if (SDL_PollEvent(&sdl->window_event))

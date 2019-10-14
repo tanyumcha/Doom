@@ -3,49 +3,63 @@
 /*                                                        :::      ::::::::   */
 /*   remover.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:39:39 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/11 11:02:45 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/14 16:54:42 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-void	remove_last_point(t_sdl *sdl, t_sector *head, t_point *grid_field, t_sector **sector)
+void	delete_point(t_sector *sector)
 {
-	if ((*sector)->size > 0)
+	sector->point[sector->size - 1].x = 0;
+	sector->point[sector->size - 1].y = 0;
+	sector->size--;
+}
+
+void	remove_last_point(t_sector **head)
+{
+	t_sector *cur_sector;
+	t_sector *prev_sector;
+
+	prev_sector = *head;
+	cur_sector = (*head)->next;
+	if (cur_sector == NULL)
 	{
-		(*sector)->point[(*sector)->size].x = 0;
-		(*sector)->point[(*sector)->size].y = 0;
-		(*sector)->size--;
-		draw(sdl, head, grid_field);
+		if (prev_sector->size > 0)
+			delete_point(prev_sector);
+		return ;
 	}
-	else if ((*sector)->size == 0)
+	while (cur_sector->next != NULL)
 	{
-		(*sector)->point[(*sector)->size - 1].x = 0;
-		(*sector)->point[(*sector)->size - 1].y = 0;
+		prev_sector = cur_sector;
+		cur_sector = cur_sector->next;
+	}
+	if (cur_sector->size > 0)
+		delete_point(cur_sector);
+	else if (cur_sector->size == 0)
+	{
+		prev_sector->next = NULL;
+		free(cur_sector);
+		delete_point(prev_sector);
 	}
 }
 
-void	remove_last_sector(t_sdl *sdl, t_sector *head, t_point *grid_field, t_sector *sector)
+void	reset(t_sector **head)
 {
-	if (sector != NULL)
-	{
-		ft_bzero(sector->point, 100);
-		sector->size = 0;
-		sector->next = NULL;
-		draw(sdl, head, grid_field);
-	}
-}
+	t_sector **prev;
+	t_sector **cur;
 
-void	reset(t_sdl *sdl, t_sector *head, t_point *grid_field)
-{
-	while (head != NULL)
+	prev = head;
+	cur = &((*head)->next);
+	while (*cur != NULL)
 	{
-		ft_bzero(head->point, 100);
-		head->size = 0;
-		head = head->next;
+		free(*prev);
+		*prev = *cur;
+		*cur = (*cur)->next;
 	}
-	draw(sdl, head, grid_field);
+	ft_bzero((*prev)->point, 100);
+	(*prev)->size = 0;
 }
