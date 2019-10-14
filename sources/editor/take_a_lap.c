@@ -7,10 +7,7 @@
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:46:30 by eharrag-          #+#    #+#             */
 <<<<<<< HEAD
-/*   Updated: 2019/10/10 17:02:11 by djast            ###   ########.fr       */
-=======
-/*   Updated: 2019/10/10 14:40:35 by eharrag-         ###   ########.fr       */
->>>>>>> 725e4d1643fc5941c3cf78feafca59c5b30be3d0
+/*   Updated: 2019/10/11 13:13:02 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +109,7 @@ void	add_point(t_point *grid_field, t_sector **sector, int i)
 		draw(sdl, head, grid_field);
 		(*sector)->next = init_sector();
 		(*sector) = (*sector)->next;
+		(*sector)->num_of_sector++;
 		printf("SAVE\n");
 	//	save_the_sector(sector->point);
 		(*sector)->size = 0;

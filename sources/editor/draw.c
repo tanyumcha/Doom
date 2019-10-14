@@ -27,8 +27,6 @@ void	draw_a_sector(t_sdl *sdl, t_sector *sector, int dots)
 {
 	int j;
 
-
-	SDL_SetRenderDrawColor(sdl->renderer, 153, 204, 255, 0);
 	draw_a_point(sdl, sector->point, 0);
 	j = 1;
 	while (j < dots)
@@ -43,9 +41,21 @@ void	draw_a_sector(t_sdl *sdl, t_sector *sector, int dots)
 void	draw(t_sdl *sdl, t_sector *head, t_point *grid_field)
 {
 	redraw(sdl, grid_field);
+	SDL_SetRenderDrawColor(sdl->renderer, 153, 204, 255, 0);
 	while (head != NULL)
 	{
-		draw_a_sector(sdl, head, head->size);
+		if (head->type_of_point == 0)
+			draw_a_sector(sdl, head, head->size);
+		else if (head->type_of_point == 1)
+		{
+			SDL_SetRenderDrawColor(sdl->renderer, 153, 000, 102, 0);
+			draw_a_point(sdl, head->point, head->type_of_point);
+		}
+		else if (head->type_of_point == 2)
+		{
+			SDL_SetRenderDrawColor(sdl->renderer, 204, 102, 255, 0);
+			draw_a_point(sdl, head->point, head->type_of_point);
+		}
 		head = head->next;
 	}
 	SDL_RenderPresent(sdl->renderer);
