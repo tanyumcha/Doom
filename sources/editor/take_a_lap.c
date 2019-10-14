@@ -6,7 +6,11 @@
 /*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:46:30 by eharrag-          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2019/10/10 17:02:11 by djast            ###   ########.fr       */
+=======
+/*   Updated: 2019/10/10 14:40:35 by eharrag-         ###   ########.fr       */
+>>>>>>> 725e4d1643fc5941c3cf78feafca59c5b30be3d0
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,12 +97,26 @@ int		check_first_touch(t_sector *head, t_sector *sector, int x, int y)
 
 void	add_point(t_point *grid_field, t_sector **sector, int i)
 {
+<<<<<<< HEAD
 		// if (check_intersect(head, (*sector)->point[(*sector)->size - 1].x, (*sector)->point[(*sector)->size - 1].y, grid_field[i].x, grid_field[i].y) == 0)
 		// {
 	(*sector)->point[(*sector)->size].x = grid_field[i].x;
 	(*sector)->point[(*sector)->size].y = grid_field[i].y;
 	(*sector)->size++;
 		//}
+=======
+	// if (check_intersect(head, (*sector)->point[(*sector)->size - 1].x, (*sector)->point[(*sector)->size - 1].y, grid_field[i].x, grid_field[i].y) == 0)
+	// {
+		(*sector)->point[(*sector)->size].x = grid_field[i].x;
+		(*sector)->point[(*sector)->size].y = grid_field[i].y;
+		draw(sdl, head, grid_field);
+		(*sector)->next = init_sector();
+		(*sector) = (*sector)->next;
+		printf("SAVE\n");
+	//	save_the_sector(sector->point);
+		(*sector)->size = 0;
+	// }
+>>>>>>> 725e4d1643fc5941c3cf78feafca59c5b30be3d0
 }
 
 int	dot_in_used(t_sector *sector, int x, int y)
@@ -117,6 +135,7 @@ int	dot_in_used(t_sector *sector, int x, int y)
 
 int		check_id_contact_sector(t_sector *head, int x, int y, int id_check)
 {
+<<<<<<< HEAD
 	int i;
 
 	while (head->next != NULL)
@@ -135,6 +154,25 @@ int		check_id_contact_sector(t_sector *head, int x, int y, int id_check)
 		head = head->next;
 	}
 	return (0);
+=======
+	// if ((*sector)->size > 0)
+	// {
+	// 	if (check_intersect(head, (*sector)->point[(*sector)->size - 1].x, (*sector)->point[(*sector)->size - 1].y, grid_field[i].x, grid_field[i].y) == 0)
+	// 	{
+	// 		(*sector)->point[(*sector)->size].x = grid_field[i].x;
+	// 		(*sector)->point[(*sector)->size].y = grid_field[i].y;
+	// 		draw(sdl, head, grid_field);
+	// 		(*sector)->size++;
+	// 	}
+	// }
+	// else
+	// {
+		(*sector)->point[(*sector)->size].x = grid_field[i].x;
+		(*sector)->point[(*sector)->size].y = grid_field[i].y;
+		draw(sdl, head, grid_field);
+		(*sector)->size++;
+	// }
+>>>>>>> 725e4d1643fc5941c3cf78feafca59c5b30be3d0
 }
 
 void	take_a_lap(t_sdl *sdl, t_point *grid_field, t_sector *head, t_sector **sector)
@@ -147,6 +185,7 @@ void	take_a_lap(t_sdl *sdl, t_point *grid_field, t_sector *head, t_sector **sect
 	{
 		if ((i = check_the_grid(grid_field, sdl->mouse_position.x, sdl->mouse_position.y)) >= 0)
 		{
+<<<<<<< HEAD
 			printf("sector size: %d\n", (*sector)->size);
 			if ((*sector)->size == 0 && ((sdl->sect_count > 0 && check_first_touch(head, *sector, grid_field[i].x, grid_field[i].y) == 1) || sdl->sect_count == 0)) // для первой точки
 			{
@@ -187,6 +226,23 @@ void	take_a_lap(t_sdl *sdl, t_point *grid_field, t_sector *head, t_sector **sect
 				(*sector)->size = 0;
 				
 			}
+=======
+			// if (sect_num > 0 && check_the_touch(head, sector, sdl->mouse_position.x, sdl->mouse_position.y) == 1)
+			// 	{
+			// 		printf("in\n");
+			// 		(*sector)->point[(*sector)->size].x = sdl->mouse_position.x;
+			// 		(*sector)->point[(*sector)->size].y = sdl->mouse_position.y;
+			// 		draw(sdl, head, grid_field);
+			// 		(*sector)->size++;
+			// 		printf("touch\n");
+			// 	}
+			// else if (sect_num < 0 || (sect_num > -1 && (*sector)->size > 2)) // для первого сектора и следующей точки после двух касаний
+			// // (*sector)->point[(*sector)->size].x = grid_field[i].x;
+			// // (*sector)->point[(*sector)->size].y = grid_field[i].y;
+			// // draw(sdl, head, grid_field);
+			// // (*sector)->size++;
+				middle_points(sdl, head, grid_field, sector, i);
+>>>>>>> 725e4d1643fc5941c3cf78feafca59c5b30be3d0
 		}
 	}
 }
