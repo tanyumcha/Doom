@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:27:00 by djast             #+#    #+#             */
-/*   Updated: 2019/10/14 17:38:03 by djast            ###   ########.fr       */
+/*   Updated: 2019/10/16 14:02:44 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ void		init_sdl(t_sdl *sdl)
 					SDL_WINDOW_OPENGL);
 	sdl->renderer = SDL_CreateRenderer(sdl->window, -1,
 					SDL_RENDERER_ACCELERATED);
+	TTF_Init();
+	sdl->font = TTF_OpenFont("resources/Samson.ttf", 200);
+	// if(!sdl->font)
+	// 	printf("TTF_OpenFont: %s\n", TTF_GetError());
 	sdl->type_pressed = WALL_TYPE;
 	sdl->sectors = NULL;
 	sdl->commands = NULL;

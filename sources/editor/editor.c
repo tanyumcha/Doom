@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 13:05:37 by djast             #+#    #+#             */
-/*   Updated: 2019/10/14 17:38:02 by djast            ###   ########.fr       */
+/*   Updated: 2019/10/15 09:48:03 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int			main ()
 	sdl = (t_sdl *)malloc(sizeof(t_sdl));
 	init_sdl(sdl);
 	sdl->sectors = init_sector();
-	
+
 	init_grid(sdl->grid_field);
 	redraw(sdl);
 	SDL_RenderPresent(sdl->renderer);

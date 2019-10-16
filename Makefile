@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: djast <djast@student.42.fr>                +#+  +:+       +#+         #
+#    By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/15 17:18:06 by djast             #+#    #+#              #
-#    Updated: 2019/10/14 17:35:28 by djast            ###   ########.fr        #
+#    Updated: 2019/10/16 12:32:47 by eharrag-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ INCLUDES = -I$(HEADERS_DIRECTORY) -I$(LIBFT_FOLDER) -I$(SDL_TTF_FOLDER) -I$(SDL_
 EDITOR_FILES =	editor.c \
 				draw.c \
 				redraw.c \
+				draw_sidebar.c \
 				draw_grid.c \
 				init_grid.c \
 				bigloop.c \
@@ -48,6 +49,7 @@ EDITOR_FILES =	editor.c \
 				commands.c \
 				utils.c \
 				init.c \
+				check_intersection.c \
 
 SRC_DIRECTORY = ./sources/
 SRC_DIRECTORY_EDITOR = $(SRC_DIRECTORY)editor/

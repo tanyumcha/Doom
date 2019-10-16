@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_stuff.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 11:16:02 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/14 17:51:01 by djast            ###   ########.fr       */
+/*   Updated: 2019/10/16 09:59:57 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ void	set_sprite(t_sdl *sdl)
 
 void	set_player(t_sdl *sdl, int x, int y)
 {
-	sdl->player->x = x;
-	sdl->player->y = y;
-	printf("Player is available\n");
-	add_command(&(sdl->commands), PLAYER_TYPE);
+	if (check_intersection(sdl->sectors, 0, 0, x, y) % 2 == 1)
+	{
+		sdl->player->x = x;
+		sdl->player->y = y;
+		printf("Player is available\n");
+		add_command(&(sdl->commands), PLAYER_TYPE);
+	}
 }
 
 void	make_player_or_sprite(t_sdl *sdl)
