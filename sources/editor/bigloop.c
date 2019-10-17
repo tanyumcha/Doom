@@ -6,11 +6,36 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 11:26:54 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/16 15:16:25 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/17 10:43:49 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
+
+void	clicks(t_sdl *sdl)
+{
+	SDL_GetMouseState(&sdl->mouse_position.x, &sdl->mouse_position.y);
+	if (sdl->type_pressed == WALL_TYPE)
+		make_wall(sdl);
+	if ((sdl->mouse_position.x > BUTTON_PLAYER_X1 && sdl->mouse_position.x < BUTTON_PLAYER_X2) &&
+			(sdl->mouse_position.y > BUTTON_PLAYER_Y1 && sdl->mouse_position.y < BUTTON_PLAYER_Y2))
+	{
+		sdl->type_pressed = PLAYER_TYPE;
+		sdl->button_pushed = PLAYER_PUSH;
+		printf("Player\n");
+	}
+	else if ((sdl->mouse_position.x > BUTTON_MEDKIT_X1 && sdl->mouse_position.x < BUTTON_MEDKIT_X2) &&
+			(sdl->mouse_position.y > BUTTON_MEDKIT_Y1 && sdl->mouse_position.y < BUTTON_MEDKIT_Y2))
+	{
+		sdl->type_pressed = SPRITE_TYPE;
+		sdl->button_pushed = SPRITE_PUSH;
+		printf("Medkit\n");
+	}
+	else if (sdl->type_pressed == PLAYER_TYPE || sdl->type_pressed == SPRITE_TYPE)
+		make_player_or_sprite(sdl);
+	//else if (sdl->type_pressed == SPRITE_TYPE)
+		//make_sprite(sdl);
+}
 
 void	big_loop(t_sdl *sdl)
 {
@@ -52,27 +77,7 @@ void	big_loop(t_sdl *sdl)
 
 			else if (sdl->window_event.type == SDL_MOUSEBUTTONDOWN &&
 					sdl->window_event.button.button == SDL_BUTTON_LEFT)
-			{
-				SDL_GetMouseState(&sdl->mouse_position.x, &sdl->mouse_position.y);
-				if (sdl->type_pressed == WALL_TYPE)
-					make_wall(sdl);
-				if ((sdl->mouse_position.x > BUTTON_PLAYER_X1 && sdl->mouse_position.x < BUTTON_PLAYER_X2) &&
-						(sdl->mouse_position.y > BUTTON_PLAYER_Y1 && sdl->mouse_position.y < BUTTON_PLAYER_Y2))
-				{
-					sdl->type_pressed = PLAYER_TYPE;
-					printf("Player\n");
-				}
-				else if ((sdl->mouse_position.x > BUTTON_MEDKIT_X1 && sdl->mouse_position.x < BUTTON_MEDKIT_X2) &&
-						(sdl->mouse_position.y > BUTTON_MEDKIT_Y1 && sdl->mouse_position.y < BUTTON_MEDKIT_Y2))
-				{
-					sdl->type_pressed = SPRITE_TYPE;
-					printf("Medkit\n");
-				}
-				else if (sdl->type_pressed == PLAYER_TYPE || sdl->type_pressed == SPRITE_TYPE)
-					make_player_or_sprite(sdl);
-				//else if (sdl->type_pressed == SPRITE_TYPE)
-					//make_sprite(sdl);
-			}
+			clicks(sdl);
 			// else if (sdl->window_event.type == SDL_MOUSEBUTTONDOWN &&
 			// 		sdl->window_event.button.button == SDL_BUTTON_LEFT && sector->type_of_point > 0)
 			// 	set_stuff(sdl, grid_field, &sector);

@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:31:52 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/16 15:10:30 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/17 10:50:19 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,16 @@ SDL_Color		*create_sdl_color(int r, int g, int b, int a)
 	return (color);
 }
 
-void			draw_button(t_sdl *sdl, SDL_Rect button, char *text)
+void			draw_button(t_sdl *sdl, SDL_Rect button, char *text, int color)
 {
 	SDL_Color	*color_text;
 
-	SDL_SetRenderDrawColor(sdl->renderer, 025, 000, 051, 255);
+	if (color == COLOR_PUSHED && sdl->type_pressed == PLAYER_TYPE)
+		SDL_SetRenderDrawColor(sdl->renderer, 50, 205, 50, 255);
+
+	else if (color == COLOR_UNPUSHED)
+		SDL_SetRenderDrawColor(sdl->renderer, 025, 000, 051, 255);
+
 	SDL_RenderFillRect(sdl->renderer, &button);
 	color_text = create_sdl_color(204, 153, 255, 255);
 	draw_text(sdl, text, button, *color_text);
@@ -48,27 +53,37 @@ void			draw_button(t_sdl *sdl, SDL_Rect button, char *text)
 void			draw_buttons_on_sidebar(t_sdl *sdl)
 {
 	SDL_Rect	*button;
-	int			num_of_sprites;
-	int			i;
 
-	i = 0;
-	num_of_sprites = 12;
 	button = (SDL_Rect *)malloc(sizeof(SDL_Rect));
-	while (i <= num_of_sprites)
-	{
-		i++;
-		button->x = SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1;
-		button->y = SIZE_WIN_Y * 0.1 * (i * 0.7);
-		button->w = SIZE_WIN_X * 0.2 - SIZE_WIN_X * 0.2 * 0.2;
-		button->h = SIZE_WIN_Y * 0.05;
 
-		if (i == 1)
-			draw_button(sdl, *button, " SET A PLAYER");
-		else if (i == 2)
-			draw_button(sdl, *button, " SET A MEDKIT");
-		else
-			draw_button(sdl, *button, " SET A CHA CHA CHA");
-	}
+	button->x = SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1;
+	button->y = SIZE_WIN_Y * 0.1 * (1 * 0.7);
+	button->w = SIZE_WIN_X * 0.2 - SIZE_WIN_X * 0.2 * 0.2;
+	button->h = SIZE_WIN_Y * 0.05;
+
+	if (sdl->button_pushed == PLAYER_PUSH)
+		draw_button(sdl, *button, " PLAYER", COLOR_PUSHED);
+	else
+		draw_button(sdl, *button, " PLAYER", COLOR_UNPUSHED);
+
+	button->x = SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1;
+	button->y = SIZE_WIN_Y * 0.1 * (2 * 0.7);
+	button->w = SIZE_WIN_X * 0.2 - SIZE_WIN_X * 0.2 * 0.2;
+	button->h = SIZE_WIN_Y * 0.05;
+	if (sdl->button_pushed == SPRITE_PUSH)
+		draw_button(sdl, *button, " SET A MEDKIT", COLOR_PUSHED);
+	else
+		draw_button(sdl, *button, " SET A MEDKIT", COLOR_UNPUSHED);
+
+	button->x = SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1;
+	button->y = SIZE_WIN_Y * 0.1 * (3 * 0.7);
+	button->w = SIZE_WIN_X * 0.2 - SIZE_WIN_X * 0.2 * 0.2;
+	button->h = SIZE_WIN_Y * 0.05;
+	if (sdl->button_pushed == SPRITE_PUSH)
+		draw_button(sdl, *button, " SET CHA CHA CHA", COLOR_PUSHED);
+	else
+		draw_button(sdl, *button, " SET CHA CHA CHA", COLOR_UNPUSHED);
+
 	free(button);
 }
 

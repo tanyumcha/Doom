@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/10/16 15:16:24 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/17 10:50:20 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,12 @@
 # define GRID_SIZE 600
 # define GRID_SIZE_X 30
 # define GRID_SIZE_Y 20
+
+# define COLOR_UNPUSHED 0
+# define COLOR_PUSHED 1
+
+# define PLAYER_PUSH 0
+# define SPRITE_PUSH 1
 
 # define WALL_TYPE 1
 # define PLAYER_TYPE 2
@@ -80,6 +86,7 @@ typedef struct			s_sdl
 	TTF_Font			*font;
 	SDL_Texture			*text;
 	int					sect_count;
+	int					button_pushed;
 	int					type_pressed;
 	struct s_point		grid_field[GRID_SIZE];
 	struct s_sector		*sectors;
@@ -110,6 +117,6 @@ t_sector				*get_last_sector(t_sector *head);
 void					choose_type_of_point(t_sector **stuffbox, int type);
 void					make_player_or_sprite(t_sdl *sdl);
 int						check_intersection(t_sector *head, int x1, int y1, int x2, int y2);
-void					set_sprite(t_sdl *sdl);
+void					set_sprite(t_sdl *sdl, int x, int y);
 
 #endif
