@@ -6,23 +6,30 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 10:11:40 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/17 09:59:30 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/17 14:10:17 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-// void	draw_a_sprite(t_sdl *sdl, t_sprite *sprite)
-// {
-// 	SDL_Rect	newrect;
+void	draw_a_sprite(t_sdl *sdl, t_sprite *sprite)
+{
+	SDL_Rect	newrect;
 
-// 	SDL_SetRenderDrawColor(sdl->renderer, 102, 204, 204, 100);
-// 	newrect.x = sprite->x - POINT_SIZE / 2;
-// 	newrect.y = sprite->y - POINT_SIZE / 2;
-// 	newrect.w = POINT_SIZE;
-// 	newrect.h = POINT_SIZE;
-// 	SDL_RenderFillRect(sdl->renderer, &newrect);
-// }
+	while (sprite != NULL)
+	{
+		//if (sdl->button_pushed == MEDKIT_PUSH)
+			SDL_SetRenderDrawColor(sdl->renderer, 255, 051, 051, 0);
+		// else
+		// 	SDL_SetRenderDrawColor(sdl->renderer, 102, 204, 204, 100);
+		newrect.x = sprite->x - POINT_SIZE / 2;
+		newrect.y = sprite->y - POINT_SIZE / 2;
+		newrect.w = POINT_SIZE;
+		newrect.h = POINT_SIZE;
+		SDL_RenderFillRect(sdl->renderer, &newrect);
+		sprite = sprite->next;
+	}
+}
 
 void	draw_a_player(t_sdl *sdl, t_point *player)
 {
@@ -82,7 +89,7 @@ void	draw(t_sdl *sdl)
 	}
 	if (sdl->player->x != 0 && sdl->player->y != 0)
 		draw_a_player(sdl, sdl->player);
-	// if (sdl->sprites->x != 0 && sdl->sprites->y != 0)
-		// draw_a_sprite(sdl, sdl->sprites);
+	if (sdl->sprites->x != 0 && sdl->sprites->y != 0)
+		draw_a_sprite(sdl, sdl->sprites);
 	SDL_RenderPresent(sdl->renderer);
 }

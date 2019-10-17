@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 11:26:54 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/17 10:43:49 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/17 14:26:28 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,11 @@ void	clicks(t_sdl *sdl)
 			(sdl->mouse_position.y > BUTTON_MEDKIT_Y1 && sdl->mouse_position.y < BUTTON_MEDKIT_Y2))
 	{
 		sdl->type_pressed = SPRITE_TYPE;
-		sdl->button_pushed = SPRITE_PUSH;
+		sdl->button_pushed = MEDKIT_PUSH;
 		printf("Medkit\n");
 	}
 	else if (sdl->type_pressed == PLAYER_TYPE || sdl->type_pressed == SPRITE_TYPE)
 		make_player_or_sprite(sdl);
-	//else if (sdl->type_pressed == SPRITE_TYPE)
-		//make_sprite(sdl);
 }
 
 void	big_loop(t_sdl *sdl)
@@ -53,7 +51,7 @@ void	big_loop(t_sdl *sdl)
 				delete_last_command(sdl);
 			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_r ==
 					sdl->window_event.key.keysym.sym)
-				reset(&(sdl->sectors));
+				reset(&(sdl->sectors), sdl->player, sdl->sprites);
 			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_w == // переписать по нормальму
 			 		sdl->window_event.key.keysym.sym)
 			 	sdl->type_pressed = WALL_TYPE;
@@ -71,16 +69,14 @@ void	big_loop(t_sdl *sdl)
 			// 		printf("Player");
 			// 	}
 			// }
-			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_s ==
-					sdl->window_event.key.keysym.sym)
-				sdl->type_pressed = SPRITE_TYPE;
+
+			// else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_s ==
+			// 		sdl->window_event.key.keysym.sym)
+			// 	sdl->type_pressed = SPRITE_TYPE;
 
 			else if (sdl->window_event.type == SDL_MOUSEBUTTONDOWN &&
 					sdl->window_event.button.button == SDL_BUTTON_LEFT)
-			clicks(sdl);
-			// else if (sdl->window_event.type == SDL_MOUSEBUTTONDOWN &&
-			// 		sdl->window_event.button.button == SDL_BUTTON_LEFT && sector->type_of_point > 0)
-			// 	set_stuff(sdl, grid_field, &sector);
+				clicks(sdl);
 			draw(sdl);
 		}
 	}

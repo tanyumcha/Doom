@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:31:52 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/17 10:50:19 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/17 14:26:09 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void			draw_button(t_sdl *sdl, SDL_Rect button, char *text, int color)
 
 	if (color == COLOR_PUSHED && sdl->type_pressed == PLAYER_TYPE)
 		SDL_SetRenderDrawColor(sdl->renderer, 50, 205, 50, 255);
-
+	else if (color == COLOR_PUSHED && sdl->type_pressed == SPRITE_TYPE)
+		SDL_SetRenderDrawColor(sdl->renderer, 255, 051, 051, 0);
 	else if (color == COLOR_UNPUSHED)
 		SDL_SetRenderDrawColor(sdl->renderer, 025, 000, 051, 255);
 
@@ -70,7 +71,7 @@ void			draw_buttons_on_sidebar(t_sdl *sdl)
 	button->y = SIZE_WIN_Y * 0.1 * (2 * 0.7);
 	button->w = SIZE_WIN_X * 0.2 - SIZE_WIN_X * 0.2 * 0.2;
 	button->h = SIZE_WIN_Y * 0.05;
-	if (sdl->button_pushed == SPRITE_PUSH)
+	if (sdl->button_pushed == MEDKIT_PUSH)
 		draw_button(sdl, *button, " SET A MEDKIT", COLOR_PUSHED);
 	else
 		draw_button(sdl, *button, " SET A MEDKIT", COLOR_UNPUSHED);

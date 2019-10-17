@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:27:00 by djast             #+#    #+#             */
-/*   Updated: 2019/10/16 14:02:44 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/17 14:08:58 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,21 @@ t_sector	*init_sector()
 	return (sector);
 }
 
+void		init_sprites(t_sdl *sdl)
+{
+	sdl->sprites = (t_sprite *)malloc(sizeof(t_sprite));
+	sdl->sprites->type = 0;
+	sdl->sprites->x = 0;
+	sdl->sprites->y = 0;
+	sdl->sprites->next = NULL;
+}
+
 void		init_player(t_sdl *sdl)
 {
 	sdl->player = (t_point *)malloc(sizeof(t_point));
 	sdl->player->x = 0;
 	sdl->player->y = 0;
 }
-
 
 void		init_sdl(t_sdl *sdl)
 {
@@ -49,6 +57,6 @@ void		init_sdl(t_sdl *sdl)
 	sdl->sectors = NULL;
 	sdl->commands = NULL;
 	init_player(sdl);
-	sdl->sprites = NULL;
+	init_sprites(sdl);
 	SDL_ShowCursor(1);
 }

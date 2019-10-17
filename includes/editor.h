@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/10/17 10:50:20 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/17 14:26:59 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,8 @@
 # define COLOR_PUSHED 1
 
 # define PLAYER_PUSH 0
-# define SPRITE_PUSH 1
+# define MEDKIT_PUSH 1
+# define SPRITE_PUSH 2
 
 # define WALL_TYPE 1
 # define PLAYER_TYPE 2
@@ -109,8 +110,9 @@ void					draw_grid(t_sdl *sdl);
 void					draw(t_sdl *sdl);
 void					draw_a_sector(t_sdl *sdl, t_sector *sector, int i);
 void					draw_a_point(t_sdl *sdl, t_point *point, int i);
+void					delete_player(t_point *player);
 void					remove_last_point(t_sector **head);
-void					reset(t_sector **head);
+void					reset(t_sector **head, t_point	*player, t_sprite *sprites);
 void					delete_last_command(t_sdl *sdl);
 void					add_command(t_commands **commands, int type);
 t_sector				*get_last_sector(t_sector *head);

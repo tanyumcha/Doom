@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 15:25:23 by djast             #+#    #+#             */
-/*   Updated: 2019/10/14 17:50:59 by djast            ###   ########.fr       */
+/*   Updated: 2019/10/17 14:09:11 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	add_command(t_commands **commands, int type)
 
 void	delete_last_command(t_sdl *sdl)
 {
-	(void) *sdl;
-	t_commands *tmp;
-	int type;
+	(void)		*sdl;
+	t_commands	*tmp;
+	int			type;
 
 	if (sdl->commands == NULL)
 		return ;
@@ -44,7 +44,7 @@ void	delete_last_command(t_sdl *sdl)
 	if (type == WALL_TYPE)
 		remove_last_point(&(sdl->sectors));
 	if (type == PLAYER_TYPE)
-	{}
+		delete_player(sdl->player);
 	if (type == SPRITE_TYPE)
 	{}
 }

@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   remover.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:39:39 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/14 16:54:42 by djast            ###   ########.fr       */
+/*   Updated: 2019/10/17 14:09:57 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
+
+void	delete_sprites(t_sprite *sprites)
+{
+	while (sprites != NULL)
+	{
+		sprites->type = 0;
+		sprites->x = 0;
+		sprites->y = 0;
+		sprites = sprites->next;
+	}
+}
+
+void	delete_player(t_point *player)
+{
+	player->x = 0;
+	player->y = 0;
+}
 
 void	delete_point(t_sector *sector)
 {
@@ -47,7 +64,7 @@ void	remove_last_point(t_sector **head)
 	}
 }
 
-void	reset(t_sector **head)
+void	reset(t_sector **head, t_point	*player, t_sprite *sprites)
 {
 	t_sector **prev;
 	t_sector **cur;
@@ -62,4 +79,6 @@ void	reset(t_sector **head)
 	}
 	ft_bzero((*prev)->point, 100);
 	(*prev)->size = 0;
+	delete_player(player);
+	delete_sprites(sprites);
 }
