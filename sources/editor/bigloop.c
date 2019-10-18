@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 11:26:54 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/18 12:48:39 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/18 13:13:45 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,13 @@ void	clicks(t_sdl *sdl)
 		sdl->button_pushed = IMP_PUSH;
 		printf("Imp\n");
 	}
+	else if ((sdl->mouse_position.x > BUTTON_WALL_X1 && sdl->mouse_position.x < BUTTON_WALL_X2) &&
+			(sdl->mouse_position.y > BUTTON_WALL_Y1 && sdl->mouse_position.y < BUTTON_WALL_Y2))
+	{
+		sdl->type_pressed = WALL_TYPE;
+		sdl->button_pushed = WALL_PUSH;
+		printf("Wall\n");
+	}
 	else if (sdl->type_pressed == PLAYER_TYPE || sdl->type_pressed == SPRITE_TYPE)
 		make_player_or_sprite(sdl);
 }
@@ -115,9 +122,12 @@ void	big_loop(t_sdl *sdl)
 			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_r ==
 					sdl->window_event.key.keysym.sym)
 				reset(&(sdl->sectors), sdl->player, sdl->sprites);
-			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_w == // переписать по нормальму
-			 		sdl->window_event.key.keysym.sym)
-			 	sdl->type_pressed = WALL_TYPE;
+
+			// else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_w == // переписать по нормальму
+			//  		sdl->window_event.key.keysym.sym)
+			//  	sdl->type_pressed = WALL_TYPE;
+
+
 			// else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_p == // переписать по нормальму
 			//  		sdl->window_event.key.keysym.sym)
 

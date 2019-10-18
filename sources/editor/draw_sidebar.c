@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:31:52 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/18 12:56:53 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/18 13:14:53 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void			draw_button(t_sdl *sdl, SDL_Rect button, char *text, int color)
 		SDL_SetRenderDrawColor(sdl->renderer, 200, 100, 100, 0);
 	else if (color == COLOR_UNPUSHED)
 		SDL_SetRenderDrawColor(sdl->renderer, 025, 000, 051, 255);
+	else if (color == COLOR_PUSHED && sdl->button_pushed == WALL_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 153, 204, 255, 0);
 
 	SDL_RenderFillRect(sdl->renderer, &button);
 	color_text = create_sdl_color(204, 153, 255, 255);
@@ -173,6 +175,15 @@ void			draw_buttons_on_sidebar(t_sdl *sdl)
 		draw_button(sdl, *button, " SET IMP", COLOR_PUSHED);
 	else
 		draw_button(sdl, *button, " SET IMP", COLOR_UNPUSHED);
+
+	button->x = BUTTON_WALL_X1;
+	button->y = BUTTON_WALL_Y1;
+	button->w = BUTTON_WALL_X2 - BUTTON_WALL_X1;
+	button->h = BUTTON_WALL_Y2 - BUTTON_WALL_Y1;
+	if (sdl->button_pushed == WALL_PUSH)
+		draw_button(sdl, *button, " WALL", COLOR_PUSHED);
+	else
+		draw_button(sdl, *button, " WALL", COLOR_UNPUSHED);
 
 	free(button);
 }
