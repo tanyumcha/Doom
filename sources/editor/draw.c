@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 10:11:40 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/18 11:47:38 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/18 12:56:10 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,12 @@ void	draw_a_sprite(t_sdl *sdl, t_sprite *sprite)
 			SDL_SetRenderDrawColor(sdl->renderer, 204, 255, 000, 0);
 		else if (sprite->type == BARREL_PUSH)
 			SDL_SetRenderDrawColor(sdl->renderer, 102, 051, 000, 0);
+		else if (sprite->type == AFRIT_PUSH)
+			SDL_SetRenderDrawColor(sdl->renderer, 204, 000, 000, 0);
+		else if (sprite->type == CACODEMON_PUSH)
+			SDL_SetRenderDrawColor(sdl->renderer, 150, 000, 100, 0);
+		else if (sprite->type == IMP_PUSH)
+			SDL_SetRenderDrawColor(sdl->renderer, 200, 100, 100, 0);
 		newrect.x = sprite->x - POINT_SIZE / 2;
 		newrect.y = sprite->y - POINT_SIZE / 2;
 		newrect.w = POINT_SIZE;

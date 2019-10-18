@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/10/18 11:51:34 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/18 12:56:22 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,10 @@
 # define COLOR_UNPUSHED 0
 # define COLOR_PUSHED 1
 
+# define WALL_TYPE 1
+# define PLAYER_TYPE 2
+# define SPRITE_TYPE 3
+
 # define PLAYER_PUSH 0
 # define MEDKIT_PUSH 1
 # define SPRITE_PUSH 2
@@ -39,10 +43,9 @@
 # define PLASMA_GUN_PUSH 6
 # define PLASMA_AMMO_PUSH 7
 # define BARREL_PUSH 8
-
-# define WALL_TYPE 1
-# define PLAYER_TYPE 2
-# define SPRITE_TYPE 3
+# define AFRIT_PUSH 9
+# define CACODEMON_PUSH 10
+# define IMP_PUSH 11
 
 # define BUTTON_PLAYER_X1 SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1
 # define BUTTON_PLAYER_Y1 SIZE_WIN_Y * 0.1 * 0.7
@@ -83,6 +86,21 @@
 # define BUTTON_BARREL_Y1 BUTTON_PLAYER_Y1 * 8
 # define BUTTON_BARREL_X2 BUTTON_PLAYER_X2
 # define BUTTON_BARREL_Y2 BUTTON_BARREL_Y1 + SIZE_WIN_Y * 0.05
+
+# define BUTTON_AFRIT_X1 BUTTON_PLAYER_X1
+# define BUTTON_AFRIT_Y1 BUTTON_PLAYER_Y1 * 9
+# define BUTTON_AFRIT_X2 BUTTON_PLAYER_X2
+# define BUTTON_AFRIT_Y2 BUTTON_AFRIT_Y1 + SIZE_WIN_Y * 0.05
+
+# define BUTTON_CACODEMON_X1 BUTTON_PLAYER_X1
+# define BUTTON_CACODEMON_Y1 BUTTON_PLAYER_Y1 * 10
+# define BUTTON_CACODEMON_X2 BUTTON_PLAYER_X2
+# define BUTTON_CACODEMON_Y2 BUTTON_CACODEMON_Y1 + SIZE_WIN_Y * 0.05
+
+# define BUTTON_IMP_X1 BUTTON_PLAYER_X1
+# define BUTTON_IMP_Y1 BUTTON_PLAYER_Y1 * 11
+# define BUTTON_IMP_X2 BUTTON_PLAYER_X2
+# define BUTTON_IMP_Y2 BUTTON_IMP_Y1 + SIZE_WIN_Y * 0.05
 
 typedef struct			s_point
 {

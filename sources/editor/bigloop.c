@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 11:26:54 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/18 11:46:56 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/18 12:48:39 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,27 @@ void	clicks(t_sdl *sdl)
 		sdl->type_pressed = SPRITE_TYPE;
 		sdl->button_pushed = BARREL_PUSH;
 		printf("Barrel\n");
+	}
+	else if ((sdl->mouse_position.x > BUTTON_AFRIT_X1 && sdl->mouse_position.x < BUTTON_AFRIT_X2) &&
+			(sdl->mouse_position.y > BUTTON_AFRIT_Y1 && sdl->mouse_position.y < BUTTON_AFRIT_Y2))
+	{
+		sdl->type_pressed = SPRITE_TYPE;
+		sdl->button_pushed = AFRIT_PUSH;
+		printf("Afrit\n");
+	}
+	else if ((sdl->mouse_position.x > BUTTON_CACODEMON_X1 && sdl->mouse_position.x < BUTTON_CACODEMON_X2) &&
+			(sdl->mouse_position.y > BUTTON_CACODEMON_Y1 && sdl->mouse_position.y < BUTTON_CACODEMON_Y2))
+	{
+		sdl->type_pressed = SPRITE_TYPE;
+		sdl->button_pushed = CACODEMON_PUSH;
+		printf("Cacodemon\n");
+	}
+	else if ((sdl->mouse_position.x > BUTTON_IMP_X1 && sdl->mouse_position.x < BUTTON_IMP_X2) &&
+			(sdl->mouse_position.y > BUTTON_IMP_Y1 && sdl->mouse_position.y < BUTTON_IMP_Y2))
+	{
+		sdl->type_pressed = SPRITE_TYPE;
+		sdl->button_pushed = IMP_PUSH;
+		printf("Imp\n");
 	}
 	else if (sdl->type_pressed == PLAYER_TYPE || sdl->type_pressed == SPRITE_TYPE)
 		make_player_or_sprite(sdl);

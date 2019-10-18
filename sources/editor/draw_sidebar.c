@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:31:52 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/18 11:49:20 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/18 12:56:53 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void			draw_button(t_sdl *sdl, SDL_Rect button, char *text, int color)
 	SDL_Color	*color_text;
 
 	if (color == COLOR_PUSHED && sdl->type_pressed == PLAYER_TYPE)
-		SDL_SetRenderDrawColor(sdl->renderer, 50, 205, 50, 255);
+		SDL_SetRenderDrawColor(sdl->renderer, 50, 205, 50, 100);
 	else if (color == COLOR_PUSHED && sdl->button_pushed == MEDKIT_PUSH)
 		SDL_SetRenderDrawColor(sdl->renderer, 255, 051, 051, 0);
 	else if (color == COLOR_PUSHED && sdl->button_pushed == ARMOR_PUSH)
@@ -54,6 +54,12 @@ void			draw_button(t_sdl *sdl, SDL_Rect button, char *text, int color)
 		SDL_SetRenderDrawColor(sdl->renderer, 204, 255, 000, 0);
 	else if (color == COLOR_PUSHED && sdl->button_pushed == BARREL_PUSH)
 		SDL_SetRenderDrawColor(sdl->renderer, 102, 051, 000, 0);
+	else if (color == COLOR_PUSHED && sdl->button_pushed == AFRIT_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 204, 000, 000, 0);
+	else if (color == COLOR_PUSHED && sdl->button_pushed == CACODEMON_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 150, 000, 100, 0);
+	else if (color == COLOR_PUSHED && sdl->button_pushed == IMP_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 200, 100, 100, 0);
 	else if (color == COLOR_UNPUSHED)
 		SDL_SetRenderDrawColor(sdl->renderer, 025, 000, 051, 255);
 
@@ -140,6 +146,33 @@ void			draw_buttons_on_sidebar(t_sdl *sdl)
 		draw_button(sdl, *button, " SET BARREL", COLOR_PUSHED);
 	else
 		draw_button(sdl, *button, " SET BARREL", COLOR_UNPUSHED);
+
+	button->x = BUTTON_AFRIT_X1;
+	button->y = BUTTON_AFRIT_Y1;
+	button->w = BUTTON_AFRIT_X2 - BUTTON_AFRIT_X1;
+	button->h = BUTTON_AFRIT_Y2 - BUTTON_AFRIT_Y1;
+	if (sdl->button_pushed == AFRIT_PUSH)
+		draw_button(sdl, *button, " SET AFRIT", COLOR_PUSHED);
+	else
+		draw_button(sdl, *button, " SET AFRIT", COLOR_UNPUSHED);
+
+	button->x = BUTTON_CACODEMON_X1;
+	button->y = BUTTON_CACODEMON_Y1;
+	button->w = BUTTON_CACODEMON_X2 - BUTTON_CACODEMON_X1;
+	button->h = BUTTON_CACODEMON_Y2 - BUTTON_CACODEMON_Y1;
+	if (sdl->button_pushed == CACODEMON_PUSH)
+		draw_button(sdl, *button, " SET CACODEMON", COLOR_PUSHED);
+	else
+		draw_button(sdl, *button, " SET CACODEMON", COLOR_UNPUSHED);
+
+	button->x = BUTTON_IMP_X1;
+	button->y = BUTTON_IMP_Y1;
+	button->w = BUTTON_IMP_X2 - BUTTON_IMP_X1;
+	button->h = BUTTON_IMP_Y2 - BUTTON_IMP_Y1;
+	if (sdl->button_pushed == IMP_PUSH)
+		draw_button(sdl, *button, " SET IMP", COLOR_PUSHED);
+	else
+		draw_button(sdl, *button, " SET IMP", COLOR_UNPUSHED);
 
 	free(button);
 }
