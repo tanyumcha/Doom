@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 10:11:40 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/17 14:10:17 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/18 11:47:38 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,20 @@ void	draw_a_sprite(t_sdl *sdl, t_sprite *sprite)
 
 	while (sprite != NULL)
 	{
-		//if (sdl->button_pushed == MEDKIT_PUSH)
+		if (sprite->type == MEDKIT_PUSH)
 			SDL_SetRenderDrawColor(sdl->renderer, 255, 051, 051, 0);
-		// else
-		// 	SDL_SetRenderDrawColor(sdl->renderer, 102, 204, 204, 100);
+		else if (sprite->type == ARMOR_PUSH)
+			SDL_SetRenderDrawColor(sdl->renderer, 051, 102, 153, 0);
+		else if (sprite->type == POWER_UP_PUSH)
+			SDL_SetRenderDrawColor(sdl->renderer, 051, 102, 051, 0);
+		else if (sprite->type == POWER_UP_PUSH)
+			SDL_SetRenderDrawColor(sdl->renderer, 051, 102, 051, 0);
+		else if (sprite->type == PLASMA_GUN_PUSH)
+			SDL_SetRenderDrawColor(sdl->renderer, 255, 255, 000, 0);
+		else if (sprite->type == PLASMA_AMMO_PUSH)
+			SDL_SetRenderDrawColor(sdl->renderer, 204, 255, 000, 0);
+		else if (sprite->type == BARREL_PUSH)
+			SDL_SetRenderDrawColor(sdl->renderer, 102, 051, 000, 0);
 		newrect.x = sprite->x - POINT_SIZE / 2;
 		newrect.y = sprite->y - POINT_SIZE / 2;
 		newrect.w = POINT_SIZE;

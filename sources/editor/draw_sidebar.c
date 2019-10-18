@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:31:52 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/17 14:26:09 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/18 11:49:20 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,20 @@ void			draw_button(t_sdl *sdl, SDL_Rect button, char *text, int color)
 
 	if (color == COLOR_PUSHED && sdl->type_pressed == PLAYER_TYPE)
 		SDL_SetRenderDrawColor(sdl->renderer, 50, 205, 50, 255);
-	else if (color == COLOR_PUSHED && sdl->type_pressed == SPRITE_TYPE)
+	else if (color == COLOR_PUSHED && sdl->button_pushed == MEDKIT_PUSH)
 		SDL_SetRenderDrawColor(sdl->renderer, 255, 051, 051, 0);
+	else if (color == COLOR_PUSHED && sdl->button_pushed == ARMOR_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 051, 102, 153, 0);
+	else if (color == COLOR_PUSHED && sdl->button_pushed == POWER_UP_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 051, 102, 051, 0);
+	else if (color == COLOR_PUSHED && sdl->button_pushed == RIFLE_AMMO_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 204, 153, 000, 0);
+	else if (color == COLOR_PUSHED && sdl->button_pushed == PLASMA_GUN_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 255, 255, 000, 0);
+	else if (color == COLOR_PUSHED && sdl->button_pushed == PLASMA_AMMO_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 204, 255, 000, 0);
+	else if (color == COLOR_PUSHED && sdl->button_pushed == BARREL_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 102, 051, 000, 0);
 	else if (color == COLOR_UNPUSHED)
 		SDL_SetRenderDrawColor(sdl->renderer, 025, 000, 051, 255);
 
@@ -57,33 +69,77 @@ void			draw_buttons_on_sidebar(t_sdl *sdl)
 
 	button = (SDL_Rect *)malloc(sizeof(SDL_Rect));
 
-	button->x = SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1;
-	button->y = SIZE_WIN_Y * 0.1 * (1 * 0.7);
-	button->w = SIZE_WIN_X * 0.2 - SIZE_WIN_X * 0.2 * 0.2;
-	button->h = SIZE_WIN_Y * 0.05;
-
+	button->x = BUTTON_PLAYER_X1;
+	button->y = BUTTON_PLAYER_Y1;
+	button->w = BUTTON_PLAYER_X2 - BUTTON_PLAYER_X1;
+	button->h = BUTTON_PLAYER_Y2 - BUTTON_PLAYER_Y1;
 	if (sdl->button_pushed == PLAYER_PUSH)
 		draw_button(sdl, *button, " PLAYER", COLOR_PUSHED);
 	else
 		draw_button(sdl, *button, " PLAYER", COLOR_UNPUSHED);
 
-	button->x = SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1;
-	button->y = SIZE_WIN_Y * 0.1 * (2 * 0.7);
-	button->w = SIZE_WIN_X * 0.2 - SIZE_WIN_X * 0.2 * 0.2;
-	button->h = SIZE_WIN_Y * 0.05;
+	button->x = BUTTON_MEDKIT_X1;
+	button->y = BUTTON_MEDKIT_Y1;
+	button->w = BUTTON_MEDKIT_X2 - BUTTON_MEDKIT_X1;
+	button->h = BUTTON_MEDKIT_Y2 - BUTTON_MEDKIT_Y1;
 	if (sdl->button_pushed == MEDKIT_PUSH)
 		draw_button(sdl, *button, " SET A MEDKIT", COLOR_PUSHED);
 	else
 		draw_button(sdl, *button, " SET A MEDKIT", COLOR_UNPUSHED);
 
-	button->x = SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1;
-	button->y = SIZE_WIN_Y * 0.1 * (3 * 0.7);
-	button->w = SIZE_WIN_X * 0.2 - SIZE_WIN_X * 0.2 * 0.2;
-	button->h = SIZE_WIN_Y * 0.05;
-	if (sdl->button_pushed == SPRITE_PUSH)
-		draw_button(sdl, *button, " SET CHA CHA CHA", COLOR_PUSHED);
+	button->x = BUTTON_ARMOR_X1;
+	button->y = BUTTON_ARMOR_Y1;
+	button->w = BUTTON_ARMOR_X2 - BUTTON_ARMOR_X1;
+	button->h = BUTTON_ARMOR_Y2 - BUTTON_ARMOR_Y1;
+	if (sdl->button_pushed == ARMOR_PUSH)
+		draw_button(sdl, *button, " SET AN ARMOR", COLOR_PUSHED);
 	else
-		draw_button(sdl, *button, " SET CHA CHA CHA", COLOR_UNPUSHED);
+		draw_button(sdl, *button, " SET AN ARMOR", COLOR_UNPUSHED);
+
+	button->x = BUTTON_POWER_UP_X1;
+	button->y = BUTTON_POWER_UP_Y1;
+	button->w = BUTTON_POWER_UP_X2 - BUTTON_POWER_UP_X1;
+	button->h = BUTTON_POWER_UP_Y2 - BUTTON_POWER_UP_Y1;
+	if (sdl->button_pushed == POWER_UP_PUSH)
+		draw_button(sdl, *button, " SET POWER UP", COLOR_PUSHED);
+	else
+		draw_button(sdl, *button, " SET POWER UP", COLOR_UNPUSHED);
+
+	button->x = BUTTON_RIFLE_AMMO_X1;
+	button->y = BUTTON_RIFLE_AMMO_Y1;
+	button->w = BUTTON_RIFLE_AMMO_X2 - BUTTON_RIFLE_AMMO_X1;
+	button->h = BUTTON_RIFLE_AMMO_Y2 - BUTTON_RIFLE_AMMO_Y1;
+	if (sdl->button_pushed == RIFLE_AMMO_PUSH)
+		draw_button(sdl, *button, " SET RIFLE AMMO", COLOR_PUSHED);
+	else
+		draw_button(sdl, *button, " SET RIFLE AMMO", COLOR_UNPUSHED);
+
+	button->x = BUTTON_PLASMA_GUN_X1;
+	button->y = BUTTON_PLASMA_GUN_Y1;
+	button->w = BUTTON_PLASMA_GUN_X2 - BUTTON_PLASMA_GUN_X1;
+	button->h = BUTTON_PLASMA_GUN_Y2 - BUTTON_PLASMA_GUN_Y1;
+	if (sdl->button_pushed == PLASMA_GUN_PUSH)
+		draw_button(sdl, *button, " SET PLASMA GUN", COLOR_PUSHED);
+	else
+		draw_button(sdl, *button, " SET PLASMA GUN", COLOR_UNPUSHED);
+
+	button->x = BUTTON_PLASMA_AMMO_X1;
+	button->y = BUTTON_PLASMA_AMMO_Y1;
+	button->w = BUTTON_PLASMA_AMMO_X2 - BUTTON_PLASMA_AMMO_X1;
+	button->h = BUTTON_PLASMA_AMMO_Y2 - BUTTON_PLASMA_AMMO_Y1;
+	if (sdl->button_pushed == PLASMA_AMMO_PUSH)
+		draw_button(sdl, *button, " SET PLASMA AMMO", COLOR_PUSHED);
+	else
+		draw_button(sdl, *button, " SET PLASMA AMMO", COLOR_UNPUSHED);
+
+	button->x = BUTTON_BARREL_X1;
+	button->y = BUTTON_BARREL_Y1;
+	button->w = BUTTON_BARREL_X2 - BUTTON_BARREL_X1;
+	button->h = BUTTON_BARREL_Y2 - BUTTON_BARREL_Y1;
+	if (sdl->button_pushed == BARREL_PUSH)
+		draw_button(sdl, *button, " SET BARREL", COLOR_PUSHED);
+	else
+		draw_button(sdl, *button, " SET BARREL", COLOR_UNPUSHED);
 
 	free(button);
 }

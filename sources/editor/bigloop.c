@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 11:26:54 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/17 14:26:28 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/18 11:46:56 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,48 @@ void	clicks(t_sdl *sdl)
 		sdl->type_pressed = SPRITE_TYPE;
 		sdl->button_pushed = MEDKIT_PUSH;
 		printf("Medkit\n");
+	}
+	else if ((sdl->mouse_position.x > BUTTON_ARMOR_X1 && sdl->mouse_position.x < BUTTON_ARMOR_X2) &&
+			(sdl->mouse_position.y > BUTTON_ARMOR_Y1 && sdl->mouse_position.y < BUTTON_ARMOR_Y2))
+	{
+		sdl->type_pressed = SPRITE_TYPE;
+		sdl->button_pushed = ARMOR_PUSH;
+		printf("Armor\n");
+	}
+	else if ((sdl->mouse_position.x > BUTTON_POWER_UP_X1 && sdl->mouse_position.x < BUTTON_POWER_UP_X2) &&
+			(sdl->mouse_position.y > BUTTON_POWER_UP_Y1 && sdl->mouse_position.y < BUTTON_POWER_UP_Y2))
+	{
+		sdl->type_pressed = SPRITE_TYPE;
+		sdl->button_pushed = POWER_UP_PUSH;
+		printf("Power up\n");
+	}
+	else if ((sdl->mouse_position.x > BUTTON_RIFLE_AMMO_X1 && sdl->mouse_position.x < BUTTON_RIFLE_AMMO_X2) &&
+			(sdl->mouse_position.y > BUTTON_RIFLE_AMMO_Y1 && sdl->mouse_position.y < BUTTON_RIFLE_AMMO_Y2))
+	{
+		sdl->type_pressed = SPRITE_TYPE;
+		sdl->button_pushed = RIFLE_AMMO_PUSH;
+		printf("Rifle ammo\n");
+	}
+	else if ((sdl->mouse_position.x > BUTTON_PLASMA_GUN_X1 && sdl->mouse_position.x < BUTTON_PLASMA_GUN_X2) &&
+			(sdl->mouse_position.y > BUTTON_PLASMA_GUN_Y1 && sdl->mouse_position.y < BUTTON_PLASMA_GUN_Y2))
+	{
+		sdl->type_pressed = SPRITE_TYPE;
+		sdl->button_pushed = PLASMA_GUN_PUSH;
+		printf("Plasma gun\n");
+	}
+	else if ((sdl->mouse_position.x > BUTTON_PLASMA_AMMO_X1 && sdl->mouse_position.x < BUTTON_PLASMA_AMMO_X2) &&
+			(sdl->mouse_position.y > BUTTON_PLASMA_AMMO_Y1 && sdl->mouse_position.y < BUTTON_PLASMA_AMMO_Y2))
+	{
+		sdl->type_pressed = SPRITE_TYPE;
+		sdl->button_pushed = PLASMA_AMMO_PUSH;
+		printf("Plasma ammo\n");
+	}
+	else if ((sdl->mouse_position.x > BUTTON_BARREL_X1 && sdl->mouse_position.x < BUTTON_BARREL_X2) &&
+			(sdl->mouse_position.y > BUTTON_BARREL_Y1 && sdl->mouse_position.y < BUTTON_BARREL_Y2))
+	{
+		sdl->type_pressed = SPRITE_TYPE;
+		sdl->button_pushed = BARREL_PUSH;
+		printf("Barrel\n");
 	}
 	else if (sdl->type_pressed == PLAYER_TYPE || sdl->type_pressed == SPRITE_TYPE)
 		make_player_or_sprite(sdl);

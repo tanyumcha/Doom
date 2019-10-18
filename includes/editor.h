@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/10/17 14:26:59 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/18 11:51:34 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,12 @@
 # define PLAYER_PUSH 0
 # define MEDKIT_PUSH 1
 # define SPRITE_PUSH 2
+# define ARMOR_PUSH 3
+# define POWER_UP_PUSH 4
+# define RIFLE_AMMO_PUSH 5
+# define PLASMA_GUN_PUSH 6
+# define PLASMA_AMMO_PUSH 7
+# define BARREL_PUSH 8
 
 # define WALL_TYPE 1
 # define PLAYER_TYPE 2
@@ -40,13 +46,43 @@
 
 # define BUTTON_PLAYER_X1 SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1
 # define BUTTON_PLAYER_Y1 SIZE_WIN_Y * 0.1 * 0.7
-# define BUTTON_PLAYER_X2 SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1 + SIZE_WIN_X * 0.2 - SIZE_WIN_X * 0.2 * 0.2
-# define BUTTON_PLAYER_Y2 SIZE_WIN_Y * 0.1 * 0.7 + SIZE_WIN_Y * 0.05
+# define BUTTON_PLAYER_X2 BUTTON_PLAYER_X1 + SIZE_WIN_X * 0.2 * 0.6
+# define BUTTON_PLAYER_Y2 BUTTON_PLAYER_Y1 + SIZE_WIN_Y * 0.05
 
-# define BUTTON_MEDKIT_X1 SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1
-# define BUTTON_MEDKIT_Y1 SIZE_WIN_Y * 0.1 * 0.7 * 2
-# define BUTTON_MEDKIT_X2 SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1 + SIZE_WIN_X * 0.2 - SIZE_WIN_X * 0.2 * 0.2
-# define BUTTON_MEDKIT_Y2 SIZE_WIN_Y * 0.1 * 0.7 * 2 + SIZE_WIN_Y * 0.05 * 2
+# define BUTTON_MEDKIT_X1 BUTTON_PLAYER_X1
+# define BUTTON_MEDKIT_Y1 BUTTON_PLAYER_Y1 * 2
+# define BUTTON_MEDKIT_X2 BUTTON_PLAYER_X2
+# define BUTTON_MEDKIT_Y2 BUTTON_MEDKIT_Y1 + SIZE_WIN_Y * 0.05
+
+# define BUTTON_ARMOR_X1 BUTTON_PLAYER_X1
+# define BUTTON_ARMOR_Y1 BUTTON_PLAYER_Y1 * 3
+# define BUTTON_ARMOR_X2 BUTTON_PLAYER_X2
+# define BUTTON_ARMOR_Y2 BUTTON_ARMOR_Y1 + SIZE_WIN_Y * 0.05
+
+# define BUTTON_POWER_UP_X1 BUTTON_PLAYER_X1
+# define BUTTON_POWER_UP_Y1 BUTTON_PLAYER_Y1 * 4
+# define BUTTON_POWER_UP_X2 BUTTON_PLAYER_X2
+# define BUTTON_POWER_UP_Y2 BUTTON_POWER_UP_Y1 + SIZE_WIN_Y * 0.05
+
+# define BUTTON_RIFLE_AMMO_X1 BUTTON_PLAYER_X1
+# define BUTTON_RIFLE_AMMO_Y1 BUTTON_PLAYER_Y1 * 5
+# define BUTTON_RIFLE_AMMO_X2 BUTTON_PLAYER_X2
+# define BUTTON_RIFLE_AMMO_Y2 BUTTON_RIFLE_AMMO_Y1 + SIZE_WIN_Y * 0.05
+
+# define BUTTON_PLASMA_GUN_X1 BUTTON_PLAYER_X1
+# define BUTTON_PLASMA_GUN_Y1 BUTTON_PLAYER_Y1 * 6
+# define BUTTON_PLASMA_GUN_X2 BUTTON_PLAYER_X2
+# define BUTTON_PLASMA_GUN_Y2 BUTTON_PLASMA_GUN_Y1 + SIZE_WIN_Y * 0.05
+
+# define BUTTON_PLASMA_AMMO_X1 BUTTON_PLAYER_X1
+# define BUTTON_PLASMA_AMMO_Y1 BUTTON_PLAYER_Y1 * 7
+# define BUTTON_PLASMA_AMMO_X2 BUTTON_PLAYER_X2
+# define BUTTON_PLASMA_AMMO_Y2 BUTTON_PLASMA_AMMO_Y1 + SIZE_WIN_Y * 0.05
+
+# define BUTTON_BARREL_X1 BUTTON_PLAYER_X1
+# define BUTTON_BARREL_Y1 BUTTON_PLAYER_Y1 * 8
+# define BUTTON_BARREL_X2 BUTTON_PLAYER_X2
+# define BUTTON_BARREL_Y2 BUTTON_BARREL_Y1 + SIZE_WIN_Y * 0.05
 
 typedef struct			s_point
 {
