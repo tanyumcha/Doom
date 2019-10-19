@@ -6,7 +6,7 @@
 /*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/10/19 15:38:28 by djast            ###   ########.fr       */
+/*   Updated: 2019/10/19 12:16:30 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -161,6 +161,7 @@ void					init_sdl(t_sdl *sdl);
 void					init_grid(t_point *grid_field);
 t_sector				*init_sector();
 void					init_player(t_sdl *sdl);
+t_sprite				*init_sprite();
 void					big_loop(t_sdl *sdl);
 void					save_the_grid(t_point *grid_field, int start_x, int start_y, int width, int height);
 void					make_wall(t_sdl *sdl);
@@ -177,6 +178,7 @@ void					reset(t_sector **head, t_point	*player, t_sprite *sprites);
 void					delete_last_command(t_sdl *sdl);
 void					add_command(t_commands **commands, int type);
 t_sector				*get_last_sector(t_sector *head);
+t_sprite				*find_last_sprite(t_sprite *sprites);
 SDL_Color				*create_sdl_color(int r, int g, int b, int a);
 void					choose_type_of_point(t_sector **stuffbox, int type);
 void					make_player_or_sprite(t_sdl *sdl);

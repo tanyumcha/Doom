@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 15:04:11 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/15 09:48:01 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/19 11:53:18 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,17 +50,6 @@ void	save_the_grid(t_point *grid_field, int start_x, int start_y, int width, int
 			y += STEP;
 		}
 	}
-	// printf("i = %d\n", i);
-	// printf("w = %d\n", width);
-	// printf("h = %d\n", height);
-	// printf("x = %d\n", grid_field[0].x);
-	// printf("y = %d\n", grid_field[0].y);
-	// printf("x = %d\n", grid_field[1].x);
-	// printf("y = %d\n", grid_field[1].y);
-	// printf("x = %d\n", grid_field[30].x);
-	// printf("y = %d\n", grid_field[30].y);
-	// printf("x = %d\n", grid_field[599].x);
-	// printf("y = %d\n", grid_field[599].y);
 }
 
 void	init_grid(t_point *grid_field)

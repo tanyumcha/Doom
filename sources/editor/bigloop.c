@@ -6,7 +6,7 @@
 /*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 11:26:54 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/19 12:04:32 by djast            ###   ########.fr       */
+/*   Updated: 2019/10/19 12:29:22 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	clicks(t_sdl *sdl)
 {
 	SDL_GetMouseState(&sdl->mouse_position.x, &sdl->mouse_position.y);
-	if (sdl->type_pressed == WALL_TYPE)
+	if (sdl->button_pushed == WALL_PUSH)
 		make_wall(sdl);
 	if ((sdl->mouse_position.x > BUTTON_PLAYER_X1 && sdl->mouse_position.x < BUTTON_PLAYER_X2) &&
 			(sdl->mouse_position.y > BUTTON_PLAYER_Y1 && sdl->mouse_position.y < BUTTON_PLAYER_Y2))

@@ -6,7 +6,7 @@
 /*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 11:16:02 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/19 11:41:31 by djast            ###   ########.fr       */
+/*   Updated: 2019/10/19 14:52:02 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,110 +14,92 @@
 
 void	set_sprite(t_sdl *sdl, int x, int y)
 {
-	t_sprite	*cursprite;
+	t_sprite	*cur_sprite;
 
-	cursprite = sdl->sprites;
+	cur_sprite = find_last_sprite(sdl->sprites);
+	if (check_intersection(sdl->sectors, 0, 0, x, y) % 2 == 1)
+	{
+		if (cur_sprite == NULL)
+		{
+			sdl->sprites = init_sprite();
+			cur_sprite = sdl->sprites;
+		}
+		else
+		{
+			cur_sprite->next = init_sprite();
+			cur_sprite = cur_sprite->next;
+		}
+	}
 	if (sdl->button_pushed == MEDKIT_PUSH && check_intersection(sdl->sectors, 0, 0, x, y) % 2 == 1)
 	{
-		cursprite->type = MEDKIT_PUSH;
-		cursprite->x = x;
-		cursprite->y = y;
-		cursprite->next = (t_sprite *)malloc(sizeof(t_sprite));
-		ft_bzero(cursprite->next, sizeof(t_sprite));
-		printf("Medkit is available\n");
+		cur_sprite->type = MEDKIT_PUSH;
+		cur_sprite->x = x;
+		cur_sprite->y = y;
 		add_command(&(sdl->commands), SPRITE_TYPE);
 	}
 	else if (sdl->button_pushed == ARMOR_PUSH && check_intersection(sdl->sectors, 0, 0, x, y) % 2 == 1)
 	{
-		cursprite->type = ARMOR_PUSH;
-		cursprite->x = x;
-		cursprite->y = y;
-		cursprite->next = (t_sprite *)malloc(sizeof(t_sprite));
-		ft_bzero(cursprite->next, sizeof(t_sprite));
-		printf("Medkit is available\n");
+		cur_sprite->type = ARMOR_PUSH;
+		cur_sprite->x = x;
+		cur_sprite->y = y;
 		add_command(&(sdl->commands), SPRITE_TYPE);
 	}
 	else if (sdl->button_pushed == POWER_UP_PUSH && check_intersection(sdl->sectors, 0, 0, x, y) % 2 == 1)
 	{
-		cursprite->type = POWER_UP_PUSH;
-		cursprite->x = x;
-		cursprite->y = y;
-		cursprite->next = (t_sprite *)malloc(sizeof(t_sprite));
-		ft_bzero(cursprite->next, sizeof(t_sprite));
-		printf("Power_up is available\n");
+		cur_sprite->type = POWER_UP_PUSH;
+		cur_sprite->x = x;
+		cur_sprite->y = y;
 		add_command(&(sdl->commands), SPRITE_TYPE);
 	}
 	else if (sdl->button_pushed == RIFLE_AMMO_PUSH && check_intersection(sdl->sectors, 0, 0, x, y) % 2 == 1)
 	{
-		cursprite->type = RIFLE_AMMO_PUSH;
-		cursprite->x = x;
-		cursprite->y = y;
-		cursprite->next = (t_sprite *)malloc(sizeof(t_sprite));
-		ft_bzero(cursprite->next, sizeof(t_sprite));
-		printf("Rifle ammo is available\n");
+		cur_sprite->type = RIFLE_AMMO_PUSH;
+		cur_sprite->x = x;
+		cur_sprite->y = y;
 		add_command(&(sdl->commands), SPRITE_TYPE);
 	}
 	else if (sdl->button_pushed == PLASMA_GUN_PUSH && check_intersection(sdl->sectors, 0, 0, x, y) % 2 == 1)
 	{
-		cursprite->type = PLASMA_GUN_PUSH;
-		cursprite->x = x;
-		cursprite->y = y;
-		cursprite->next = (t_sprite *)malloc(sizeof(t_sprite));
-		ft_bzero(cursprite->next, sizeof(t_sprite));
-		printf("Plasma gun is available\n");
+		cur_sprite->type = PLASMA_GUN_PUSH;
+		cur_sprite->x = x;
+		cur_sprite->y = y;
 		add_command(&(sdl->commands), SPRITE_TYPE);
 	}
 	else if (sdl->button_pushed == PLASMA_AMMO_PUSH && check_intersection(sdl->sectors, 0, 0, x, y) % 2 == 1)
 	{
-		cursprite->type = PLASMA_AMMO_PUSH;
-		cursprite->x = x;
-		cursprite->y = y;
-		cursprite->next = (t_sprite *)malloc(sizeof(t_sprite));
-		ft_bzero(cursprite->next, sizeof(t_sprite));
-		printf("Plasma ammo is available\n");
+		cur_sprite->type = PLASMA_AMMO_PUSH;
+		cur_sprite->x = x;
+		cur_sprite->y = y;
 		add_command(&(sdl->commands), SPRITE_TYPE);
 	}
 	else if (sdl->button_pushed == BARREL_PUSH && check_intersection(sdl->sectors, 0, 0, x, y) % 2 == 1)
 	{
-		cursprite->type = BARREL_PUSH;
-		cursprite->x = x;
-		cursprite->y = y;
-		cursprite->next = (t_sprite *)malloc(sizeof(t_sprite));
-		ft_bzero(cursprite->next, sizeof(t_sprite));
-		printf("Barrel is available\n");
+		cur_sprite->type = BARREL_PUSH;
+		cur_sprite->x = x;
+		cur_sprite->y = y;
 		add_command(&(sdl->commands), SPRITE_TYPE);
 	}
 	else if (sdl->button_pushed == AFRIT_PUSH && check_intersection(sdl->sectors, 0, 0, x, y) % 2 == 1)
 	{
-		cursprite->type = AFRIT_PUSH;
-		cursprite->x = x;
-		cursprite->y = y;
-		cursprite->next = (t_sprite *)malloc(sizeof(t_sprite));
-		ft_bzero(cursprite->next, sizeof(t_sprite));
-		printf("Afrit is available\n");
+		cur_sprite->type = AFRIT_PUSH;
+		cur_sprite->x = x;
+		cur_sprite->y = y;
 		add_command(&(sdl->commands), SPRITE_TYPE);
 	}
 	else if (sdl->button_pushed == CACODEMON_PUSH && check_intersection(sdl->sectors, 0, 0, x, y) % 2 == 1)
 	{
-		cursprite->type = CACODEMON_PUSH;
-		cursprite->x = x;
-		cursprite->y = y;
-		cursprite->next = (t_sprite *)malloc(sizeof(t_sprite));
-		ft_bzero(cursprite->next, sizeof(t_sprite));
-		printf("Cacodemon is available\n");
+		cur_sprite->type = CACODEMON_PUSH;
+		cur_sprite->x = x;
+		cur_sprite->y = y;
 		add_command(&(sdl->commands), SPRITE_TYPE);
 	}
 	else if (sdl->button_pushed == IMP_PUSH && check_intersection(sdl->sectors, 0, 0, x, y) % 2 == 1)
 	{
-		cursprite->type = IMP_PUSH;
-		cursprite->x = x;
-		cursprite->y = y;
-		cursprite->next = (t_sprite *)malloc(sizeof(t_sprite));
-		ft_bzero(cursprite->next, sizeof(t_sprite));
-		printf("Imp is available\n");
+		cur_sprite->type = IMP_PUSH;
+		cur_sprite->x = x;
+		cur_sprite->y = y;
 		add_command(&(sdl->commands), SPRITE_TYPE);
 	}
-	cursprite = cursprite->next;
 }
 
 void	set_player(t_sdl *sdl, int x, int y)
