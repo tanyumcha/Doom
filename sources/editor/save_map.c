@@ -6,7 +6,7 @@
 /*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:37:38 by djast             #+#    #+#             */
-/*   Updated: 2019/10/19 14:51:49 by djast            ###   ########.fr       */
+/*   Updated: 2019/10/19 17:01:47 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,15 @@ static int	create_file(char *map_name)
 void		save_map(t_sdl *sdl, char *map_name)
 {
 	int fd;
+	int last_id;
 
 	fd = create_file(map_name);
 	write_world(sdl, fd);
 	write_player(sdl, fd);
-	write_vertexes(sdl, fd);
+	last_id = write_vertexes_wall(sdl, fd);
+	write_vertexes_sprite(sdl, fd, last_id);
 	write_polygone(sdl, fd);
+	write_objects(sdl, fd);
+	write_sprites(sdl, fd, last_id);
+	write_sectors(sdl, fd);
 }

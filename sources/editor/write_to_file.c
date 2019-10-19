@@ -6,7 +6,7 @@
 /*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:48:45 by djast             #+#    #+#             */
-/*   Updated: 2019/10/19 15:42:32 by djast            ###   ########.fr       */
+/*   Updated: 2019/10/19 17:13:05 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,46 +38,6 @@ void		write_world(t_sdl *sdl, int fd)
 	write(fd, "\n", 1);
 }
 
-void			write_vertexes(t_sdl *sdl, int fd)
-{
-	t_sector	*cur_sector;
-	int			i;
-	int			id;
-	char		*char_id;
-
-	cur_sector = sdl->sectors;
-	id = 0;
-	
-	while (cur_sector != NULL && cur_sector->size != 0)
-	{
-		i = 0;
-		printf("%d\n", cur_sector->size);
-		while (i != cur_sector->size)
-		{
-			write(fd, "vertex:	", 8);
-			char_id = ft_itoa(id++);
-			write(fd, char_id, ft_strlen(char_id));
-			free(char_id);
-			write(fd, "	", 1);
-			char_id = ft_itoa(cur_sector->point[i].x * 4);
-			write(fd, char_id, ft_strlen(char_id));
-			free(char_id);
-			write(fd, "	", 1);
-			char_id = ft_itoa(cur_sector->point[i].y * 4);
-			write(fd, char_id, ft_strlen(char_id));
-			free(char_id);
-			write(fd, "	", 1);
-			char_id = ft_itoa(cur_sector->z);
-			write(fd, char_id, ft_strlen(char_id));
-			free(char_id);
-			write(fd, "\n", 1);
-			i++;
-		}
-		write(fd, "\n", 1);
-		cur_sector = cur_sector->next;
-	}
-}
-
 void			write_polygone(t_sdl *sdl, int fd)
 {
 	t_sector	*cur_sector;
@@ -88,10 +48,10 @@ void			write_polygone(t_sdl *sdl, int fd)
 	cur_sector = sdl->sectors;
 	id = 1;
 	
-	while (cur_sector != NULL && cur_sector->size != 0)
+	while (cur_sector != NULL)
 	{
 		i = 0;
-		while (i != cur_sector->size - 1)
+		while (i < cur_sector->size - 1)
 		{
 			write(fd, "polygone:	", 10);
 			char_id = ft_itoa(id);
@@ -133,4 +93,74 @@ void			write_player(t_sdl *sdl, int fd)
 	write(fd, char_id, ft_strlen(char_id));
 	free(char_id);
 	write(fd, "\n\n", 2);
+}
+
+void		write_sprites(t_sdl *sdl, int fd, int last_id)
+{
+	t_sprite	*cur_sprite;
+	int			id;
+	int			i;
+	char		*char_id;
+
+	cur_sprite = sdl->sprites;
+	id = last_id;
+	i = 0;
+	while (cur_sprite != NULL)
+	{
+		write(fd, "sobjct:	", 8);
+		char_id = ft_itoa(i++);
+		write(fd, char_id, ft_strlen(char_id));
+		free(char_id);
+		write(fd, "	0	", 3);
+		char_id = ft_itoa(cur_sprite->type);
+		write(fd, char_id, ft_strlen(char_id));
+		free(char_id);
+		write(fd, "	", 1);
+		char_id = ft_itoa(id++);
+		write(fd, char_id, ft_strlen(char_id));
+		free(char_id);
+		write(fd, "\n", 1);
+		cur_sprite = cur_sprite->next;
+	}
+	write(fd, "\n", 1);
+}
+
+void		write_objects(t_sdl *sdl, int fd)
+{
+	t_sector	*cur_sector;
+	int			i;
+	int			id;
+	char		*char_id;
+
+	cur_sector = sdl->sectors;
+	id = 1;
+	
+	while (cur_sector != NULL)
+	{
+		i = 0;
+		while (i < cur_sector->size - 1)
+		{
+			write(fd, "object:	", 8);
+			char_id = ft_itoa(id);
+			write(fd, char_id, ft_strlen(char_id));
+			free(char_id);
+			write(fd, "	-1	0	1	floor_wall	ceil_wall	1	", 31);
+			char_id = ft_itoa(id);
+			write(fd, char_id, ft_strlen(char_id));
+			free(char_id);
+			write(fd, "\n", 1);
+			id++;
+			i++;
+		}
+		id++;
+		write(fd, "\n", 1);
+		cur_sector = cur_sector->next;
+	}
+
+}
+
+void		write_sectors(t_sdl *sdl, int fd)
+{
+	(void) sdl;
+	(void) fd;	
 }

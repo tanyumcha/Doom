@@ -6,7 +6,7 @@
 /*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/10/19 15:41:06 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/19 17:04:50 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -190,7 +190,11 @@ void					set_sprite(t_sdl *sdl, int x, int y);
 void					save_map(t_sdl *sdl, char *map_name);
 void					write_world(t_sdl *sdl, int fd);
 int						get_sector_count(t_sector *sect);
-void					write_vertexes(t_sdl *sdl, int fd);
+int						write_vertexes_wall(t_sdl *sdl, int fd);
 void					write_polygone(t_sdl *sdl, int fd);
 void					write_player(t_sdl *sdl, int fd);
+void					write_vertexes_sprite(t_sdl *sdl, int fd, int last_id);
+void					write_sprites(t_sdl *sdl, int fd, int last_id);
+void					write_sectors(t_sdl *sdl, int fd);
+void					write_objects(t_sdl *sdl, int fd);
 #endif
