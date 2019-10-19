@@ -36,18 +36,17 @@
 
 # define PLAYER_PUSH 0
 # define MEDKIT_PUSH 1
-# define SPRITE_PUSH 2
-# define ARMOR_PUSH 3
-# define POWER_UP_PUSH 4
-# define RIFLE_AMMO_PUSH 5
-# define PLASMA_GUN_PUSH 6
-# define PLASMA_AMMO_PUSH 7
-# define BARREL_PUSH 8
-# define AFRIT_PUSH 9
-# define CACODEMON_PUSH 10
-# define IMP_PUSH 11
-# define JETPACK_PUSH 12
-# define WALL_PUSH 13
+# define ARMOR_PUSH 2
+# define POWER_UP_PUSH 3
+# define RIFLE_AMMO_PUSH 4
+# define PLASMA_GUN_PUSH 5
+# define PLASMA_AMMO_PUSH 6
+# define BARREL_PUSH 7
+# define AFRIT_PUSH 8
+# define CACODEMON_PUSH 9
+# define IMP_PUSH 10
+# define JETPACK_PUSH 11
+# define WALL_PUSH 12
 
 # define BUTTON_PLAYER_X1 SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1
 # define BUTTON_PLAYER_Y1 SIZE_WIN_Y * 0.1 * 0.6
