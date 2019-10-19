@@ -6,41 +6,35 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:39:39 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/19 10:59:47 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/19 15:54:20 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-// void	remove_last_sprite(t_sprite *sprites)
-// {
-// 	while (sprites != NULL)
-// 		sprites = sprites->next;
-
-// }
-
-void	delete_sprites(t_sprite *sprites)
+void	remove_last_sprite(t_sprite **sprites)
 {
-	while (sprites != NULL) // доделать
+	t_sprite *cur_sprite;
+	t_sprite *prev_sprite;
+
+	prev_sprite = *sprites;
+	cur_sprite = (*sprites)->next;
+	if (cur_sprite == NULL)
 	{
-		sprites->type = 0;
-		sprites->x = 0;
-		sprites->y = 0;
-		sprites = sprites->next;
+		free(prev_sprite);
+		*sprites = NULL;
+		return ;
 	}
-}
-
-void	delete_player(t_point *player)
-{
-	player->x = 0;
-	player->y = 0;
-}
-
-void	delete_point(t_sector *sector)
-{
-	sector->point[sector->size - 1].x = 0;
-	sector->point[sector->size - 1].y = 0;
-	sector->size--;
+	while (cur_sprite->next != NULL)
+	{
+		prev_sprite = cur_sprite;
+		cur_sprite = cur_sprite->next;
+	}
+	if (cur_sprite->next == NULL)
+	{
+		prev_sprite->next = NULL;
+		free(cur_sprite);
+	}
 }
 
 void	remove_last_point(t_sector **head)
@@ -69,6 +63,30 @@ void	remove_last_point(t_sector **head)
 		free(cur_sector);
 		delete_point(prev_sector);
 	}
+}
+
+void	delete_sprites(t_sprite *sprites)
+{
+	while (sprites != NULL) // доделать
+	{
+		sprites->type = 0;
+		sprites->x = 0;
+		sprites->y = 0;
+		sprites = sprites->next;
+	}
+}
+
+void	delete_player(t_point *player)
+{
+	player->x = 0;
+	player->y = 0;
+}
+
+void	delete_point(t_sector *sector)
+{
+	sector->point[sector->size - 1].x = 0;
+	sector->point[sector->size - 1].y = 0;
+	sector->size--;
 }
 
 void	reset(t_sector **head, t_point	*player, t_sprite *sprites)

@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 15:25:23 by djast             #+#    #+#             */
-/*   Updated: 2019/10/19 10:59:57 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/19 15:38:46 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,5 @@ void	delete_last_command(t_sdl *sdl)
 	if (type == PLAYER_TYPE)
 		delete_player(sdl->player);
 	if (type == SPRITE_TYPE)
-	{}
-		// remove_last_sprite(&(sdl->sprites));
+		remove_last_sprite(&(sdl->sprites));
 }

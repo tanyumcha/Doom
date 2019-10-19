@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/10/19 12:16:30 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/19 15:41:06 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,6 +175,9 @@ void					delete_player(t_point *player);
 void					remove_last_point(t_sector **head);
 void					reset(t_sector **head, t_point	*player, t_sprite *sprites);
 void					delete_last_command(t_sdl *sdl);
+void					delete_point(t_sector *sector);
+void					remove_last_sprite(t_sprite **sprites);
+void					remove_last_point(t_sector **head);
 void					add_command(t_commands **commands, int type);
 t_sector				*get_last_sector(t_sector *head);
 t_sprite				*find_last_sprite(t_sprite *sprites);
