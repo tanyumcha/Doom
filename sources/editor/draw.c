@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 10:11:40 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/19 15:15:35 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/19 16:33:48 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,13 @@ void	draw_a_sprite(t_sdl *sdl, t_sprite *sprites)
 			SDL_SetRenderDrawColor(sdl->renderer, 150, 000, 100, 0);
 		else if (sprites->type == IMP_PUSH)
 			SDL_SetRenderDrawColor(sdl->renderer, 200, 100, 100, 0);
+		else if (sprites->type == JETPACK_PUSH)
+			SDL_SetRenderDrawColor(sdl->renderer, 000, 000, 255, 0);
 		newrect.x = sprites->x - POINT_SIZE / 2;
 		newrect.y = sprites->y - POINT_SIZE / 2;
 		newrect.w = POINT_SIZE;
 		newrect.h = POINT_SIZE;
 		SDL_RenderFillRect(sdl->renderer, &newrect);
-		printf("Sprite is available\n");
 		sprites = sprites->next;
 	}
 }
@@ -101,7 +102,6 @@ void	draw(t_sdl *sdl)
 	}
 	if (sdl->player->x != 0 && sdl->player->y != 0)
 		draw_a_player(sdl, sdl->player);
-
 	draw_a_sprite(sdl, sdl->sprites);
 	SDL_RenderPresent(sdl->renderer);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/10/19 17:04:50 by djast            ###   ########.fr       */
+/*   Updated: 2019/10/19 16:31:11 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,16 @@
 
 # define PLAYER_PUSH 0
 # define MEDKIT_PUSH 1
-# define SPRITE_PUSH 2
-# define ARMOR_PUSH 3
-# define POWER_UP_PUSH 4
-# define RIFLE_AMMO_PUSH 5
-# define PLASMA_GUN_PUSH 6
-# define PLASMA_AMMO_PUSH 7
-# define BARREL_PUSH 8
-# define AFRIT_PUSH 9
-# define CACODEMON_PUSH 10
-# define IMP_PUSH 11
+# define ARMOR_PUSH 2
+# define POWER_UP_PUSH 3
+# define RIFLE_AMMO_PUSH 4
+# define PLASMA_GUN_PUSH 5
+# define PLASMA_AMMO_PUSH 6
+# define BARREL_PUSH 7
+# define AFRIT_PUSH 8
+# define CACODEMON_PUSH 9
+# define IMP_PUSH 10
+# define JETPACK_PUSH 11
 # define WALL_PUSH 12
 
 # define BUTTON_PLAYER_X1 SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1
@@ -103,8 +103,13 @@
 # define BUTTON_IMP_X2 BUTTON_PLAYER_X2
 # define BUTTON_IMP_Y2 BUTTON_IMP_Y1 + SIZE_WIN_Y * 0.05
 
+# define BUTTON_JETPACK_X1 BUTTON_PLAYER_X1
+# define BUTTON_JETPACK_Y1 BUTTON_PLAYER_Y1 * 12
+# define BUTTON_JETPACK_X2 BUTTON_PLAYER_X2
+# define BUTTON_JETPACK_Y2 BUTTON_JETPACK_Y1 + SIZE_WIN_Y * 0.05
+
 # define BUTTON_WALL_X1 BUTTON_PLAYER_X1
-# define BUTTON_WALL_Y1 BUTTON_PLAYER_Y1 * 12
+# define BUTTON_WALL_Y1 BUTTON_PLAYER_Y1 * 13
 # define BUTTON_WALL_X2 BUTTON_PLAYER_X2
 # define BUTTON_WALL_Y2 BUTTON_WALL_Y1 + SIZE_WIN_Y * 0.05
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bigloop.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 11:26:54 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/19 12:29:22 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/19 16:36:18 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,13 @@ void	clicks(t_sdl *sdl)
 		sdl->type_pressed = SPRITE_TYPE;
 		sdl->button_pushed = IMP_PUSH;
 		printf("Imp\n");
+	}
+	else if ((sdl->mouse_position.x > BUTTON_JETPACK_X1 && sdl->mouse_position.x < BUTTON_JETPACK_X2) &&
+			(sdl->mouse_position.y > BUTTON_JETPACK_Y1 && sdl->mouse_position.y < BUTTON_JETPACK_Y2))
+	{
+		sdl->type_pressed = SPRITE_TYPE;
+		sdl->button_pushed = JETPACK_PUSH;
+		printf("Jetpack\n");
 	}
 	else if ((sdl->mouse_position.x > BUTTON_WALL_X1 && sdl->mouse_position.x < BUTTON_WALL_X2) &&
 			(sdl->mouse_position.y > BUTTON_WALL_Y1 && sdl->mouse_position.y < BUTTON_WALL_Y2))
