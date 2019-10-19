@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:27:00 by djast             #+#    #+#             */
 /*   Updated: 2019/10/19 15:05:23 by eharrag-         ###   ########.fr       */
@@ -21,6 +21,7 @@ t_sector	*init_sector()
 	sector->size = 0;
 	sector->num_of_sector = 0;
 	sector->type_of_point = 0;
+	sector->z = 300;
 	sector->next = NULL;
 	return (sector);
 }

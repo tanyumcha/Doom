@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   put_stuff.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 11:16:02 by eharrag-          #+#    #+#             */
 /*   Updated: 2019/10/19 14:52:02 by eharrag-         ###   ########.fr       */

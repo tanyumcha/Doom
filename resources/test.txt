@@ -1,0 +1,13 @@
+world:	1	2	0,1
+player:	98123
+
+vertex:	98123	3896	2940	300
+vertex:	0	4976	2804	300
+vertex:	1	3776	3204	300
+vertex:	2	3776	2604	300
+vertex:	3	4976	2804	300
+
+polygone:	1	1	0xFF0000	bricks	2	1,0
+polygone:	2	1	0xFF0000	bricks	2	2,1
+polygone:	3	1	0xFF0000	bricks	2	3,2
+

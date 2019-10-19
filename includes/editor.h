@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
 /*   Updated: 2019/10/19 15:41:06 by eharrag-         ###   ########.fr       */
@@ -120,6 +120,7 @@ typedef struct			s_sector
 	int					size;
 	int					num_of_sector;
 	int					type_of_point;
+	int					z;
 	struct s_sector		*next;
 }						t_sector;
 
@@ -186,5 +187,10 @@ void					choose_type_of_point(t_sector **stuffbox, int type);
 void					make_player_or_sprite(t_sdl *sdl);
 int						check_intersection(t_sector *head, int x1, int y1, int x2, int y2);
 void					set_sprite(t_sdl *sdl, int x, int y);
-
+void					save_map(t_sdl *sdl, char *map_name);
+void					write_world(t_sdl *sdl, int fd);
+int						get_sector_count(t_sector *sect);
+void					write_vertexes(t_sdl *sdl, int fd);
+void					write_polygone(t_sdl *sdl, int fd);
+void					write_player(t_sdl *sdl, int fd);
 #endif

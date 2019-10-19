@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   bigloop.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 11:26:54 by eharrag-          #+#    #+#             */
 /*   Updated: 2019/10/19 12:29:22 by eharrag-         ###   ########.fr       */
@@ -119,6 +119,9 @@ void	big_loop(t_sdl *sdl)
 			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_BACKSPACE ==
 					sdl->window_event.key.keysym.sym)
 				delete_last_command(sdl);
+			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_m ==
+					sdl->window_event.key.keysym.sym)
+				save_map(sdl, "test.txt");
 			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_r ==
 					sdl->window_event.key.keysym.sym)
 				reset(&(sdl->sectors), sdl->player, sdl->sprites);
