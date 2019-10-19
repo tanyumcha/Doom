@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+         #
+#    By: djast <djast@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/15 17:18:06 by djast             #+#    #+#              #
-#    Updated: 2019/10/16 12:32:47 by eharrag-         ###   ########.fr        #
+#    Updated: 2019/10/19 12:00:07 by djast            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,9 @@ EDITOR_FILES =	editor.c \
 				utils.c \
 				init.c \
 				check_intersection.c \
+				save_map.c \
+				save_utils.c \
+				write_to_file.c
 
 SRC_DIRECTORY = ./sources/
 SRC_DIRECTORY_EDITOR = $(SRC_DIRECTORY)editor/
