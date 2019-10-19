@@ -6,44 +6,45 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 10:11:40 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/18 12:56:10 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/19 15:15:35 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-void	draw_a_sprite(t_sdl *sdl, t_sprite *sprite)
+void	draw_a_sprite(t_sdl *sdl, t_sprite *sprites)
 {
 	SDL_Rect	newrect;
 
-	while (sprite != NULL)
+	while (sprites != NULL)
 	{
-		if (sprite->type == MEDKIT_PUSH)
+		if (sprites->type == MEDKIT_PUSH)
 			SDL_SetRenderDrawColor(sdl->renderer, 255, 051, 051, 0);
-		else if (sprite->type == ARMOR_PUSH)
+		else if (sprites->type == ARMOR_PUSH)
 			SDL_SetRenderDrawColor(sdl->renderer, 051, 102, 153, 0);
-		else if (sprite->type == POWER_UP_PUSH)
+		else if (sprites->type == POWER_UP_PUSH)
 			SDL_SetRenderDrawColor(sdl->renderer, 051, 102, 051, 0);
-		else if (sprite->type == POWER_UP_PUSH)
-			SDL_SetRenderDrawColor(sdl->renderer, 051, 102, 051, 0);
-		else if (sprite->type == PLASMA_GUN_PUSH)
+		else if (sprites->type == RIFLE_AMMO_PUSH)
+			SDL_SetRenderDrawColor(sdl->renderer, 204, 153, 000, 0);
+		else if (sprites->type == PLASMA_GUN_PUSH)
 			SDL_SetRenderDrawColor(sdl->renderer, 255, 255, 000, 0);
-		else if (sprite->type == PLASMA_AMMO_PUSH)
+		else if (sprites->type == PLASMA_AMMO_PUSH)
 			SDL_SetRenderDrawColor(sdl->renderer, 204, 255, 000, 0);
-		else if (sprite->type == BARREL_PUSH)
+		else if (sprites->type == BARREL_PUSH)
 			SDL_SetRenderDrawColor(sdl->renderer, 102, 051, 000, 0);
-		else if (sprite->type == AFRIT_PUSH)
+		else if (sprites->type == AFRIT_PUSH)
 			SDL_SetRenderDrawColor(sdl->renderer, 204, 000, 000, 0);
-		else if (sprite->type == CACODEMON_PUSH)
+		else if (sprites->type == CACODEMON_PUSH)
 			SDL_SetRenderDrawColor(sdl->renderer, 150, 000, 100, 0);
-		else if (sprite->type == IMP_PUSH)
+		else if (sprites->type == IMP_PUSH)
 			SDL_SetRenderDrawColor(sdl->renderer, 200, 100, 100, 0);
-		newrect.x = sprite->x - POINT_SIZE / 2;
-		newrect.y = sprite->y - POINT_SIZE / 2;
+		newrect.x = sprites->x - POINT_SIZE / 2;
+		newrect.y = sprites->y - POINT_SIZE / 2;
 		newrect.w = POINT_SIZE;
 		newrect.h = POINT_SIZE;
 		SDL_RenderFillRect(sdl->renderer, &newrect);
-		sprite = sprite->next;
+		printf("Sprite is available\n");
+		sprites = sprites->next;
 	}
 }
 
@@ -96,16 +97,11 @@ void	draw(t_sdl *sdl)
 	{
 		if (cur_sector->type_of_point == 0)
 			draw_a_sector(sdl, cur_sector, cur_sector->size);
-		// else if (head->type_of_point == 2)
-		// {
-		// 	SDL_SetRenderDrawColor(sdl->renderer, 204, 102, 255, 0);
-		// 	draw_a_point(sdl, head->point, head->type_of_point);
-		// }
 		cur_sector = cur_sector->next;
 	}
 	if (sdl->player->x != 0 && sdl->player->y != 0)
 		draw_a_player(sdl, sdl->player);
-	if (sdl->sprites->x != 0 && sdl->sprites->y != 0)
-		draw_a_sprite(sdl, sdl->sprites);
+
+	draw_a_sprite(sdl, sdl->sprites);
 	SDL_RenderPresent(sdl->renderer);
 }

@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:27:00 by djast             #+#    #+#             */
-/*   Updated: 2019/10/17 14:08:58 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/19 15:05:23 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_sector	*init_sector()
 {
-	t_sector *sector;
+	t_sector	*sector;
 
 	sector = (t_sector *)malloc(sizeof(t_sector));
 	ft_bzero(sector->point, 100);
@@ -25,13 +25,16 @@ t_sector	*init_sector()
 	return (sector);
 }
 
-void		init_sprites(t_sdl *sdl)
+t_sprite	*init_sprite()
 {
-	sdl->sprites = (t_sprite *)malloc(sizeof(t_sprite));
-	sdl->sprites->type = 0;
-	sdl->sprites->x = 0;
-	sdl->sprites->y = 0;
-	sdl->sprites->next = NULL;
+	t_sprite	*sprite;
+
+	sprite = (t_sprite *)malloc(sizeof(t_sprite));
+	sprite->type = 0;
+	sprite->x = 0;
+	sprite->y = 0;
+	sprite->next = NULL;
+	return (sprite);
 }
 
 void		init_player(t_sdl *sdl)
@@ -51,12 +54,10 @@ void		init_sdl(t_sdl *sdl)
 					SDL_RENDERER_ACCELERATED);
 	TTF_Init();
 	sdl->font = TTF_OpenFont("resources/Samson.ttf", 200);
-	// if(!sdl->font)
-	// 	printf("TTF_OpenFont: %s\n", TTF_GetError());
-	sdl->type_pressed = WALL_TYPE;
-	sdl->sectors = NULL;
+	sdl->button_pushed = WALL_PUSH;
+	sdl->sectors = init_sector();
 	sdl->commands = NULL;
+	sdl->sprites = NULL;
 	init_player(sdl);
-	init_sprites(sdl);
 	SDL_ShowCursor(1);
 }

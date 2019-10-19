@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   take_a_lap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:46:30 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/14 17:37:12 by djast            ###   ########.fr       */
+/*   Updated: 2019/10/19 15:05:07 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	add_point(t_sdl *sdl, t_sector **sector, int i)
 	add_command(&(sdl->commands), WALL_TYPE);
 }
 
-int	dot_in_used(t_sector *sector, int x, int y)
+int		dot_in_used(t_sector *sector, int x, int y)
 {
 	int i;
 
@@ -36,10 +36,15 @@ int	dot_in_used(t_sector *sector, int x, int y)
 
 void	make_wall(t_sdl *sdl)
 {
-	int i;
-	t_sector *sector;
+	int			i;
+	t_sector	*sector;
 
 	sector = get_last_sector(sdl->sectors);
+	if (sector == NULL)
+	{
+		sdl->sectors = init_sector();
+		sector = sdl->sectors;
+	}
 	SDL_GetMouseState(&sdl->mouse_position.x, &sdl->mouse_position.y);
 	if (sdl->mouse_position.x < (int)(SIZE_WIN_X * 0.8))
 	{
@@ -55,10 +60,23 @@ void	make_wall(t_sdl *sdl)
 				sdl->mouse_position.y <= sector->point[0].y + POINT_SIZE / 2)))
 			{
 				add_point(sdl, &sector, i);
-				sector->next = init_sector(++sdl->sect_count);
+				sector->next = init_sector();
 				sector = sector->next;
+				// if (sector == NULL)
+				// {
+				// 	sdl->sectors = init_sector();
+				// 	sector = sdl->sectors;
+				// }
+				// else
+				// {
+				// 	sector->next = init_sector();
+				// 	sector = sector->next;
+				// }
+
+				// sector->next = init_sector();
+				// sector = sector->next;
+
 				printf("SAVE\n");
-				sector->size = 0;
 			}
 		}
 	}

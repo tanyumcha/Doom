@@ -6,13 +6,13 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:31:52 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/19 11:19:05 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/19 12:27:34 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-void			draw_text(t_sdl *sdl, char *text, SDL_Rect button, SDL_Color color)
+void	draw_text(t_sdl *sdl, char *text, SDL_Rect button, SDL_Color color)
 {
 	sdl->surface = TTF_RenderText_Solid(sdl->font, text, color);
 	SDL_DestroyTexture(sdl->text);
@@ -22,9 +22,9 @@ void			draw_text(t_sdl *sdl, char *text, SDL_Rect button, SDL_Color color)
 	SDL_RenderCopy(sdl->renderer, sdl->text, NULL, &button);
 }
 
-void			choose_color_of_button(t_sdl *sdl, int color)
+void	choose_color_of_button(t_sdl *sdl, int color)
 {
-	if (color == COLOR_PUSHED && sdl->type_pressed == PLAYER_TYPE)
+	if (color == COLOR_PUSHED && sdl->button_pushed == PLAYER_PUSH)
 		SDL_SetRenderDrawColor(sdl->renderer, 50, 205, 50, 100);
 	else if (color == COLOR_PUSHED && sdl->button_pushed == MEDKIT_PUSH)
 		SDL_SetRenderDrawColor(sdl->renderer, 255, 051, 051, 0);
@@ -46,24 +46,24 @@ void			choose_color_of_button(t_sdl *sdl, int color)
 		SDL_SetRenderDrawColor(sdl->renderer, 150, 000, 100, 0);
 	else if (color == COLOR_PUSHED && sdl->button_pushed == IMP_PUSH)
 		SDL_SetRenderDrawColor(sdl->renderer, 200, 100, 100, 0);
-	else if (color == COLOR_UNPUSHED)
-		SDL_SetRenderDrawColor(sdl->renderer, 025, 000, 051, 255);
 	else if (color == COLOR_PUSHED && sdl->button_pushed == WALL_PUSH)
 		SDL_SetRenderDrawColor(sdl->renderer, 153, 204, 255, 0);
 }
 
-void			draw_button(t_sdl *sdl, SDL_Rect button, char *text, int color)
+void	draw_button(t_sdl *sdl, SDL_Rect button, char *text, int color)
 {
 	SDL_Color	*color_text;
 
 	choose_color_of_button(sdl, color);
+	if (color == COLOR_UNPUSHED)
+		SDL_SetRenderDrawColor(sdl->renderer, 025, 000, 051, 255);
 	SDL_RenderFillRect(sdl->renderer, &button);
 	color_text = create_sdl_color(204, 153, 255, 255);
 	draw_text(sdl, text, button, *color_text);
 	free(color_text);
 }
 
-void			draw_buttons_on_sidebar(t_sdl *sdl)
+void	draw_buttons_on_sidebar(t_sdl *sdl)
 {
 	SDL_Rect	*button;
 
@@ -180,7 +180,7 @@ void			draw_buttons_on_sidebar(t_sdl *sdl)
 	free(button);
 }
 
-void			draw_sidebar(t_sdl *sdl)
+void	draw_sidebar(t_sdl *sdl)
 {
 	SDL_Rect	sidebar;
 
