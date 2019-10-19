@@ -6,15 +6,22 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:39:39 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/17 14:09:57 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/19 10:59:47 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
+// void	remove_last_sprite(t_sprite *sprites)
+// {
+// 	while (sprites != NULL)
+// 		sprites = sprites->next;
+
+// }
+
 void	delete_sprites(t_sprite *sprites)
 {
-	while (sprites != NULL)
+	while (sprites != NULL) // доделать
 	{
 		sprites->type = 0;
 		sprites->x = 0;

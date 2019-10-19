@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/10/18 13:12:15 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/19 11:18:28 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@
 # define WALL_PUSH 12
 
 # define BUTTON_PLAYER_X1 SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1
-# define BUTTON_PLAYER_Y1 SIZE_WIN_Y * 0.1 * 0.7
+# define BUTTON_PLAYER_Y1 SIZE_WIN_Y * 0.1 * 0.6
 # define BUTTON_PLAYER_X2 BUTTON_PLAYER_X1 + SIZE_WIN_X * 0.2 * 0.6
 # define BUTTON_PLAYER_Y2 BUTTON_PLAYER_Y1 + SIZE_WIN_Y * 0.05
 
@@ -176,6 +176,7 @@ void					reset(t_sector **head, t_point	*player, t_sprite *sprites);
 void					delete_last_command(t_sdl *sdl);
 void					add_command(t_commands **commands, int type);
 t_sector				*get_last_sector(t_sector *head);
+SDL_Color				*create_sdl_color(int r, int g, int b, int a);
 void					choose_type_of_point(t_sector **stuffbox, int type);
 void					make_player_or_sprite(t_sdl *sdl);
 int						check_intersection(t_sector *head, int x1, int y1, int x2, int y2);
