@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:31:52 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/19 12:27:34 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/19 16:38:34 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ void	choose_color_of_button(t_sdl *sdl, int color)
 		SDL_SetRenderDrawColor(sdl->renderer, 150, 000, 100, 0);
 	else if (color == COLOR_PUSHED && sdl->button_pushed == IMP_PUSH)
 		SDL_SetRenderDrawColor(sdl->renderer, 200, 100, 100, 0);
+	else if (color == COLOR_PUSHED && sdl->button_pushed == JETPACK_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 000, 000, 255, 0);
 	else if (color == COLOR_PUSHED && sdl->button_pushed == WALL_PUSH)
 		SDL_SetRenderDrawColor(sdl->renderer, 153, 204, 255, 0);
 }
@@ -167,6 +169,15 @@ void	draw_buttons_on_sidebar(t_sdl *sdl)
 		draw_button(sdl, *button, " SET IMP", COLOR_PUSHED);
 	else
 		draw_button(sdl, *button, " SET IMP", COLOR_UNPUSHED);
+
+	button->x = BUTTON_JETPACK_X1;
+	button->y = BUTTON_JETPACK_Y1;
+	button->w = BUTTON_JETPACK_X2 - BUTTON_JETPACK_X1;
+	button->h = BUTTON_JETPACK_Y2 - BUTTON_JETPACK_Y1;
+	if (sdl->button_pushed == JETPACK_PUSH)
+		draw_button(sdl, *button, " SET JETPACK", COLOR_PUSHED);
+	else
+		draw_button(sdl, *button, " SET JETPACK", COLOR_UNPUSHED);
 
 	button->x = BUTTON_WALL_X1;
 	button->y = BUTTON_WALL_Y1;

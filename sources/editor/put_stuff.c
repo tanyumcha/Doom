@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   put_stuff.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 11:16:02 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/19 14:52:02 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/19 16:35:00 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,13 @@ void	set_sprite(t_sdl *sdl, int x, int y)
 	else if (sdl->button_pushed == IMP_PUSH && check_intersection(sdl->sectors, 0, 0, x, y) % 2 == 1)
 	{
 		cur_sprite->type = IMP_PUSH;
+		cur_sprite->x = x;
+		cur_sprite->y = y;
+		add_command(&(sdl->commands), SPRITE_TYPE);
+	}
+	else if (sdl->button_pushed == JETPACK_PUSH && check_intersection(sdl->sectors, 0, 0, x, y) % 2 == 1)
+	{
+		cur_sprite->type = JETPACK_PUSH;
 		cur_sprite->x = x;
 		cur_sprite->y = y;
 		add_command(&(sdl->commands), SPRITE_TYPE);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/10/19 15:41:06 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/19 16:31:11 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@
 # define AFRIT_PUSH 9
 # define CACODEMON_PUSH 10
 # define IMP_PUSH 11
-# define WALL_PUSH 12
+# define JETPACK_PUSH 12
+# define WALL_PUSH 13
 
 # define BUTTON_PLAYER_X1 SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1
 # define BUTTON_PLAYER_Y1 SIZE_WIN_Y * 0.1 * 0.6
@@ -103,8 +104,13 @@
 # define BUTTON_IMP_X2 BUTTON_PLAYER_X2
 # define BUTTON_IMP_Y2 BUTTON_IMP_Y1 + SIZE_WIN_Y * 0.05
 
+# define BUTTON_JETPACK_X1 BUTTON_PLAYER_X1
+# define BUTTON_JETPACK_Y1 BUTTON_PLAYER_Y1 * 12
+# define BUTTON_JETPACK_X2 BUTTON_PLAYER_X2
+# define BUTTON_JETPACK_Y2 BUTTON_JETPACK_Y1 + SIZE_WIN_Y * 0.05
+
 # define BUTTON_WALL_X1 BUTTON_PLAYER_X1
-# define BUTTON_WALL_Y1 BUTTON_PLAYER_Y1 * 12
+# define BUTTON_WALL_Y1 BUTTON_PLAYER_Y1 * 13
 # define BUTTON_WALL_X2 BUTTON_PLAYER_X2
 # define BUTTON_WALL_Y2 BUTTON_WALL_Y1 + SIZE_WIN_Y * 0.05
 
