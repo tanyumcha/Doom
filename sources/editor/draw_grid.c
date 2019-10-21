@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 11:12:11 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/15 09:48:09 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/21 12:40:45 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,6 @@ void	draw_grid(t_sdl *sdl)
 	grid.w = (int)SIZE_WIN_X * 0.8 - grid.x * 2;
 	grid.h = SIZE_WIN_Y - grid.y * 2;
 	SDL_SetRenderDrawColor(sdl->renderer, 85, 26, 139, 0);
-//	SDL_RenderDrawRect(sdl->renderer, &grid);
 	draw_verts(sdl);
 	draw_hors(sdl);
-//	SDL_RenderPresent(sdl->renderer);
 }

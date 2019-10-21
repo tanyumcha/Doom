@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:27:00 by djast             #+#    #+#             */
-/*   Updated: 2019/10/19 15:05:23 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/21 13:11:48 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-t_sector	*init_sector()
+t_sector	*init_sector(void)
 {
 	t_sector	*sector;
 
@@ -22,11 +22,14 @@ t_sector	*init_sector()
 	sector->num_of_sector = 0;
 	sector->type_of_point = 0;
 	sector->z = 300;
+	sector->cmn = 0;
+	sector->sh = 0;
+	sector->rh = 0;
 	sector->next = NULL;
 	return (sector);
 }
 
-t_sprite	*init_sprite()
+t_sprite	*init_sprite(void)
 {
 	t_sprite	*sprite;
 

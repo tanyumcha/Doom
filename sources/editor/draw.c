@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/02 10:11:40 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/19 16:33:48 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/21 13:08:04 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,28 +18,7 @@ void	draw_a_sprite(t_sdl *sdl, t_sprite *sprites)
 
 	while (sprites != NULL)
 	{
-		if (sprites->type == MEDKIT_PUSH)
-			SDL_SetRenderDrawColor(sdl->renderer, 255, 051, 051, 0);
-		else if (sprites->type == ARMOR_PUSH)
-			SDL_SetRenderDrawColor(sdl->renderer, 051, 102, 153, 0);
-		else if (sprites->type == POWER_UP_PUSH)
-			SDL_SetRenderDrawColor(sdl->renderer, 051, 102, 051, 0);
-		else if (sprites->type == RIFLE_AMMO_PUSH)
-			SDL_SetRenderDrawColor(sdl->renderer, 204, 153, 000, 0);
-		else if (sprites->type == PLASMA_GUN_PUSH)
-			SDL_SetRenderDrawColor(sdl->renderer, 255, 255, 000, 0);
-		else if (sprites->type == PLASMA_AMMO_PUSH)
-			SDL_SetRenderDrawColor(sdl->renderer, 204, 255, 000, 0);
-		else if (sprites->type == BARREL_PUSH)
-			SDL_SetRenderDrawColor(sdl->renderer, 102, 051, 000, 0);
-		else if (sprites->type == AFRIT_PUSH)
-			SDL_SetRenderDrawColor(sdl->renderer, 204, 000, 000, 0);
-		else if (sprites->type == CACODEMON_PUSH)
-			SDL_SetRenderDrawColor(sdl->renderer, 150, 000, 100, 0);
-		else if (sprites->type == IMP_PUSH)
-			SDL_SetRenderDrawColor(sdl->renderer, 200, 100, 100, 0);
-		else if (sprites->type == JETPACK_PUSH)
-			SDL_SetRenderDrawColor(sdl->renderer, 000, 000, 255, 0);
+		choose_sprite_color(sdl, sprites);
 		newrect.x = sprites->x - POINT_SIZE / 2;
 		newrect.y = sprites->y - POINT_SIZE / 2;
 		newrect.w = POINT_SIZE;
@@ -82,8 +61,10 @@ void	draw_a_sector(t_sdl *sdl, t_sector *sector, int dots)
 	{
 		draw_a_point(sdl, sector->point, j);
 		if (j != 0)
-			SDL_RenderDrawLine(sdl->renderer, sector->point[j - 1].x, sector->point[j - 1].y,
-								sector->point[j].x, sector->point[j].y);
+			SDL_RenderDrawLine(sdl->renderer, sector->point[j - 1].x,
+								sector->point[j - 1].y,
+								sector->point[j].x,
+								sector->point[j].y);
 		j++;
 	}
 }

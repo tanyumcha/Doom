@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/04 15:04:11 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/19 11:53:18 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/21 13:13:59 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,30 @@ int		check_the_grid(t_point *grid_field, int x, int y)
 	i = 0;
 	while (i < GRID_SIZE)
 	{
-		if (x <= grid_field[i].x + POINT_SIZE / 2 && x >= grid_field[i].x - POINT_SIZE / 2 &&
-				y <= grid_field[i].y + POINT_SIZE / 2 && y >= grid_field[i].y - POINT_SIZE / 2)
+		if (x <= grid_field[i].x + POINT_SIZE / 2 &&
+				x >= grid_field[i].x - POINT_SIZE / 2 &&
+				y <= grid_field[i].y + POINT_SIZE / 2 &&
+				y >= grid_field[i].y - POINT_SIZE / 2)
 			return (i);
 		i++;
 	}
 	return (-1);
 }
 
-void	save_the_grid(t_point *grid_field, int start_x, int start_y, int width, int height)
+void	save_the_grid(t_point *grid_field, SDL_Rect grid)
 {
 	int i;
 	int x;
 	int y;
 
 	i = 0;
-	y = start_y;
+	y = grid.y;
 	while (i < GRID_SIZE)
 	{
-		while (y < start_y + height)
+		while (y < grid.y + grid.h)
 		{
-			x = start_x;
-			while (x < start_x + width)
+			x = grid.x;
+			while (x < grid.x + grid.w)
 			{
 				grid_field[i].x = x;
 				grid_field[i].y = y;
@@ -60,5 +62,5 @@ void	init_grid(t_point *grid_field)
 	grid.y = 101;
 	grid.w = (int)SIZE_WIN_X * 0.8 - grid.x * 2 + 1;
 	grid.h = SIZE_WIN_Y - grid.y * 2 + 1;
-	save_the_grid(grid_field, grid.x, grid.y, grid.w, grid.h);
+	save_the_grid(grid_field, grid);
 }

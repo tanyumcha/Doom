@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/10/19 16:31:11 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/21 13:07:43 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@
 # define GRID_SIZE 600
 # define GRID_SIZE_X 30
 # define GRID_SIZE_Y 20
+# define XO 0
+# define YO 0
 
 # define COLOR_UNPUSHED 0
 # define COLOR_PUSHED 1
@@ -125,6 +127,9 @@ typedef struct			s_sector
 	int					size;
 	int					num_of_sector;
 	int					type_of_point;
+	double				cmn;
+	double				rh;
+	double				sh;
 	int					z;
 	struct s_sector		*next;
 }						t_sector;
@@ -168,13 +173,29 @@ t_sector				*init_sector();
 void					init_player(t_sdl *sdl);
 t_sprite				*init_sprite();
 void					big_loop(t_sdl *sdl);
-void					save_the_grid(t_point *grid_field, int start_x, int start_y, int width, int height);
+void    				clicks3(t_sdl *sdl);
+void					save_the_grid(t_point *grid_field, SDL_Rect	grid);
 void					make_wall(t_sdl *sdl);
 int						check_the_grid(t_point *grid_field, int x, int y);
 void					redraw(t_sdl *sdl);
 void					draw_sidebar(t_sdl *sdl);
+void					player_button(t_sdl *sdl, SDL_Rect *button);
+void					medkit_button(t_sdl *sdl, SDL_Rect *button);
+void					armor_button(t_sdl *sdl, SDL_Rect *button);
+void					power_up_button(t_sdl *sdl, SDL_Rect *button);
+void					rifle_ammo_button(t_sdl *sdl, SDL_Rect *button);
+void					plasma_gun_button(t_sdl *sdl, SDL_Rect *button);
+void					plasma_ammo_button(t_sdl *sdl, SDL_Rect *button);
+void					barrel_button(t_sdl *sdl, SDL_Rect *button);
+void					afrit_button(t_sdl *sdl, SDL_Rect *button);
+void					cacodemon_button(t_sdl *sdl, SDL_Rect *button);
+void					imp_button(t_sdl *sdl, SDL_Rect *button);
+void					jetpack_button(t_sdl *sdl, SDL_Rect *button);
+void					wall_button(t_sdl *sdl, SDL_Rect *button);
+void					draw_button(t_sdl *sdl, SDL_Rect button, char *text, int color);
 void					draw_grid(t_sdl *sdl);
 void					draw(t_sdl *sdl);
+void					choose_sprite_color(t_sdl *sdl, t_sprite *sprites);
 void					draw_a_sector(t_sdl *sdl, t_sector *sector, int i);
 void					draw_a_point(t_sdl *sdl, t_point *point, int i);
 void					delete_player(t_point *player);
@@ -190,7 +211,7 @@ t_sprite				*find_last_sprite(t_sprite *sprites);
 SDL_Color				*create_sdl_color(int r, int g, int b, int a);
 void					choose_type_of_point(t_sector **stuffbox, int type);
 void					make_player_or_sprite(t_sdl *sdl);
-int						check_intersection(t_sector *head, int x1, int y1, int x2, int y2);
+int						check_intersection(t_sector *head, int x2, int y2);
 void					set_sprite(t_sdl *sdl, int x, int y);
 void					save_map(t_sdl *sdl, char *map_name);
 void					write_world(t_sdl *sdl, int fd);

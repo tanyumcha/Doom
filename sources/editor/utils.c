@@ -6,11 +6,37 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 16:34:40 by djast             #+#    #+#             */
-/*   Updated: 2019/10/19 15:03:19 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/21 13:07:45 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
+
+void	choose_sprite_color(t_sdl *sdl, t_sprite *sprites)
+{
+	if (sprites->type == MEDKIT_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 255, 051, 051, 0);
+	else if (sprites->type == ARMOR_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 051, 102, 153, 0);
+	else if (sprites->type == POWER_UP_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 051, 102, 051, 0);
+	else if (sprites->type == RIFLE_AMMO_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 204, 153, 000, 0);
+	else if (sprites->type == PLASMA_GUN_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 255, 255, 000, 0);
+	else if (sprites->type == PLASMA_AMMO_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 204, 255, 000, 0);
+	else if (sprites->type == BARREL_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 102, 051, 000, 0);
+	else if (sprites->type == AFRIT_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 204, 000, 000, 0);
+	else if (sprites->type == CACODEMON_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 150, 000, 100, 0);
+	else if (sprites->type == IMP_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 200, 100, 100, 0);
+	else if (sprites->type == JETPACK_PUSH)
+		SDL_SetRenderDrawColor(sdl->renderer, 000, 000, 255, 0);
+}
 
 t_sector	*get_last_sector(t_sector *head)
 {

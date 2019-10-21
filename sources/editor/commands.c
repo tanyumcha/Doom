@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 15:25:23 by djast             #+#    #+#             */
-/*   Updated: 2019/10/19 11:39:11 by djast            ###   ########.fr       */
+/*   Updated: 2019/10/21 13:02:48 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,10 @@ void	add_command(t_commands **commands, int type)
 
 void	delete_last_command(t_sdl *sdl)
 {
-	(void)		*sdl;
 	t_commands	*tmp;
 	int			type;
 
+	// (void)*sdl; //НАДО ЛИ?
 	if (sdl->commands == NULL)
 		return ;
 	tmp = sdl->commands;
