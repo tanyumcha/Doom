@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_vertexes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 16:19:28 by djast             #+#    #+#             */
-/*   Updated: 2019/10/19 17:06:19 by djast            ###   ########.fr       */
+/*   Updated: 2019/10/21 13:24:48 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int			write_vertexes_wall(t_sdl *sdl, int fd)
 
 	cur_sector = sdl->sectors;
 	id = 0;
-	
 	while (cur_sector != NULL && cur_sector->size != 0)
 	{
 		i = 0;
@@ -62,7 +61,6 @@ void		write_vertexes_sprite(t_sdl *sdl, int fd, int last_id)
 
 	cur_sprite = sdl->sprites;
 	id = last_id;
-	
 	while (cur_sprite != NULL)
 	{
 		write(fd, "vertex:	", 8);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_to_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:48:45 by djast             #+#    #+#             */
-/*   Updated: 2019/10/19 17:13:05 by djast            ###   ########.fr       */
+/*   Updated: 2019/10/21 13:24:20 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 void		write_world(t_sdl *sdl, int fd)
 {
-	int sector_count;
-	char *sectors;
-	int i;
+	int		sector_count;
+	char	*sectors;
+	int		i;
 
 	write(fd, "world:	1	", 9);
 	sector_count = get_sector_count(sdl->sectors);
@@ -47,7 +47,6 @@ void			write_polygone(t_sdl *sdl, int fd)
 
 	cur_sector = sdl->sectors;
 	id = 1;
-	
 	while (cur_sector != NULL)
 	{
 		i = 0;
@@ -134,7 +133,6 @@ void		write_objects(t_sdl *sdl, int fd)
 
 	cur_sector = sdl->sectors;
 	id = 1;
-	
 	while (cur_sector != NULL)
 	{
 		i = 0;
@@ -156,11 +154,10 @@ void		write_objects(t_sdl *sdl, int fd)
 		write(fd, "\n", 1);
 		cur_sector = cur_sector->next;
 	}
-
 }
 
 void		write_sectors(t_sdl *sdl, int fd)
 {
-	(void) sdl;
-	(void) fd;	
+	(void)sdl;
+	(void)fd;
 }

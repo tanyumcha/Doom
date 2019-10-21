@@ -6,13 +6,13 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 16:34:40 by djast             #+#    #+#             */
-/*   Updated: 2019/10/21 13:07:45 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/21 13:22:31 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-void	choose_sprite_color(t_sdl *sdl, t_sprite *sprites)
+void		choose_sprite_color(t_sdl *sdl, t_sprite *sprites)
 {
 	if (sprites->type == MEDKIT_PUSH)
 		SDL_SetRenderDrawColor(sdl->renderer, 255, 051, 051, 0);
