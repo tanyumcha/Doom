@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/10/21 13:07:43 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/21 14:26:04 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -193,6 +193,8 @@ void					imp_button(t_sdl *sdl, SDL_Rect *button);
 void					jetpack_button(t_sdl *sdl, SDL_Rect *button);
 void					wall_button(t_sdl *sdl, SDL_Rect *button);
 void					draw_button(t_sdl *sdl, SDL_Rect button, char *text, int color);
+void					draw_headline(t_sdl *sdl);
+void					draw_text(t_sdl *sdl, char *text, SDL_Rect button, SDL_Color color);
 void					draw_grid(t_sdl *sdl);
 void					draw(t_sdl *sdl);
 void					choose_sprite_color(t_sdl *sdl, t_sprite *sprites);

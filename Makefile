@@ -6,7 +6,7 @@
 #    By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/15 17:18:06 by djast             #+#    #+#              #
-#    Updated: 2019/10/21 12:51:12 by eharrag-         ###   ########.fr        #
+#    Updated: 2019/10/21 14:23:54 by eharrag-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,7 @@ EDITOR_FILES =	editor.c \
 				draw_buttons0.c \
 				draw_buttons1.c \
 				draw_buttons2.c \
+				draw_headline.c \
 				draw_grid.c \
 				init_grid.c \
 				bigloop.c \
