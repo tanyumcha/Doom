@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:46:30 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/21 13:27:38 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/23 09:05:14 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,27 +55,15 @@ void	make_wall(t_sdl *sdl)
 			else if (sector->size > 0 && dot_in_used(sector, sdl->grid_field[i].x, sdl->grid_field[i].y) == 0) // для всех, кроме первой и последней точки
 				add_point(sdl, &sector, i);
 			else if (sector->size > 2 && ((sdl->mouse_position.x >= sector->point[0].x - POINT_SIZE / 2 && //Для последней точки
-				sdl->mouse_position.x <= sector->point[0].x + POINT_SIZE / 2) &&
-				(sdl->mouse_position.y >= sector->point[0].y - POINT_SIZE / 2 &&
-				sdl->mouse_position.y <= sector->point[0].y + POINT_SIZE / 2)))
+					sdl->mouse_position.x <= sector->point[0].x + POINT_SIZE / 2) &&
+					(sdl->mouse_position.y >= sector->point[0].y - POINT_SIZE / 2 &&
+					sdl->mouse_position.y <= sector->point[0].y + POINT_SIZE / 2)))
 			{
 				add_point(sdl, &sector, i);
+				sector->num_of_sector = sdl->count;
 				sector->next = init_sector();
 				sector = sector->next;
-				// if (sector == NULL)
-				// {
-				// 	sdl->sectors = init_sector();
-				// 	sector = sdl->sectors;
-				// }
-				// else
-				// {
-				// 	sector->next = init_sector();
-				// 	sector = sector->next;
-				// }
-
-				// sector->next = init_sector();
-				// sector = sector->next;
-
+				sdl->count++;
 				printf("SAVE\n");
 			}
 		}

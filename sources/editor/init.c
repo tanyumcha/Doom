@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:27:00 by djast             #+#    #+#             */
-/*   Updated: 2019/10/21 13:11:48 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/23 09:01:20 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_sprite	*init_sprite(void)
 	sprite->type = 0;
 	sprite->x = 0;
 	sprite->y = 0;
+	sprite->sector = 0;
 	sprite->next = NULL;
 	return (sprite);
 }
@@ -62,6 +63,7 @@ void		init_sdl(t_sdl *sdl)
 	sdl->sectors = init_sector();
 	sdl->commands = NULL;
 	sdl->sprites = NULL;
+	sdl->count = 0;
 	init_player(sdl);
 	SDL_ShowCursor(1);
 }

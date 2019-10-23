@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/10/21 14:26:04 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/10/23 09:00:25 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,7 @@ typedef struct			s_sprite
 	int					type;
 	int					x;
 	int					y;
+	int					sector;
 	struct s_sprite		*next;
 }						t_sprite;
 
@@ -160,6 +161,8 @@ typedef struct			s_sdl
 	int					sect_count;
 	int					button_pushed;
 	int					type_pressed;
+	int					count;
+	int					sprite_in_sector;
 	struct s_point		grid_field[GRID_SIZE];
 	struct s_sector		*sectors;
 	struct s_commands	*commands;
@@ -213,7 +216,8 @@ t_sprite				*find_last_sprite(t_sprite *sprites);
 SDL_Color				*create_sdl_color(int r, int g, int b, int a);
 void					choose_type_of_point(t_sector **stuffbox, int type);
 void					make_player_or_sprite(t_sdl *sdl);
-int						check_intersection(t_sector *head, int x2, int y2);
+// int						check_intersection(t_sector *head, int x2, int y2);
+int						check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2);
 void					set_sprite(t_sdl *sdl, int x, int y);
 void					save_map(t_sdl *sdl, char *map_name);
 void					write_world(t_sdl *sdl, int fd);
