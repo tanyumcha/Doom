@@ -6,13 +6,13 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 13:49:10 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/21 14:13:19 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/05 11:49:32 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 // #include "editor.h"
 
-int		points_on_line(int x1, int y1, int x2, int y2, int x3, int y3)
+int	points_on_line(int x1, int y1, int x2, int y2, int x3, int y3)
 {
 	if (x3 * (y2 - y1) - y3 * (x2 - x1) == x1 * y2 - x2 * y1)
 		return (1);
@@ -30,7 +30,7 @@ int main()
 	int x4 = 4;
 	int y4 = 4;
 
-	if	(points_on_line(x2, y2, x3, y3, x4, y4) == 1 &&
+	if (points_on_line(x2, y2, x3, y3, x4, y4) == 1 &&
 			points_on_line(x1, y1, x3, y3, x4, y4) == 1 &&
 			points_on_line(x1, y1, x2, y2, x4, y4) == 1 &&
 			points_on_line(x1, y1, x2, y2, x3, y3) == 1)

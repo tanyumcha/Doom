@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/10/23 09:00:25 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/05 13:47:18 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@
 
 # define COLOR_UNPUSHED 0
 # define COLOR_PUSHED 1
+# define INPUT_FIELD 2
+# define SAVE_BUTTON 3
 
 # define WALL_TYPE 1
 # define PLAYER_TYPE 2
@@ -115,6 +117,31 @@
 # define BUTTON_WALL_X2 BUTTON_PLAYER_X2
 # define BUTTON_WALL_Y2 BUTTON_WALL_Y1 + SIZE_WIN_Y * 0.05
 
+# define BUTTON_SAVE_X1 BUTTON_PLAYER_X1
+# define BUTTON_SAVE_Y1 BUTTON_PLAYER_Y1 * 15
+# define BUTTON_SAVE_X2 BUTTON_PLAYER_X2
+# define BUTTON_SAVE_Y2 BUTTON_SAVE_Y1 + SIZE_WIN_Y * 0.05
+
+# define INPUT_FIELD_X1 BUTTON_PLAYER_X1
+# define INPUT_FIELD_Y1 BUTTON_PLAYER_Y1 * 14.5
+# define INPUT_FIELD_X2 BUTTON_PLAYER_X2
+# define INPUT_FIELD_Y2 INPUT_FIELD_Y1 + SIZE_WIN_Y * 0.03
+
+# define INPUT_MAP_NAME_SIZE_X SIZE_WIN_X * 0.16
+# define INPUT_MAP_NAME_Y SIZE_WIN_Y * 0.8
+# define INPUT_LETTER_SIZE 20
+
+typedef struct				s_input_field
+{
+	int						x;
+	int						y;
+	int						size_x;
+	int						size_y;
+	int						max_text_size;
+	char					*text;
+	int						text_size;
+}							t_input_field;
+
 typedef struct			s_point
 {
 	int					x;
@@ -168,6 +195,7 @@ typedef struct			s_sdl
 	struct s_commands	*commands;
 	struct s_point		*player;
 	struct s_sprite		*sprites;
+	struct s_input_field	*map_name;
 }						t_sdl;
 
 void					init_sdl(t_sdl *sdl);
@@ -195,6 +223,8 @@ void					cacodemon_button(t_sdl *sdl, SDL_Rect *button);
 void					imp_button(t_sdl *sdl, SDL_Rect *button);
 void					jetpack_button(t_sdl *sdl, SDL_Rect *button);
 void					wall_button(t_sdl *sdl, SDL_Rect *button);
+void					input_field(t_sdl *sdl, SDL_Rect *button);
+void					save_button(t_sdl *sdl, SDL_Rect *button);
 void					draw_button(t_sdl *sdl, SDL_Rect button, char *text, int color);
 void					draw_headline(t_sdl *sdl);
 void					draw_text(t_sdl *sdl, char *text, SDL_Rect button, SDL_Color color);

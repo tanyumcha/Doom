@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 11:26:54 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/21 12:57:33 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/05 13:43:44 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,15 @@ void	clicks0(t_sdl *sdl)
 		make_player_or_sprite(sdl);
 }
 
+void	textinput(t_sdl *sdl)
+{
+	if (sdl->map_name->text_size + 1 < sdl->map_name->max_text_size)
+	{
+		ft_strcat(sdl->map_name->text, sdl->window_event.text.text);
+		sdl->map_name->text_size++;
+	}
+}
+
 void	big_loop(t_sdl *sdl)
 {
 	while (1)
@@ -90,15 +99,14 @@ void	big_loop(t_sdl *sdl)
 		{
 			if (SDL_QUIT == sdl->window_event.type)
 				exit(0);
+			else if (sdl->window_event.type == SDL_TEXTINPUT)
+				textinput(sdl);
 			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_ESCAPE ==
 					sdl->window_event.key.keysym.sym)
 				exit(0);
 			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_BACKSPACE ==
 					sdl->window_event.key.keysym.sym)
 				delete_last_command(sdl);
-			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_m ==
-					sdl->window_event.key.keysym.sym)
-				save_map(sdl, "test.txt");
 			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_r ==
 					sdl->window_event.key.keysym.sym)
 				reset(&(sdl->sectors), sdl->player, sdl->sprites);

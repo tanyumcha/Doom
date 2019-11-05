@@ -6,11 +6,32 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 09:30:55 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/21 13:00:25 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/05 13:25:17 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
+
+void	clicks7(t_sdl *sdl)
+{
+	SDL_GetMouseState(&sdl->mouse_position.x, &sdl->mouse_position.y);
+	if ((sdl->mouse_position.x > INPUT_FIELD_X1 &&
+		sdl->mouse_position.x < INPUT_FIELD_X2) &&
+		(sdl->mouse_position.y > INPUT_FIELD_Y1 &&
+		sdl->mouse_position.y < INPUT_FIELD_Y2))
+	{
+		printf("Type a name\n");
+	}
+
+	else if ((sdl->mouse_position.x > BUTTON_SAVE_X1 &&
+			sdl->mouse_position.x < BUTTON_SAVE_X2) &&
+			(sdl->mouse_position.y > BUTTON_SAVE_Y1 &&
+			sdl->mouse_position.y < BUTTON_SAVE_Y2))
+	{
+		save_map(sdl, "test.txt");
+		printf("I want cookies!\n");
+	}
+}
 
 void	clicks6(t_sdl *sdl)
 {
@@ -33,6 +54,8 @@ void	clicks6(t_sdl *sdl)
 		sdl->button_pushed = JETPACK_PUSH;
 		printf("Jetpack\n");
 	}
+	else
+		clicks7(sdl);
 }
 
 void	clicks5(t_sdl *sdl)

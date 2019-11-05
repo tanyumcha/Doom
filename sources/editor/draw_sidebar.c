@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:31:52 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/21 13:06:35 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/05 12:44:06 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,10 @@ void	draw_button(t_sdl *sdl, SDL_Rect button, char *text, int color)
 		SDL_SetRenderDrawColor(sdl->renderer, 153, 204, 255, 0);
 	if (color == COLOR_UNPUSHED)
 		SDL_SetRenderDrawColor(sdl->renderer, 025, 000, 051, 255);
+	if (color == INPUT_FIELD)
+		SDL_SetRenderDrawColor(sdl->renderer, 204, 204, 255, 255);
+	if (color == SAVE_BUTTON)
+		SDL_SetRenderDrawColor(sdl->renderer, 050, 000, 100, 255);
 	SDL_RenderFillRect(sdl->renderer, &button);
 	color_text = create_sdl_color(204, 153, 255, 255);
 	draw_text(sdl, text, button, *color_text);
@@ -83,6 +87,8 @@ void	draw_buttons_on_sidebar(t_sdl *sdl)
 	imp_button(sdl, button);
 	jetpack_button(sdl, button);
 	wall_button(sdl, button);
+	input_field(sdl, button);
+	save_button(sdl, button);
 	free(button);
 }
 
