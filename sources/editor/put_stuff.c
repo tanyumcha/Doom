@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 11:16:02 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/23 08:57:08 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/06 15:01:18 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	set_sprite(t_sdl *sdl, int x, int y)
 	t_sprite	*cur_sprite;
 
 	cur_sprite = find_last_sprite(sdl->sprites);
-	// if (check_intersection(sdl->sectors, x, y) % 2 == 1)
 	if (check_intersection(sdl, sdl->sectors, x, y) % 2 == 1)
 	{
 		if (cur_sprite == NULL)
@@ -42,14 +41,12 @@ void	set_sprite(t_sdl *sdl, int x, int y)
 		}
 	}
 	if (sdl->button_pushed >= MEDKIT_PUSH && sdl->button_pushed <= WALL_PUSH &&
-			// check_intersection(sdl->sectors, x, y) % 2 == 1)
 			check_intersection(sdl, sdl->sectors, x, y) % 2 == 1)
 		fill_a_sprite(sdl, cur_sprite, x, y);
 }
 
 void	set_player(t_sdl *sdl, int x, int y)
 {
-	// if (check_intersection(sdl->sectors, x, y) % 2 == 1)
 	if (check_intersection(sdl, sdl->sectors, x, y) % 2 == 1)
 	{
 		sdl->player->x = x;

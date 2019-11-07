@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 08:37:22 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/05 13:51:46 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/07 16:22:13 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,15 +46,6 @@ void	wall_button(t_sdl *sdl, SDL_Rect *button)
 		draw_button(sdl, *button, " WALL", COLOR_PUSHED);
 	else
 		draw_button(sdl, *button, " WALL", COLOR_UNPUSHED);
-}
-
-void	input_field(t_sdl *sdl, SDL_Rect *button)
-{
-	button->x = INPUT_FIELD_X1;
-	button->y = INPUT_FIELD_Y1;
-	button->w = INPUT_FIELD_X2 - INPUT_FIELD_X1;
-	button->h = INPUT_FIELD_Y2 - INPUT_FIELD_Y1;
-	draw_button(sdl, *button, "", INPUT_FIELD);
 }
 
 void	save_button(t_sdl *sdl, SDL_Rect *button)

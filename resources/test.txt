@@ -8,34 +8,28 @@ vertex:	98123	0	0	300
 
 
 
-6	300
-
-vertex:	0	2176	2804	300
-vertex:	1	2176	3204	300
-vertex:	2	2576	3204	300
-vertex:	3	2576	2804	300
-vertex:	4	2176	2804	300
-
-vertex:	5	2176	2804	300
-vertex:	6	2176	2604	300
-vertex:	7	1776	2404	300
-vertex:	8	1776	2204	300
-vertex:	9	2176	2204	300
-vertex:	10	2376	2404	300
-vertex:	11	2376	2804	300
-vertex:	12	2176	2804	300
-
-vertex:	13	2176	2804	300
-vertex:	14	2376	3004	300
-vertex:	15	2176	3204	300
-vertex:	16	1976	3204	300
-vertex:	17	1976	3004	300
-vertex:	18	2176	2804	300
+tex:	0	2776	2804	300
+vertex:	1	3376	3404	300
+vertex:	2	3376	2404	300
+vertex:	3	2776	2804	300
 
 
-vertex:	19	2488	2928	300
-vertex:	20	2496	3104	300
-vertex:	21	2100	3032	300
+
+polygone:	1	1	0xFF0000	bricks	2	1,0
+polygone:	2	1	0xFF0000	bricks	2	2,1
+polygone:	3	1	0xFF0000	bricks	2	3,2
+
+
+object:	1	-1	0	1	floor_wall	ceil_wall	1	1
+object:	2	-1	0	1	floor_wall	ceil_wall	1	2
+object:	3	-1	0	1	floor_wall	ceil_wall	1	3
+
+
+
+604	300
+vertex:	14	3376	1804	300
+
+
 
 polygone:	1	1	0xFF0000	bricks	2	1,0
 polygone:	2	1	0xFF0000	bricks	2	2,1
@@ -46,15 +40,11 @@ polygone:	6	1	0xFF0000	bricks	2	6,5
 polygone:	7	1	0xFF0000	bricks	2	7,6
 polygone:	8	1	0xFF0000	bricks	2	8,7
 polygone:	9	1	0xFF0000	bricks	2	9,8
-polygone:	10	1	0xFF0000	bricks	2	10,9
+
 polygone:	11	1	0xFF0000	bricks	2	11,10
 polygone:	12	1	0xFF0000	bricks	2	12,11
-
+polygone:	13	1	0xFF0000	bricks	2	13,12
 polygone:	14	1	0xFF0000	bricks	2	14,13
-polygone:	15	1	0xFF0000	bricks	2	15,14
-polygone:	16	1	0xFF0000	bricks	2	16,15
-polygone:	17	1	0xFF0000	bricks	2	17,16
-polygone:	18	1	0xFF0000	bricks	2	18,17
 
 
 object:	1	-1	0	1	floor_wall	ceil_wall	1	1
@@ -63,6 +53,18 @@ object:	3	-1	0	1	floor_wall	ceil_wall	1	3
 object:	4	-1	0	1	floor_wall	ceil_wall	1	4
 
 object:	6	-1	0	1	floor_wall	ceil_wall	1	6
+object:	7	-1	0	1	floor_wall	ceil_wall	1	7
+object:	8	-1	0	1	floor_wall	ceil_wall	1	8
+object:	9	-1	0	1	floor_wall	ceil_wall	1	9
+
+object:	11	-1	0	1	floor_wall	ceil_wall	1	11
+object:	12	-1	0	1	floor_wall	ceil_wall	1	12
+object:	13	-1	0	1	floor_wall	ceil_wall	1	13
+object:	14	-1	0	1	floor_wall	ceil_wall	1	14
+
+
+
+	0	1	floor_wall	ceil_wall	1	6
 object:	7	-1	0	1	floor_wall	ceil_wall	1	7
 object:	8	-1	0	1	floor_wall	ceil_wall	1	8
 object:	9	-1	0	1	floor_wall	ceil_wall	1	9

@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/11/05 13:47:18 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/07 16:41:36 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,7 @@
 
 # define COLOR_UNPUSHED 0
 # define COLOR_PUSHED 1
-# define INPUT_FIELD 2
-# define SAVE_BUTTON 3
+# define SAVE_BUTTON 2
 
 # define WALL_TYPE 1
 # define PLAYER_TYPE 2
@@ -53,7 +52,7 @@
 # define WALL_PUSH 12
 
 # define BUTTON_PLAYER_X1 SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1
-# define BUTTON_PLAYER_Y1 SIZE_WIN_Y * 0.1 * 0.6
+# define BUTTON_PLAYER_Y1 SIZE_WIN_Y * 0.1 * 0.5
 # define BUTTON_PLAYER_X2 BUTTON_PLAYER_X1 + SIZE_WIN_X * 0.2 * 0.6
 # define BUTTON_PLAYER_Y2 BUTTON_PLAYER_Y1 + SIZE_WIN_Y * 0.05
 
@@ -129,7 +128,7 @@
 
 # define INPUT_MAP_NAME_SIZE_X SIZE_WIN_X * 0.16
 # define INPUT_MAP_NAME_Y SIZE_WIN_Y * 0.8
-# define INPUT_LETTER_SIZE 20
+# define INPUT_LETTER_SIZE 17
 
 typedef struct				s_input_field
 {
@@ -142,121 +141,120 @@ typedef struct				s_input_field
 	int						text_size;
 }							t_input_field;
 
-typedef struct			s_point
+typedef struct				s_point
 {
-	int					x;
-	int					y;
-}						t_point;
+	int						x;
+	int						y;
+}							t_point;
 
-typedef struct			s_sector
+typedef struct				s_sector
 {
-	t_point				point[100];
-	int					size;
-	int					num_of_sector;
-	int					type_of_point;
-	double				cmn;
-	double				rh;
-	double				sh;
-	int					z;
-	struct s_sector		*next;
-}						t_sector;
+	t_point					point[100];
+	int						size;
+	int						num_of_sector;
+	int						type_of_point;
+	double					cmn;
+	double					rh;
+	double					sh;
+	int						z;
+	struct s_sector			*next;
+}							t_sector;
 
-typedef struct 			s_commands
+typedef struct 				s_commands
 {
-	int					type;
-	struct s_commands	*next;
-}						t_commands;
+	int						type;
+	struct s_commands		*next;
+}							t_commands;
 
-typedef struct			s_sprite
+typedef struct				s_sprite
 {
-	int					type;
-	int					x;
-	int					y;
-	int					sector;
-	struct s_sprite		*next;
-}						t_sprite;
+	int						type;
+	int						x;
+	int						y;
+	int						sector;
+	struct s_sprite			*next;
+}							t_sprite;
 
-typedef struct			s_sdl
+typedef struct				s_sdl
 {
-	SDL_Window			*window;
-	SDL_Renderer		*renderer;
-	SDL_Surface			*surface;
-	SDL_Event			window_event;
-	SDL_Point			mouse_position;
-	TTF_Font			*font;
-	SDL_Texture			*text;
-	int					sect_count;
-	int					button_pushed;
-	int					type_pressed;
-	int					count;
-	int					sprite_in_sector;
-	struct s_point		grid_field[GRID_SIZE];
-	struct s_sector		*sectors;
-	struct s_commands	*commands;
-	struct s_point		*player;
-	struct s_sprite		*sprites;
+	SDL_Window				*window;
+	SDL_Renderer			*renderer;
+	SDL_Surface				*surface;
+	SDL_Event				window_event;
+	SDL_Point				mouse_position;
+	TTF_Font				*font;
+	SDL_Texture				*text;
+	int						sect_count;
+	int						button_pushed;
+	int						type_pressed;
+	int						count;
+	int						sprite_in_sector;
+	struct s_point			grid_field[GRID_SIZE];
+	struct s_sector			*sectors;
+	struct s_commands		*commands;
+	struct s_point			*player;
+	struct s_sprite			*sprites;
 	struct s_input_field	*map_name;
-}						t_sdl;
+}							t_sdl;
 
-void					init_sdl(t_sdl *sdl);
-void					init_grid(t_point *grid_field);
-t_sector				*init_sector();
-void					init_player(t_sdl *sdl);
-t_sprite				*init_sprite();
-void					big_loop(t_sdl *sdl);
-void    				clicks3(t_sdl *sdl);
-void					save_the_grid(t_point *grid_field, SDL_Rect	grid);
-void					make_wall(t_sdl *sdl);
-int						check_the_grid(t_point *grid_field, int x, int y);
-void					redraw(t_sdl *sdl);
-void					draw_sidebar(t_sdl *sdl);
-void					player_button(t_sdl *sdl, SDL_Rect *button);
-void					medkit_button(t_sdl *sdl, SDL_Rect *button);
-void					armor_button(t_sdl *sdl, SDL_Rect *button);
-void					power_up_button(t_sdl *sdl, SDL_Rect *button);
-void					rifle_ammo_button(t_sdl *sdl, SDL_Rect *button);
-void					plasma_gun_button(t_sdl *sdl, SDL_Rect *button);
-void					plasma_ammo_button(t_sdl *sdl, SDL_Rect *button);
-void					barrel_button(t_sdl *sdl, SDL_Rect *button);
-void					afrit_button(t_sdl *sdl, SDL_Rect *button);
-void					cacodemon_button(t_sdl *sdl, SDL_Rect *button);
-void					imp_button(t_sdl *sdl, SDL_Rect *button);
-void					jetpack_button(t_sdl *sdl, SDL_Rect *button);
-void					wall_button(t_sdl *sdl, SDL_Rect *button);
-void					input_field(t_sdl *sdl, SDL_Rect *button);
-void					save_button(t_sdl *sdl, SDL_Rect *button);
-void					draw_button(t_sdl *sdl, SDL_Rect button, char *text, int color);
-void					draw_headline(t_sdl *sdl);
-void					draw_text(t_sdl *sdl, char *text, SDL_Rect button, SDL_Color color);
-void					draw_grid(t_sdl *sdl);
-void					draw(t_sdl *sdl);
-void					choose_sprite_color(t_sdl *sdl, t_sprite *sprites);
-void					draw_a_sector(t_sdl *sdl, t_sector *sector, int i);
-void					draw_a_point(t_sdl *sdl, t_point *point, int i);
-void					delete_player(t_point *player);
-void					remove_last_point(t_sector **head);
-void					reset(t_sector **head, t_point	*player, t_sprite *sprites);
-void					delete_last_command(t_sdl *sdl);
-void					delete_point(t_sector *sector);
-void					remove_last_sprite(t_sprite **sprites);
-void					remove_last_point(t_sector **head);
-void					add_command(t_commands **commands, int type);
-t_sector				*get_last_sector(t_sector *head);
-t_sprite				*find_last_sprite(t_sprite *sprites);
-SDL_Color				*create_sdl_color(int r, int g, int b, int a);
-void					choose_type_of_point(t_sector **stuffbox, int type);
-void					make_player_or_sprite(t_sdl *sdl);
-// int						check_intersection(t_sector *head, int x2, int y2);
-int						check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2);
-void					set_sprite(t_sdl *sdl, int x, int y);
-void					save_map(t_sdl *sdl, char *map_name);
-void					write_world(t_sdl *sdl, int fd);
-int						get_sector_count(t_sector *sect);
-int						write_vertexes_wall(t_sdl *sdl, int fd);
-void					write_polygone(t_sdl *sdl, int fd);
-void					write_player(t_sdl *sdl, int fd);
-void					write_vertexes_sprite(t_sdl *sdl, int fd, int last_id);
-void					write_sprites(t_sdl *sdl, int fd, int last_id);
-void					write_sectors(t_sdl *sdl, int fd);
-void					write_objects(t_sdl *sdl, int fd);
+void						init_sdl(t_sdl *sdl);
+void						init_grid(t_point *grid_field);
+t_sector					*init_sector();
+void						init_player(t_sdl *sdl);
+t_sprite					*init_sprite();
+void						big_loop(t_sdl *sdl);
+void						clicks3(t_sdl *sdl);
+void						save_the_grid(t_point *grid_field, SDL_Rect	grid);
+void						make_wall(t_sdl *sdl);
+int							check_the_grid(t_point *grid_field, int x, int y);
+void						redraw(t_sdl *sdl);
+void						draw_sidebar(t_sdl *sdl);
+void						player_button(t_sdl *sdl, SDL_Rect *button);
+void						medkit_button(t_sdl *sdl, SDL_Rect *button);
+void						armor_button(t_sdl *sdl, SDL_Rect *button);
+void						power_up_button(t_sdl *sdl, SDL_Rect *button);
+void						rifle_ammo_button(t_sdl *sdl, SDL_Rect *button);
+void						plasma_gun_button(t_sdl *sdl, SDL_Rect *button);
+void						plasma_ammo_button(t_sdl *sdl, SDL_Rect *button);
+void						barrel_button(t_sdl *sdl, SDL_Rect *button);
+void						afrit_button(t_sdl *sdl, SDL_Rect *button);
+void						cacodemon_button(t_sdl *sdl, SDL_Rect *button);
+void						imp_button(t_sdl *sdl, SDL_Rect *button);
+void						jetpack_button(t_sdl *sdl, SDL_Rect *button);
+void						wall_button(t_sdl *sdl, SDL_Rect *button);
+void						input_field(t_sdl *sdl);
+void						save_button(t_sdl *sdl, SDL_Rect *button);
+void						draw_button(t_sdl *sdl, SDL_Rect button, char *text, int color);
+void						draw_headline(t_sdl *sdl);
+void						draw_text(t_sdl *sdl, char *text, SDL_Rect button, SDL_Color color);
+void						draw_grid(t_sdl *sdl);
+void						draw(t_sdl *sdl);
+void						choose_sprite_color(t_sdl *sdl, t_sprite *sprites);
+void						draw_a_sector(t_sdl *sdl, t_sector *sector, int i);
+void						draw_a_point(t_sdl *sdl, t_point *point, int i);
+void						delete_player(t_point *player);
+void						remove_last_point(t_sector **head);
+void						reset(t_sector **head, t_point	*player, t_sprite *sprites);
+void						delete_last_command(t_sdl *sdl);
+void						delete_point(t_sector *sector);
+void						remove_last_sprite(t_sprite **sprites);
+void						remove_last_point(t_sector **head);
+void						add_command(t_commands **commands, int type);
+t_sector					*get_last_sector(t_sector *head);
+t_sprite					*find_last_sprite(t_sprite *sprites);
+SDL_Color					*create_sdl_color(int r, int g, int b, int a);
+void						choose_type_of_point(t_sector **stuffbox, int type);
+void						make_player_or_sprite(t_sdl *sdl);
+int							check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2);
+void						set_sprite(t_sdl *sdl, int x, int y);
+void						save_map(t_sdl *sdl, char *map_name);
+void						write_world(t_sdl *sdl, int fd);
+int							get_sector_count(t_sector *sect);
+int							write_vertexes_wall(t_sdl *sdl, int fd);
+void						write_polygone(t_sdl *sdl, int fd);
+void						write_player(t_sdl *sdl, int fd);
+void						write_vertexes_sprite(t_sdl *sdl, int fd, int last_id);
+void						write_sprites(t_sdl *sdl, int fd, int last_id);
+void						write_sectors(t_sdl *sdl, int fd);
+void						write_objects(t_sdl *sdl, int fd);
 #endif
