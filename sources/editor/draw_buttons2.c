@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 08:37:22 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/07 16:22:13 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/10 14:28:02 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,13 @@ void	save_button(t_sdl *sdl, SDL_Rect *button)
 	button->w = BUTTON_SAVE_X2 - BUTTON_SAVE_X1;
 	button->h = BUTTON_SAVE_Y2 - BUTTON_SAVE_Y1;
 	draw_button(sdl, *button, " SAVE THE MAP", SAVE_BUTTON);
+}
+
+void	load_button(t_sdl *sdl, SDL_Rect *button)
+{
+	button->x = BUTTON_LOAD_X1;
+	button->y = BUTTON_LOAD_Y1;
+	button->w = BUTTON_LOAD_X2 - BUTTON_LOAD_X1;
+	button->h = BUTTON_LOAD_Y2 - BUTTON_LOAD_Y1;
+	draw_button(sdl, *button, " LOAD THE MAP", SAVE_BUTTON);
 }

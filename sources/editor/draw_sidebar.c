@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:31:52 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/07 16:39:33 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/10 14:27:47 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ void	draw_buttons_on_sidebar(t_sdl *sdl)
 	jetpack_button(sdl, button);
 	wall_button(sdl, button);
 	save_button(sdl, button);
+	load_button(sdl, button);
 	free(button);
 }
 

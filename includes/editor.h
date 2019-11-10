@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/11/07 16:41:36 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/10 14:35:59 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@
 # define WALL_PUSH 12
 
 # define BUTTON_PLAYER_X1 SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1
-# define BUTTON_PLAYER_Y1 SIZE_WIN_Y * 0.1 * 0.5
+# define BUTTON_PLAYER_Y1 SIZE_WIN_Y * 0.1 * 0.55
 # define BUTTON_PLAYER_X2 BUTTON_PLAYER_X1 + SIZE_WIN_X * 0.2 * 0.6
 # define BUTTON_PLAYER_Y2 BUTTON_PLAYER_Y1 + SIZE_WIN_Y * 0.05
 
@@ -120,6 +120,11 @@
 # define BUTTON_SAVE_Y1 BUTTON_PLAYER_Y1 * 15
 # define BUTTON_SAVE_X2 BUTTON_PLAYER_X2
 # define BUTTON_SAVE_Y2 BUTTON_SAVE_Y1 + SIZE_WIN_Y * 0.05
+
+# define BUTTON_LOAD_X1 BUTTON_PLAYER_X1
+# define BUTTON_LOAD_Y1 BUTTON_PLAYER_Y1 * 16
+# define BUTTON_LOAD_X2 BUTTON_PLAYER_X2
+# define BUTTON_LOAD_Y2 BUTTON_LOAD_Y1 + SIZE_WIN_Y * 0.05
 
 # define INPUT_FIELD_X1 BUTTON_PLAYER_X1
 # define INPUT_FIELD_Y1 BUTTON_PLAYER_Y1 * 14.5
@@ -224,6 +229,7 @@ void						jetpack_button(t_sdl *sdl, SDL_Rect *button);
 void						wall_button(t_sdl *sdl, SDL_Rect *button);
 void						input_field(t_sdl *sdl);
 void						save_button(t_sdl *sdl, SDL_Rect *button);
+void						load_button(t_sdl *sdl, SDL_Rect *button);
 void						draw_button(t_sdl *sdl, SDL_Rect button, char *text, int color);
 void						draw_headline(t_sdl *sdl);
 void						draw_text(t_sdl *sdl, char *text, SDL_Rect button, SDL_Color color);
