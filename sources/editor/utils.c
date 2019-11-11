@@ -6,11 +6,25 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 16:34:40 by djast             #+#    #+#             */
-/*   Updated: 2019/10/22 08:43:07 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/11 15:16:58 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
+
+char	*cut_the_end(char *text)
+{
+	int	i;
+
+	i = 0;
+	while (text[i])
+	{
+		if (text[i] == '.')
+			text[i] = '\0';
+		i++;
+	}
+	return (text);
+}
 
 void		choose_sprite_color(t_sdl *sdl, t_sprite *sprites)
 {

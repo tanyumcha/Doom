@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 11:20:10 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/07 16:35:55 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/11 15:20:39 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void		input_field(t_sdl *sdl)
 {
 	SDL_Rect	*field;
 	SDL_Color	*color_text;
+	char		*name;
 
 	field = (SDL_Rect *)malloc(sizeof(SDL_Rect));
 	field->x = INPUT_FIELD_X1;
@@ -30,6 +31,13 @@ void		input_field(t_sdl *sdl)
 	field->y = sdl->map_name->y;
 	field->w = INPUT_LETTER_SIZE * sdl->map_name->text_size;
 	field->h = sdl->map_name->size_y;
-	draw_text(sdl, sdl->map_name->text, *field, *color_text);
+	if (sdl->button_pushed == SAVE_PUSH)
+	{
+		name = sdl->map_name->text;
+		name = cut_the_end(name);
+		draw_text(sdl, name, *field, *color_text);
+	}
+	else
+		draw_text(sdl, sdl->map_name->text, *field, *color_text);
 	free(field);
 }

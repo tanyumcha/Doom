@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 09:30:55 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/10 14:26:23 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/11 15:05:59 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	clicks7(t_sdl *sdl)
 		(sdl->mouse_position.y > BUTTON_LOAD_Y1 &&
 		sdl->mouse_position.y < BUTTON_LOAD_Y2))
 	{
-		printf("Me to!\n");
+		printf("Me too!\n");
 	}
 
 	else if ((sdl->mouse_position.x > BUTTON_SAVE_X1 &&
@@ -28,7 +28,10 @@ void	clicks7(t_sdl *sdl)
 			(sdl->mouse_position.y > BUTTON_SAVE_Y1 &&
 			sdl->mouse_position.y < BUTTON_SAVE_Y2))
 	{
-		save_map(sdl, "test.txt");
+		sdl->button_pushed = 13;
+		// save_map(sdl, "test.txt");
+		ft_strcat(sdl->map_name->text, ".txt");
+		save_map(sdl, sdl->map_name->text);
 		printf("I want cookies!\n");
 	}
 }

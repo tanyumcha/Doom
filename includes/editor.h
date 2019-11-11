@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/11/10 14:35:59 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/11 15:17:16 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@
 # define IMP_PUSH 10
 # define JETPACK_PUSH 11
 # define WALL_PUSH 12
+# define SAVE_PUSH 13
 
 # define BUTTON_PLAYER_X1 SIZE_WIN_X * 0.8 + SIZE_WIN_X * 0.2 * 0.1
 # define BUTTON_PLAYER_Y1 SIZE_WIN_Y * 0.1 * 0.55
@@ -249,6 +250,7 @@ void						add_command(t_commands **commands, int type);
 t_sector					*get_last_sector(t_sector *head);
 t_sprite					*find_last_sprite(t_sprite *sprites);
 SDL_Color					*create_sdl_color(int r, int g, int b, int a);
+char						*cut_the_end(char *text);
 void						choose_type_of_point(t_sector **stuffbox, int type);
 void						make_player_or_sprite(t_sdl *sdl);
 int							check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2);
