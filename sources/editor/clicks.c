@@ -6,35 +6,11 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 09:30:55 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/11 15:05:59 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/14 14:44:43 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
-
-void	clicks7(t_sdl *sdl)
-{
-	SDL_GetMouseState(&sdl->mouse_position.x, &sdl->mouse_position.y);
-	if ((sdl->mouse_position.x > BUTTON_LOAD_X1 &&
-		sdl->mouse_position.x < BUTTON_LOAD_X2) &&
-		(sdl->mouse_position.y > BUTTON_LOAD_Y1 &&
-		sdl->mouse_position.y < BUTTON_LOAD_Y2))
-	{
-		printf("Me too!\n");
-	}
-
-	else if ((sdl->mouse_position.x > BUTTON_SAVE_X1 &&
-			sdl->mouse_position.x < BUTTON_SAVE_X2) &&
-			(sdl->mouse_position.y > BUTTON_SAVE_Y1 &&
-			sdl->mouse_position.y < BUTTON_SAVE_Y2))
-	{
-		sdl->button_pushed = 13;
-		// save_map(sdl, "test.txt");
-		ft_strcat(sdl->map_name->text, ".txt");
-		save_map(sdl, sdl->map_name->text);
-		printf("I want cookies!\n");
-	}
-}
 
 void	clicks6(t_sdl *sdl)
 {
@@ -57,8 +33,6 @@ void	clicks6(t_sdl *sdl)
 		sdl->button_pushed = JETPACK_PUSH;
 		printf("Jetpack\n");
 	}
-	else
-		clicks7(sdl);
 }
 
 void	clicks5(t_sdl *sdl)

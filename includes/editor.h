@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/11/11 15:17:16 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/14 14:47:16 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,6 +255,8 @@ void						choose_type_of_point(t_sector **stuffbox, int type);
 void						make_player_or_sprite(t_sdl *sdl);
 int							check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2);
 void						set_sprite(t_sdl *sdl, int x, int y);
+void						load_click(t_sdl *sdl);
+void						save_click(t_sdl *sdl);
 void						save_map(t_sdl *sdl, char *map_name);
 void						write_world(t_sdl *sdl, int fd);
 int							get_sector_count(t_sector *sect);
