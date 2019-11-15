@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:48:45 by djast             #+#    #+#             */
-/*   Updated: 2019/11/14 15:38:24 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/15 15:13:36 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void			write_player(t_sdl *sdl, int fd)
 {
 	char		*char_id;
 
-	write(fd, "player:	98123\n\n", 15);
-	write(fd, "vertex:	98123	", 14);
+	write(fd, "player:	65534\n\n", 15);
+	write(fd, "vertex:	65534	", 14);
 	char_id = ft_itoa(sdl->player->x * 4);
 	write(fd, char_id, ft_strlen(char_id));
 	free(char_id);
@@ -121,7 +121,7 @@ void		write_sprites(t_sdl *sdl, int fd, int last_id)
 		write(fd, "\n", 1);
 		cur_sprite = cur_sprite->next;
 	}
-	write(fd, "\n", 1);
+	write(fd, "\n\n", 3);
 }
 
 void		write_objects(t_sdl *sdl, int fd)
@@ -132,7 +132,7 @@ void		write_objects(t_sdl *sdl, int fd)
 	char		*char_id;
 
 	cur_sector = sdl->sectors;
-	id = 1;
+	id = 0;
 	while (cur_sector != NULL)
 	{
 		i = 0;
@@ -142,12 +142,14 @@ void		write_objects(t_sdl *sdl, int fd)
 			char_id = ft_itoa(id);
 			write(fd, char_id, ft_strlen(char_id));
 			free(char_id);
-			write(fd, "	-1	0	1	floor_wall	ceil_wall	1	", 31);
+			// -1 - определять с каким сектором портал
+			write(fd, "	-1	0	1	floor_wall	ceil_wall	1	", 32);
 			char_id = ft_itoa(id);
 			write(fd, char_id, ft_strlen(char_id));
 			free(char_id);
 			write(fd, "\n", 1);
 			id++;
+			cur_sector->total_num_of_obj++;
 			i++;
 		}
 		id++;
@@ -158,42 +160,38 @@ void		write_objects(t_sdl *sdl, int fd)
 
 void		write_sectors(t_sdl *sdl, int fd)
 {
-	// (void)sdl;
-	// (void)fd;
 	t_sector	*cur_sector;
 	int			i;
-	int			id;
+	int			num;
 	char		*char_id;
 
 	cur_sector = sdl->sectors;
-	id = 1;
-	while (cur_sector != NULL)
+	num = 0;
+	while (cur_sector->next != NULL)
 	{
 		i = 0;
-		while (i < cur_sector->size - 1)
+		write(fd, "sector: ", 9);
+		char_id = ft_itoa(cur_sector->num_of_sector);
+		write(fd, char_id, ft_strlen(char_id));
+		free(char_id);
+		write(fd, "	0	675	q_floor_5	q_floor_3	0xFF0000	", 37);
+
+		// обход стен по часовой стрелке!!!
+
+		char_id = ft_itoa(cur_sector->total_num_of_obj);
+		write(fd, char_id, ft_strlen(char_id));
+		free(char_id);
+		write(fd, "\t", 2);
+		while (i < cur_sector->total_num_of_obj)
 		{
-			write(fd, "sector: ", 10);
-			char_id = ft_itoa(id);
+			char_id = ft_itoa(num);
 			write(fd, char_id, ft_strlen(char_id));
 			free(char_id);
-			write(fd, "0	675	q_floor_5	q_floor_3	0xFF0000	", 36);
-
-			// добавить колонку с количеством объектов и номерами объектов: 5	0 1 2 3 4
-			// добавить счетчик в сектор который плюсуется при добавлении объекта
-
-			// char_id = ft_itoa(id);
-			// write(fd, char_id, ft_strlen(char_id));
-			// free(char_id);
-			// write(fd, ",", 1);
-			// char_id = ft_itoa(id - 1);
-			// write(fd, char_id, ft_strlen(char_id));
-			// free(char_id);
-			write(fd, "\n", 1);
-			id++;
+			write(fd, " ", 1);
 			i++;
+			num++;
 		}
-		id++;
-		write(fd, "\n", 1);
+		write(fd, "\n", 2);
 		cur_sector = cur_sector->next;
 	}
 }

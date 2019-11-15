@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:27:00 by djast             #+#    #+#             */
-/*   Updated: 2019/11/07 15:08:16 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/15 11:58:26 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ t_sector	*init_sector(void)
 	sector = (t_sector *)malloc(sizeof(t_sector));
 	ft_bzero(sector->point, 100);
 	sector->size = 0;
+	sector->total_num_of_obj = 0;
 	sector->num_of_sector = 0;
 	sector->type_of_point = 0;
 	sector->z = 300;

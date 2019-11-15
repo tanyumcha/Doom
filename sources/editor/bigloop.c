@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 11:26:54 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/14 14:49:26 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/15 11:51:50 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ void	big_loop(t_sdl *sdl)
 		{
 			if (SDL_QUIT == sdl->window_event.type)
 				exit(0);
+			else if (bigscarycondition(sdl) == 1)
+				save_click(sdl);
 			else if (sdl->window_event.type == SDL_TEXTINPUT)
 				textinput(sdl);
 			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_ESCAPE ==
@@ -113,8 +115,7 @@ void	big_loop(t_sdl *sdl)
 			else if (sdl->window_event.type == SDL_MOUSEBUTTONDOWN &&
 					sdl->window_event.button.button == SDL_BUTTON_LEFT)
 				clicks0(sdl);
-			load_click(sdl);
-			save_click(sdl);
+			// load_click(sdl);
 			draw(sdl);
 		}
 	}

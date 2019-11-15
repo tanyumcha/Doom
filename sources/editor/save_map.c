@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:37:38 by djast             #+#    #+#             */
-/*   Updated: 2019/11/14 14:48:00 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/15 11:51:42 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,24 +61,29 @@ void		load_click(t_sdl *sdl)
 
 void		save_click(t_sdl *sdl)
 {
+	sdl->button_pushed = 13;
+	ft_strcat(sdl->map_name->text, ".txt");
+	save_map(sdl, sdl->map_name->text);
+	bzero(sdl->map_name->text, sizeof(char *));
+	sdl->map_name->text_size = 0;
+	printf("I want cookies!\n");
+}
+
+int			bigscarycondition(t_sdl *sdl)
+{
 	SDL_GetMouseState(&sdl->mouse_position.x, &sdl->mouse_position.y);
-	if (sdl->map_name->text_size > 0 &&
-		((sdl->window_event.type == SDL_KEYDOWN &&
-		SDLK_KP_ENTER == sdl->window_event.key.keysym.sym) ||
-		(sdl->window_event.type == SDL_KEYDOWN &&
-		SDLK_RETURN == sdl->window_event.key.keysym.sym) ||
-		(sdl->window_event.type == SDL_MOUSEBUTTONDOWN &&
-		sdl->window_event.button.button == SDL_BUTTON_LEFT &&
-		((sdl->mouse_position.x > BUTTON_SAVE_X1 &&
-		sdl->mouse_position.x < BUTTON_SAVE_X2) &&
-		(sdl->mouse_position.y > BUTTON_SAVE_Y1 &&
-		sdl->mouse_position.y < BUTTON_SAVE_Y2)))))
-	{
-		sdl->button_pushed = 13;
-		ft_strcat(sdl->map_name->text, ".txt");
-		save_map(sdl, sdl->map_name->text);
-		bzero(sdl->map_name->text, sizeof(char *));
-		sdl->map_name->text_size = 0;
-		printf("I want cookies!\n");
-	}
+	if (sdl->map_name->text_size > 0 &&// was the name entered?
+			sdl->player->x > 0 && sdl->player->y > 0 &&// was the player set?
+			((sdl->window_event.type == SDL_KEYDOWN &&
+			SDLK_KP_ENTER == sdl->window_event.key.keysym.sym) ||
+			(sdl->window_event.type == SDL_KEYDOWN &&
+			SDLK_RETURN == sdl->window_event.key.keysym.sym) ||
+			(sdl->window_event.type == SDL_MOUSEBUTTONDOWN &&
+			sdl->window_event.button.button == SDL_BUTTON_LEFT &&
+			((sdl->mouse_position.x > BUTTON_SAVE_X1 &&
+			sdl->mouse_position.x < BUTTON_SAVE_X2) &&
+			(sdl->mouse_position.y > BUTTON_SAVE_Y1 &&
+			sdl->mouse_position.y < BUTTON_SAVE_Y2)))))
+		return (1);
+	return (0);
 }
