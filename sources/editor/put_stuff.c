@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/11 11:16:02 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/06 15:01:18 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/20 14:52:43 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	fill_a_sprite(t_sdl *sdl, t_sprite *cur_sprite, int x, int y)
 	cur_sprite->y = y;
 	cur_sprite->sector = sdl->sprite_in_sector;
 	printf("sprite_in_sector %d\n", cur_sprite->sector);
-	add_command(&(sdl->commands), SPRITE_TYPE);
+	add_command(sdl, &(sdl->commands), SPRITE_TYPE);
 }
 
 void	set_sprite(t_sdl *sdl, int x, int y)
@@ -52,7 +52,7 @@ void	set_player(t_sdl *sdl, int x, int y)
 		sdl->player->x = x;
 		sdl->player->y = y;
 		printf("Player is available\n");
-		add_command(&(sdl->commands), PLAYER_TYPE);
+		add_command(sdl, &(sdl->commands), PLAYER_TYPE);
 	}
 }
 

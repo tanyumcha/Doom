@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:46:30 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/23 09:05:14 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/20 14:52:33 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	add_point(t_sdl *sdl, t_sector **sector, int i)
 	(*sector)->point[(*sector)->size].x = sdl->grid_field[i].x;
 	(*sector)->point[(*sector)->size].y = sdl->grid_field[i].y;
 	(*sector)->size++;
-	add_command(&(sdl->commands), WALL_TYPE);
+	add_command(sdl, &(sdl->commands), WALL_TYPE);
 }
 
 int		dot_in_used(t_sector *sector, int x, int y)

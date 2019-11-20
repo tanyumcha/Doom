@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:48:45 by djast             #+#    #+#             */
-/*   Updated: 2019/11/15 15:13:36 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/20 13:19:59 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,24 @@ void		write_world(t_sdl *sdl, int fd)
 
 void			write_player(t_sdl *sdl, int fd)
 {
-	char		*char_id;
+	char		*char_id = NULL;
 
 	write(fd, "player:	65534\n\n", 15);
 	write(fd, "vertex:	65534	", 14);
-	char_id = ft_itoa(sdl->player->x * 4);
-	write(fd, char_id, ft_strlen(char_id));
-	free(char_id);
+	write_to_file(fd, char_id, sdl->player->x * 4);
+	// char_id = ft_itoa(sdl->player->x * 4);
+	// write(fd, char_id, ft_strlen(char_id));
+	// free(char_id);
 	write(fd, "	", 1);
-	char_id = ft_itoa(sdl->player->y * 4);
-	write(fd, char_id, ft_strlen(char_id));
-	free(char_id);
+	write_to_file(fd, char_id, sdl->player->y * 4);
+	// char_id = ft_itoa(sdl->player->y * 4);
+	// write(fd, char_id, ft_strlen(char_id));
+	// free(char_id);
 	write(fd, "	", 1);
-	char_id = ft_itoa(sdl->sectors->z);
-	write(fd, char_id, ft_strlen(char_id));
-	free(char_id);
+	write_to_file(fd, char_id, sdl->sectors->z);
+	// char_id = ft_itoa(sdl->sectors->z);
+	// write(fd, char_id, ft_strlen(char_id));
+	// free(char_id);
 	write(fd, "\n\n", 2);
 }
 
@@ -99,7 +102,7 @@ void		write_sprites(t_sdl *sdl, int fd, int last_id)
 	t_sprite	*cur_sprite;
 	int			id;
 	int			i;
-	char		*char_id;
+	char		*char_id = NULL;
 
 	cur_sprite = sdl->sprites;
 	id = last_id;
@@ -107,17 +110,20 @@ void		write_sprites(t_sdl *sdl, int fd, int last_id)
 	while (cur_sprite != NULL)
 	{
 		write(fd, "sobjct:	", 8);
-		char_id = ft_itoa(i++);
-		write(fd, char_id, ft_strlen(char_id));
-		free(char_id);
+		write_to_file(fd, char_id, i++);
+		// char_id = ft_itoa(i++);
+		// write(fd, char_id, ft_strlen(char_id));
+		// free(char_id);
 		write(fd, "	0	", 3);
-		char_id = ft_itoa(cur_sprite->type);
-		write(fd, char_id, ft_strlen(char_id));
-		free(char_id);
+		write_to_file(fd, char_id, cur_sprite->type);
+		// char_id = ft_itoa(cur_sprite->type);
+		// write(fd, char_id, ft_strlen(char_id));
+		// free(char_id);
 		write(fd, "	", 1);
-		char_id = ft_itoa(id++);
-		write(fd, char_id, ft_strlen(char_id));
-		free(char_id);
+		write_to_file(fd, char_id, id++);
+		// char_id = ft_itoa(id++);
+		// write(fd, char_id, ft_strlen(char_id));
+		// free(char_id);
 		write(fd, "\n", 1);
 		cur_sprite = cur_sprite->next;
 	}
@@ -129,7 +135,7 @@ void		write_objects(t_sdl *sdl, int fd)
 	t_sector	*cur_sector;
 	int			i;
 	int			id;
-	char		*char_id;
+	char		*char_id = NULL;
 
 	cur_sector = sdl->sectors;
 	id = 0;
@@ -139,14 +145,18 @@ void		write_objects(t_sdl *sdl, int fd)
 		while (i < cur_sector->size - 1)
 		{
 			write(fd, "object:	", 8);
-			char_id = ft_itoa(id);
-			write(fd, char_id, ft_strlen(char_id));
-			free(char_id);
+			write_to_file(fd, char_id, id);
+			// char_id = ft_itoa(id);
+			// write(fd, char_id, ft_strlen(char_id));
+			// free(char_id);
+
 			// -1 - определять с каким сектором портал
+
 			write(fd, "	-1	0	1	floor_wall	ceil_wall	1	", 32);
-			char_id = ft_itoa(id);
-			write(fd, char_id, ft_strlen(char_id));
-			free(char_id);
+			write_to_file(fd, char_id, id);
+			// char_id = ft_itoa(id);
+			// write(fd, char_id, ft_strlen(char_id));
+			// free(char_id);
 			write(fd, "\n", 1);
 			id++;
 			cur_sector->total_num_of_obj++;
@@ -163,7 +173,7 @@ void		write_sectors(t_sdl *sdl, int fd)
 	t_sector	*cur_sector;
 	int			i;
 	int			num;
-	char		*char_id;
+	char		*char_id = NULL;
 
 	cur_sector = sdl->sectors;
 	num = 0;
@@ -171,22 +181,25 @@ void		write_sectors(t_sdl *sdl, int fd)
 	{
 		i = 0;
 		write(fd, "sector: ", 9);
-		char_id = ft_itoa(cur_sector->num_of_sector);
-		write(fd, char_id, ft_strlen(char_id));
-		free(char_id);
+		write_to_file(fd, char_id, cur_sector->num_of_sector);
+		// char_id = ft_itoa(cur_sector->num_of_sector);
+		// write(fd, char_id, ft_strlen(char_id));
+		// free(char_id);
 		write(fd, "	0	675	q_floor_5	q_floor_3	0xFF0000	", 37);
 
 		// обход стен по часовой стрелке!!!
 
-		char_id = ft_itoa(cur_sector->total_num_of_obj);
-		write(fd, char_id, ft_strlen(char_id));
-		free(char_id);
+		write_to_file(fd, char_id, cur_sector->total_num_of_obj);
+		// char_id = ft_itoa(cur_sector->total_num_of_obj);
+		// write(fd, char_id, ft_strlen(char_id));
+		// free(char_id);
 		write(fd, "\t", 2);
 		while (i < cur_sector->total_num_of_obj)
 		{
-			char_id = ft_itoa(num);
-			write(fd, char_id, ft_strlen(char_id));
-			free(char_id);
+			write_to_file(fd, char_id, num);
+			// char_id = ft_itoa(num);
+			// write(fd, char_id, ft_strlen(char_id));
+			// free(char_id);
 			write(fd, " ", 1);
 			i++;
 			num++;

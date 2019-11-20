@@ -6,11 +6,24 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:39:39 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/21 12:52:49 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/20 15:10:54 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
+
+void	delete_player(t_point *player)
+{
+	player->x = 0;
+	player->y = 0;
+}
+
+void	delete_point(t_sector *sector)
+{
+	sector->point[sector->size - 1].x = 0;
+	sector->point[sector->size - 1].y = 0;
+	sector->size--;
+}
 
 void	remove_last_sprite(t_sprite **sprites)
 {

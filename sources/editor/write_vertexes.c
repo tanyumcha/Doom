@@ -6,18 +6,25 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 16:19:28 by djast             #+#    #+#             */
-/*   Updated: 2019/11/15 15:28:21 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/20 12:40:41 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
+
+void		write_to_file(int fd, char *data, int numdata)
+{
+	data = ft_itoa(numdata);
+	write(fd, data, ft_strlen(data));
+	free(data);
+}
 
 int			write_vertexes_wall(t_sdl *sdl, int fd)
 {
 	t_sector	*cur_sector;
 	int			i;
 	int			id;
-	char		*char_id;
+	char		*char_id = NULL;
 
 	cur_sector = sdl->sectors;
 	id = 0;
@@ -28,21 +35,25 @@ int			write_vertexes_wall(t_sdl *sdl, int fd)
 		while (i != cur_sector->size)
 		{
 			write(fd, "vertex:	", 8);
-			char_id = ft_itoa(id++);
-			write(fd, char_id, ft_strlen(char_id));
-			free(char_id);
+			write_to_file(fd, char_id, id++);
+			// char_id = ft_itoa(id++);
+			// write(fd, char_id, ft_strlen(char_id));
+			// free(char_id);
 			write(fd, "	", 1);
-			char_id = ft_itoa(cur_sector->point[i].x * 4);
-			write(fd, char_id, ft_strlen(char_id));
-			free(char_id);
+			write_to_file(fd, char_id, cur_sector->point[i].x * 4);
+			// char_id = ft_itoa(cur_sector->point[i].x * 4);
+			// write(fd, char_id, ft_strlen(char_id));
+			// free(char_id);
 			write(fd, "	", 1);
-			char_id = ft_itoa(cur_sector->point[i].y * 4);
-			write(fd, char_id, ft_strlen(char_id));
-			free(char_id);
+			write_to_file(fd, char_id, cur_sector->point[i].y * 4);
+			// char_id = ft_itoa(cur_sector->point[i].y * 4);
+			// write(fd, char_id, ft_strlen(char_id));
+			// free(char_id);
 			write(fd, "	", 1);
-			char_id = ft_itoa(cur_sector->z);
-			write(fd, char_id, ft_strlen(char_id));
-			free(char_id);
+			write_to_file(fd, char_id, cur_sector->z);
+			// char_id = ft_itoa(cur_sector->z);
+			// write(fd, char_id, ft_strlen(char_id));
+			// free(char_id);
 			write(fd, "\n", 1);
 			i++;
 		}
@@ -51,13 +62,6 @@ int			write_vertexes_wall(t_sdl *sdl, int fd)
 	}
 	// write(fd, "\n", 1);
 	return (id);
-}
-
-void		write_to_file(int fd, char *data, int numdata)
-{
-	data = ft_itoa(numdata);
-	write(fd, data, ft_strlen(data));
-	free(data);
 }
 
 void		write_vertexes_sprite(t_sdl *sdl, int fd, int last_id)

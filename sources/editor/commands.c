@@ -6,13 +6,13 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 15:25:23 by djast             #+#    #+#             */
-/*   Updated: 2019/10/21 13:02:48 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/20 15:11:48 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-void	add_command(t_commands **commands, int type)
+void	add_command(t_sdl *sdl, t_commands **commands, int type)
 {
 	t_commands *command;
 	t_commands *tmp;
@@ -27,6 +27,7 @@ void	add_command(t_commands **commands, int type)
 		*commands = command;
 		(*commands)->next = tmp;
 	}
+	sdl->command_count++;
 }
 
 void	delete_last_command(t_sdl *sdl)
@@ -34,7 +35,6 @@ void	delete_last_command(t_sdl *sdl)
 	t_commands	*tmp;
 	int			type;
 
-	// (void)*sdl; //НАДО ЛИ?
 	if (sdl->commands == NULL)
 		return ;
 	tmp = sdl->commands;

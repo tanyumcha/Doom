@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/11/15 11:57:47 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/20 15:11:04 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,6 +192,7 @@ typedef struct				s_sdl
 	TTF_Font				*font;
 	SDL_Texture				*text;
 	int						sect_count;
+	int						command_count;
 	int						button_pushed;
 	int						type_pressed;
 	int						count;
@@ -242,12 +243,12 @@ void						draw_a_sector(t_sdl *sdl, t_sector *sector, int i);
 void						draw_a_point(t_sdl *sdl, t_point *point, int i);
 void						delete_player(t_point *player);
 void						remove_last_point(t_sector **head);
-void						reset(t_sector **head, t_point	*player, t_sprite *sprites);
+void						reset(t_sdl *sdl);//, t_sector **head, t_point	*player, t_sprite *sprites);
 void						delete_last_command(t_sdl *sdl);
 void						delete_point(t_sector *sector);
 void						remove_last_sprite(t_sprite **sprites);
 void						remove_last_point(t_sector **head);
-void						add_command(t_commands **commands, int type);
+void						add_command(t_sdl *sdl, t_commands **commands, int type);
 t_sector					*get_last_sector(t_sector *head);
 t_sprite					*find_last_sprite(t_sprite *sprites);
 SDL_Color					*create_sdl_color(int r, int g, int b, int a);
@@ -269,4 +270,5 @@ void						write_vertexes_sprite(t_sdl *sdl, int fd, int last_id);
 void						write_sprites(t_sdl *sdl, int fd, int last_id);
 void						write_sectors(t_sdl *sdl, int fd);
 void						write_objects(t_sdl *sdl, int fd);
+void						write_to_file(int fd, char *data, int numdata);
 #endif
