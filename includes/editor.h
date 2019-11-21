@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/11/20 15:11:04 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/21 15:36:37 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ typedef struct				s_sector
 	int						size;
 	int						num_of_sector;
 	int						type_of_point;
+	int						neighbour; // как инитить? "-1", чтобы не сопадал с номерами сектора
 	double					cmn;
 	double					rh;
 	double					sh;
@@ -256,6 +257,7 @@ char						*cut_the_end(char *text);
 void						choose_type_of_point(t_sector **stuffbox, int type);
 void						make_player_or_sprite(t_sdl *sdl);
 int							check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2);
+void						check_the_touch(t_sector *head, t_sector *sector, int i);
 void						set_sprite(t_sdl *sdl, int x, int y);
 void						load_click(t_sdl *sdl);
 int							bigscarycondition(t_sdl *sdl);

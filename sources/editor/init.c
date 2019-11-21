@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:27:00 by djast             #+#    #+#             */
-/*   Updated: 2019/11/15 11:58:26 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/21 15:14:34 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ t_sector	*init_sector(void)
 	sector->total_num_of_obj = 0;
 	sector->num_of_sector = 0;
 	sector->type_of_point = 0;
+	sector->neighbour = -1;
 	sector->z = 300;
 	sector->cmn = 0;
 	sector->sh = 0;
@@ -78,8 +79,10 @@ void		init_sdl(t_sdl *sdl)
 	sdl->button_pushed = WALL_PUSH;
 	sdl->sectors = init_sector();
 	sdl->commands = NULL;
+	sdl->command_count = 0;
 	sdl->sprites = NULL;
-	sdl->count = 0;
+	sdl->sprite_in_sector = 0;
+	sdl->count = -1;
 	sdl->map_name = init_input_field(INPUT_FIELD_X1, INPUT_FIELD_Y1,
 									INPUT_FIELD_X2, INPUT_FIELD_Y2);
 	init_player(sdl);

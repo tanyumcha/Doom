@@ -6,7 +6,7 @@
 #    By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/15 17:18:06 by djast             #+#    #+#              #
-#    Updated: 2019/11/07 16:22:33 by eharrag-         ###   ########.fr        #
+#    Updated: 2019/11/21 14:53:50 by eharrag-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,6 +57,7 @@ EDITOR_FILES =	editor.c \
 				utils.c \
 				init.c \
 				check_intersection.c \
+				check_the_touch.c \
 				save_map.c \
 				save_utils.c \
 				write_to_file.c \
