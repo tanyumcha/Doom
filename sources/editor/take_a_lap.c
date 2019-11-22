@@ -6,19 +6,65 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:46:30 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/21 15:37:41 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/22 13:35:54 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
+t_walls	*find_last_wall(t_walls *wall)
+{
+	if (wall == NULL)
+		return (NULL);
+	while (wall->next != NULL)
+		wall = wall->next;
+	return (wall);
+}
+
+void	save_wall(t_sdl *sdl, t_walls *walls, t_sector *sector, int i)
+{
+	t_walls	*cur_wall;
+
+	cur_wall = find_last_wall(walls);
+	if (i > 0)//сохраняем стену, с момента проставления второй точки сектора
+	{
+		if (cur_wall == NULL)
+		{
+			walls = init_wall();
+			cur_wall = walls;
+		}
+		else
+		{
+			cur_wall->next = init_wall();
+			cur_wall = cur_wall->next;
+		}
+		cur_wall->x1 = sector->point[i - 1].x;
+		cur_wall->y1 = sector->point[i - 1].y;
+		cur_wall->x2 = sector->point[i].x;
+		cur_wall->y2 = sector->point[i].y;
+		cur_wall->wall_id = i - 1;
+
+		// printf("x1 = %d\n", cur_wall->x1);
+		// printf("y1 = %d\n", cur_wall->y1);
+		// printf("x2 = %d\n", cur_wall->x2);
+		// printf("y2 = %d\n", cur_wall->y2);
+		// printf("wall id = %d\n", cur_wall->wall_id);
+		if (sector->num_of_sector > 0)
+			check_the_touch(cur_wall, sdl->sectors);// проверка начинается со второй точки второго сектора
+	}
+}
+
 void	add_point(t_sdl *sdl, t_sector **sector, int i)
 {
 	(*sector)->point[(*sector)->size].x = sdl->grid_field[i].x;
 	(*sector)->point[(*sector)->size].y = sdl->grid_field[i].y;
+	if ((*sector)->size > 0)
+	{
+		save_wall(sdl, sdl->walls, (*sector), (*sector)->size);//сохраняем стену
+		// if ((*sector)->num_of_sector > 0)
+		// 	check_the_touch(sdl->sectors, (*sector), (*sector)->size);// проверка начинается со второй точки второго сектора
+	}
 	(*sector)->size++;
-	if ((*sector)->num_of_sector > 0 && (*sector)->size > 0)// проверка начинается со второй точки второго сектора
-		check_the_touch(sdl->sectors, (*sector), i);
 	add_command(sdl, &(sdl->commands), WALL_TYPE);
 }
 

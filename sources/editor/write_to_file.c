@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:48:45 by djast             #+#    #+#             */
-/*   Updated: 2019/11/20 13:19:59 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/22 14:23:14 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,11 +133,13 @@ void		write_sprites(t_sdl *sdl, int fd, int last_id)
 void		write_objects(t_sdl *sdl, int fd)
 {
 	t_sector	*cur_sector;
+	t_walls		*cur_wall;
 	int			i;
 	int			id;
 	char		*char_id = NULL;
 
 	cur_sector = sdl->sectors;
+	cur_wall = sdl->walls;
 	id = 0;
 	while (cur_sector != NULL)
 	{
@@ -150,9 +152,17 @@ void		write_objects(t_sdl *sdl, int fd)
 			// write(fd, char_id, ft_strlen(char_id));
 			// free(char_id);
 
-			// -1 - определять с каким сектором портал
+			// с каким сектором касание
+			//СЕГА ГА ГА ГА
+			write(fd, "	", 2);
+			if(i > 0)
+			{
+				printf("Portal-la-la-la %D\n", sdl->walls->portal);
+				write_to_file(fd, char_id, sdl->walls->portal);
+			}
+			cur_wall = cur_wall->next;
 
-			write(fd, "	-1	0	1	floor_wall	ceil_wall	1	", 32);
+			write(fd, "	0	1	floor_wall	ceil_wall	1	", 29);
 			write_to_file(fd, char_id, id);
 			// char_id = ft_itoa(id);
 			// write(fd, char_id, ft_strlen(char_id));
