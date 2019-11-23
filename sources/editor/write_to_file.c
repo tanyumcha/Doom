@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:48:45 by djast             #+#    #+#             */
-/*   Updated: 2019/11/23 16:45:10 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/23 17:22:27 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void		write_world(t_sdl *sdl, int fd) // лишнее считает
 {
-	int		sector_count;
+	// int		sector_count;
 	char	*sectors;
 	int		i;
 
 	write(fd, "world:	1	", 9);
-	sector_count = get_sector_count(sdl->sectors);
-	sectors = ft_itoa(sector_count);
+	// sector_count = get_sector_count(sdl->sectors);
+	// sectors = ft_itoa(sector_count);
+	sectors = ft_itoa(sdl->count);
 	write(fd, sectors, ft_strlen(sectors));
 	write(fd, "	", 1);
 	free(sectors);
@@ -28,7 +29,7 @@ void		write_world(t_sdl *sdl, int fd) // лишнее считает
 	sectors = ft_itoa(i++);
 	write(fd, sectors, ft_strlen(sectors));
 	free(sectors);
-	while (i != sector_count)
+	while (i != sdl->count)
 	{
 		write(fd, " ", 1);
 		sectors = ft_itoa(i++);
@@ -79,7 +80,7 @@ void			write_player(t_sdl *sdl, int fd)
 	char		*char_id = NULL;
 
 	write(fd, "player:	0	2000\n\n", 16);
-	write(fd, "vertex:	2000	", 14);
+	write(fd, "vertex:	2000	", 13);
 	write_to_file(fd, char_id, sdl->player->x * 4);
 	// char_id = ft_itoa(sdl->player->x * 4);
 	// write(fd, char_id, ft_strlen(char_id));
@@ -135,17 +136,19 @@ void		write_objects(t_sdl *sdl, int fd)
 	t_sector	*cur_sector;
 	int			i;
 	int			id;
+	int			count;
 	char		*char_id = NULL;
 
 	cur_sector = sdl->sectors;
 	id = 0;
+	count = 0;
 	while (cur_sector != NULL)
 	{
 		i = 0;
 		while (i < cur_sector->size - 1)
 		{
 			write(fd, "object:	", 8);
-			write_to_file(fd, char_id, id);
+			write_to_file(fd, char_id, count);
 			// char_id = ft_itoa(id);
 			// write(fd, char_id, ft_strlen(char_id));
 			// free(char_id);
@@ -154,8 +157,11 @@ void		write_objects(t_sdl *sdl, int fd)
 			write(fd, "	", 1);
 
 			write_to_file(fd, char_id, cur_sector->walls[i].portal);
-
-			write(fd, "	0	1	q_bricks_2	flooring	ceiling	", 33);
+			write(fd, "	", 1);
+			if (cur_sector->walls[i].portal == 1)
+				write(fd, "	1	1	null	flooring	ceiling	", 27); // НЕ РАБОТАЕТ
+			else
+				write(fd, "	0	1	q_bricks_2	flooring	ceiling	", 33);
 			write_to_file(fd, char_id, id);
 			write(fd, " ", 1);
 			write_to_file(fd, char_id, id + 1);
@@ -166,8 +172,9 @@ void		write_objects(t_sdl *sdl, int fd)
 			id++;
 			cur_sector->total_num_of_obj++;
 			i++;
+			count++;
 		}
-		printf("i %D\n", i);
+		printf("i %d\n", i);
 		write(fd, "\n", 1);
 		id++;
 		cur_sector = cur_sector->next;

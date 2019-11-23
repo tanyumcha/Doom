@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 16:19:28 by djast             #+#    #+#             */
-/*   Updated: 2019/11/20 12:40:41 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/23 17:18:45 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,5 +97,5 @@ void		write_vertexes_sprite(t_sdl *sdl, int fd, int last_id)
 		write(fd, "\n", 1);
 		cur_sprite = cur_sprite->next;
 	}
-	write(fd, "\n\n", 3);
+	write(fd, "\n\n", 2);
 }
