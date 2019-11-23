@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:37:38 by djast             #+#    #+#             */
-/*   Updated: 2019/11/15 11:51:42 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/23 14:58:33 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,12 @@ void		save_map(t_sdl *sdl, char *map_name)
 	int fd;
 	int last_id;
 
+	find_portals(sdl);
 	fd = create_file(map_name);
 	write_world(sdl, fd);
 	write_player(sdl, fd);
 	last_id = write_vertexes_wall(sdl, fd);
 	write_vertexes_sprite(sdl, fd, last_id);
-	// write_polygone(sdl, fd);
 	write_objects(sdl, fd);
 	write_sprites(sdl, fd, last_id);
 	write_sectors(sdl, fd);
@@ -61,7 +61,7 @@ void		load_click(t_sdl *sdl)
 
 void		save_click(t_sdl *sdl)
 {
-	sdl->button_pushed = 13;
+	sdl->button_pushed = SAVE_PUSH;
 	ft_strcat(sdl->map_name->text, ".txt");
 	save_map(sdl, sdl->map_name->text);
 	bzero(sdl->map_name->text, sizeof(char *));

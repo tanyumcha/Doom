@@ -6,13 +6,13 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:48:45 by djast             #+#    #+#             */
-/*   Updated: 2019/11/22 14:23:14 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/23 16:45:10 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-void		write_world(t_sdl *sdl, int fd)
+void		write_world(t_sdl *sdl, int fd) // лишнее считает
 {
 	int		sector_count;
 	char	*sectors;
@@ -30,7 +30,7 @@ void		write_world(t_sdl *sdl, int fd)
 	free(sectors);
 	while (i != sector_count)
 	{
-		write(fd, ",", 1);
+		write(fd, " ", 1);
 		sectors = ft_itoa(i++);
 		write(fd, sectors, ft_strlen(sectors));
 		free(sectors);
@@ -78,8 +78,8 @@ void			write_player(t_sdl *sdl, int fd)
 {
 	char		*char_id = NULL;
 
-	write(fd, "player:	65534\n\n", 15);
-	write(fd, "vertex:	65534	", 14);
+	write(fd, "player:	0	2000\n\n", 16);
+	write(fd, "vertex:	2000	", 14);
 	write_to_file(fd, char_id, sdl->player->x * 4);
 	// char_id = ft_itoa(sdl->player->x * 4);
 	// write(fd, char_id, ft_strlen(char_id));
@@ -127,19 +127,17 @@ void		write_sprites(t_sdl *sdl, int fd, int last_id)
 		write(fd, "\n", 1);
 		cur_sprite = cur_sprite->next;
 	}
-	write(fd, "\n\n", 3);
+	write(fd, "\n\n", 2);
 }
 
 void		write_objects(t_sdl *sdl, int fd)
 {
 	t_sector	*cur_sector;
-	t_walls		*cur_wall;
 	int			i;
 	int			id;
 	char		*char_id = NULL;
 
 	cur_sector = sdl->sectors;
-	cur_wall = sdl->walls;
 	id = 0;
 	while (cur_sector != NULL)
 	{
@@ -153,17 +151,14 @@ void		write_objects(t_sdl *sdl, int fd)
 			// free(char_id);
 
 			// с каким сектором касание
-			//СЕГА ГА ГА ГА
-			write(fd, "	", 2);
-			if(i > 0)
-			{
-				printf("Portal-la-la-la %D\n", sdl->walls->portal);
-				write_to_file(fd, char_id, sdl->walls->portal);
-			}
-			cur_wall = cur_wall->next;
+			write(fd, "	", 1);
 
-			write(fd, "	0	1	floor_wall	ceil_wall	1	", 29);
+			write_to_file(fd, char_id, cur_sector->walls[i].portal);
+
+			write(fd, "	0	1	q_bricks_2	flooring	ceiling	", 33);
 			write_to_file(fd, char_id, id);
+			write(fd, " ", 1);
+			write_to_file(fd, char_id, id + 1);
 			// char_id = ft_itoa(id);
 			// write(fd, char_id, ft_strlen(char_id));
 			// free(char_id);
@@ -172,8 +167,9 @@ void		write_objects(t_sdl *sdl, int fd)
 			cur_sector->total_num_of_obj++;
 			i++;
 		}
-		id++;
+		printf("i %D\n", i);
 		write(fd, "\n", 1);
+		id++;
 		cur_sector = cur_sector->next;
 	}
 }
@@ -190,12 +186,13 @@ void		write_sectors(t_sdl *sdl, int fd)
 	while (cur_sector->next != NULL)
 	{
 		i = 0;
-		write(fd, "sector: ", 9);
+		write(fd, "sector: ", 8);
 		write_to_file(fd, char_id, cur_sector->num_of_sector);
+		printf("AAAAAAAAAAAAAAAA %d\n", cur_sector->num_of_sector);
 		// char_id = ft_itoa(cur_sector->num_of_sector);
 		// write(fd, char_id, ft_strlen(char_id));
 		// free(char_id);
-		write(fd, "	0	675	q_floor_5	q_floor_3	0xFF0000	", 37);
+		write(fd, "	0	675	q_floor_5	q_floor_3	0xFF0000	", 36);
 
 		// обход стен по часовой стрелке!!!
 
@@ -203,7 +200,7 @@ void		write_sectors(t_sdl *sdl, int fd)
 		// char_id = ft_itoa(cur_sector->total_num_of_obj);
 		// write(fd, char_id, ft_strlen(char_id));
 		// free(char_id);
-		write(fd, "\t", 2);
+		write(fd, "\t", 1);
 		while (i < cur_sector->total_num_of_obj)
 		{
 			write_to_file(fd, char_id, num);
@@ -214,7 +211,7 @@ void		write_sectors(t_sdl *sdl, int fd)
 			i++;
 			num++;
 		}
-		write(fd, "\n", 2);
+		write(fd, "\n", 1);
 		cur_sector = cur_sector->next;
 	}
 }

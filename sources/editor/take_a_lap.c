@@ -6,51 +6,49 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:46:30 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/22 13:35:54 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/23 16:04:09 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-t_walls	*find_last_wall(t_walls *wall)
-{
-	if (wall == NULL)
-		return (NULL);
-	while (wall->next != NULL)
-		wall = wall->next;
-	return (wall);
-}
+// t_walls	*find_last_wall(t_walls *wall)
+// {
+// 	if (wall == NULL)
+// 		return (NULL);
+// 	while (wall->next != NULL)
+// 		wall = wall->next;
+// 	return (wall);
+// }
 
-void	save_wall(t_sdl *sdl, t_walls *walls, t_sector *sector, int i)
+void	save_wall(t_sector *sector, int i)
+// void	save_wall(t_sector *head, t_sector *sector, int i)
 {
-	t_walls	*cur_wall;
-
-	cur_wall = find_last_wall(walls);
 	if (i > 0)//сохраняем стену, с момента проставления второй точки сектора
 	{
-		if (cur_wall == NULL)
-		{
-			walls = init_wall();
-			cur_wall = walls;
-		}
-		else
-		{
-			cur_wall->next = init_wall();
-			cur_wall = cur_wall->next;
-		}
-		cur_wall->x1 = sector->point[i - 1].x;
-		cur_wall->y1 = sector->point[i - 1].y;
-		cur_wall->x2 = sector->point[i].x;
-		cur_wall->y2 = sector->point[i].y;
-		cur_wall->wall_id = i - 1;
+		sector->walls[i - 1].x1 = sector->point[i - 1].x;
+		sector->walls[i - 1].y1 = sector->point[i - 1].y;
+		sector->walls[i - 1].x2 = sector->point[i].x;
+		sector->walls[i - 1].y2 = sector->point[i].y;
+		sector->walls[i - 1].wall_id = i - 1;
+		sector->walls[i - 1].portal = - 1;
+		sector->num_of_walls = sector->walls[i - 1].wall_id + 1;
+
+
+		// x3 = sdl->gried_field[i].x;
+		// y3 = sdl->gried_field[i].y;
+
+		// if ((x3 - x1) * (y2 - y1) - (y3 - y1) * (x2 - x1) == 0)
+		// 	if (((x3 > x1 && x3 < x2) || (x3 < x1 && x3 > x2)) ||
+		// 		((y3 > y1 && y3 < y2) || (y3 < y1 && y3 > y2)))
 
 		// printf("x1 = %d\n", cur_wall->x1);
 		// printf("y1 = %d\n", cur_wall->y1);
 		// printf("x2 = %d\n", cur_wall->x2);
 		// printf("y2 = %d\n", cur_wall->y2);
 		// printf("wall id = %d\n", cur_wall->wall_id);
-		if (sector->num_of_sector > 0)
-			check_the_touch(cur_wall, sdl->sectors);// проверка начинается со второй точки второго сектора
+		// if (sector->num_of_sector > 0)
+		// 	check_the_touch(&sector->walls[i - 1], head);// проверка начинается со второй точки второго сектора
 	}
 }
 
@@ -59,11 +57,8 @@ void	add_point(t_sdl *sdl, t_sector **sector, int i)
 	(*sector)->point[(*sector)->size].x = sdl->grid_field[i].x;
 	(*sector)->point[(*sector)->size].y = sdl->grid_field[i].y;
 	if ((*sector)->size > 0)
-	{
-		save_wall(sdl, sdl->walls, (*sector), (*sector)->size);//сохраняем стену
-		// if ((*sector)->num_of_sector > 0)
-		// 	check_the_touch(sdl->sectors, (*sector), (*sector)->size);// проверка начинается со второй точки второго сектора
-	}
+		save_wall((*sector), (*sector)->size);//сохраняем стену
+		// save_wall(sdl->sectors, (*sector), (*sector)->size);//сохраняем стену
 	(*sector)->size++;
 	add_command(sdl, &(sdl->commands), WALL_TYPE);
 }
@@ -101,8 +96,6 @@ void	make_wall(t_sdl *sdl)
 			if (sector->size == 0) // для первой точки
 			{
 				add_point(sdl, &sector, i);
-				sdl->count++;
-				sector->num_of_sector = sdl->count;
 			}
 			else if (sector->size > 0 && dot_in_used(sector, sdl->grid_field[i].x, sdl->grid_field[i].y) == 0) // для всех, кроме первой и последней точки
 				add_point(sdl, &sector, i);
@@ -112,11 +105,10 @@ void	make_wall(t_sdl *sdl)
 					sdl->mouse_position.y <= sector->point[0].y + POINT_SIZE / 2)))
 			{
 				add_point(sdl, &sector, i);
-//				sector->num_of_sector = sdl->count;
-				// printf("Portal is: %d", sector->neighbour);
+				sector->num_of_sector = sdl->count;
 				sector->next = init_sector();
 				sector = sector->next;
-//				sdl->count++;
+				sdl->count++;
 				printf("SAVE\n");
 			}
 		}

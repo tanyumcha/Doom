@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 13:49:10 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/22 13:54:10 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/23 15:54:00 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,14 @@ int		point_on_segment(t_walls *cur_wall)
 		(cur_wall->x1 - cur_wall->neighbour_x1) * (cur_wall->neighbour_y2 - cur_wall->neighbour_y1) - (cur_wall->y1 - cur_wall->neighbour_y1) * (cur_wall->neighbour_x2 - cur_wall->neighbour_x1) == 0 &&
 		(cur_wall->x2 - cur_wall->neighbour_x1) * (cur_wall->neighbour_y2 - cur_wall->neighbour_y1) - (cur_wall->y2 - cur_wall->neighbour_y1) * (cur_wall->neighbour_x2 - cur_wall->neighbour_x1) == 0)
 	{
-		if (((cur_wall->neighbour_x1 >= cur_wall->x1 && cur_wall->neighbour_x1 <= cur_wall->x2) || (cur_wall->neighbour_x1 <= cur_wall->x1 && cur_wall->neighbour_x1 >= cur_wall->x2)) ||
-				((cur_wall->neighbour_x2 >= cur_wall->x1 && cur_wall->neighbour_x2 <= cur_wall->x2) || (cur_wall->neighbour_x2 <= cur_wall->x1 && cur_wall->neighbour_x2 >= cur_wall->x2)) ||
-				((cur_wall->x1 >= cur_wall->neighbour_x1 && cur_wall->x1 <= cur_wall->neighbour_x2) || (cur_wall->x1 <= cur_wall->neighbour_x1 && cur_wall->x1 >= cur_wall->neighbour_x2)) ||
-				((cur_wall->x2 >= cur_wall->neighbour_x1 && cur_wall->x2 <= cur_wall->neighbour_x2) || (cur_wall->x2 <= cur_wall->neighbour_x1 && cur_wall->x2 >= cur_wall->neighbour_x2)))
+		if ((((cur_wall->neighbour_x1 > cur_wall->x1 && cur_wall->neighbour_x1 < cur_wall->x2) || (cur_wall->neighbour_x1 < cur_wall->x1 && cur_wall->neighbour_x1 > cur_wall->x2)) ||
+				((cur_wall->neighbour_x2 > cur_wall->x1 && cur_wall->neighbour_x2 < cur_wall->x2) || (cur_wall->neighbour_x2 < cur_wall->x1 && cur_wall->neighbour_x2 > cur_wall->x2)) ||
+				((cur_wall->x1 > cur_wall->neighbour_x1 && cur_wall->x1 < cur_wall->neighbour_x2) || (cur_wall->x1 < cur_wall->neighbour_x1 && cur_wall->x1 > cur_wall->neighbour_x2)) ||
+				((cur_wall->x2 > cur_wall->neighbour_x1 && cur_wall->x2 < cur_wall->neighbour_x2) || (cur_wall->x2 < cur_wall->neighbour_x1 && cur_wall->x2 > cur_wall->neighbour_x2))) ||
+				(((cur_wall->neighbour_y1 > cur_wall->y1 && cur_wall->neighbour_y1 < cur_wall->y2) || (cur_wall->neighbour_y1 < cur_wall->y1 && cur_wall->neighbour_y1 > cur_wall->y2)) ||
+				((cur_wall->neighbour_y2 > cur_wall->y1 && cur_wall->neighbour_y2 < cur_wall->y2) || (cur_wall->neighbour_y2 < cur_wall->y1 && cur_wall->neighbour_y2 > cur_wall->y2)) ||
+				((cur_wall->y1 > cur_wall->neighbour_y1 && cur_wall->y1 < cur_wall->neighbour_y2) || (cur_wall->y1 < cur_wall->neighbour_y1 && cur_wall->y1 > cur_wall->neighbour_y2)) ||
+				((cur_wall->y2 > cur_wall->neighbour_y1 && cur_wall->y2 < cur_wall->neighbour_y2) || (cur_wall->y2 < cur_wall->neighbour_y1 && cur_wall->y2 > cur_wall->neighbour_y2))))
 			return (1);
 	}
 	return (0);
@@ -58,8 +62,13 @@ void	check_the_touch(t_walls *cur_wall, t_sector *head)
 				{
 					printf("OK! On segment\n");
 					cur_wall->portal = head->num_of_sector;
+					printf("Portal is: %d\n", head->num_of_sector);
 					printf("Portal is: %d\n", cur_wall->portal);
 				}
+				// else
+				// {
+				// 	printf("OK! Nope\n");
+				// }
 			}
 			j++;
 		}
@@ -67,6 +76,26 @@ void	check_the_touch(t_walls *cur_wall, t_sector *head)
 	}
 }
 
+void	find_portals(t_sdl *sdl)
+{
+	t_sector	*cur_sector;
+	t_sector	*head;
+	int			i;
+
+	cur_sector = sdl->sectors;
+	head = sdl->sectors;
+	while (cur_sector->next != NULL)
+	{
+		i = 0;
+		printf("num_of_walls - %d\n", cur_sector->num_of_walls);
+		while (i < cur_sector->num_of_walls)
+		{
+			check_the_touch(&cur_sector->walls[i], head);
+			i++;
+		}
+		cur_sector = cur_sector->next;
+	}
+}
 	// (x1, y1, x2, y2, x3, y3)
 	// (x1, y1, x2, y2, x4, y4)
 	// (x3, y3, x4, y4, x1, y1)

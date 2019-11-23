@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/11/22 14:07:10 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/23 15:42:00 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,9 +155,7 @@ typedef struct				s_point
 
 typedef struct				s_walls
 {
-	// t_polygone				polies_array[1];
 	int						portal;
-	// int						passble;
 	int						wall_id;
 	int						x1;
 	int						y1;
@@ -167,23 +165,13 @@ typedef struct				s_walls
 	int						neighbour_y1;
 	int						neighbour_x2;
 	int						neighbour_y2;
-	// int						polies_count;
-	// int						visible;
-	// int						status;
-	// t_wallobj				particles[128];
-	// int 					wallobjects_num;
-	// t_wallobj				*stuff;
-	// t_wobj					*wallobjects_array;
-	// t_image					*floor_wall_texture;
-	// int 					floor_wall_spread;
-	// t_image					*ceil_wall_texture;
-	// int 					ceil_wall_spread;
 	struct s_walls			*next;
 }							t_walls;
 
 typedef struct				s_sector
 {
-	t_point					point[100];
+	t_point					point[1000];
+	t_walls					walls[1000];
 	int						size;
 	int						num_of_sector;
 	int						type_of_point;
@@ -191,6 +179,7 @@ typedef struct				s_sector
 	double					rh;
 	double					sh;
 	int						z;
+	int						num_of_walls;
 	int						total_num_of_obj;
 	struct s_sector			*next;
 }							t_sector;
@@ -227,7 +216,6 @@ typedef struct				s_sdl
 	int						sprite_in_sector;
 	struct s_point			grid_field[GRID_SIZE];
 	struct s_sector			*sectors;
-	struct s_walls			*walls;
 	struct s_commands		*commands;
 	struct s_point			*player;
 	struct s_sprite			*sprites;
@@ -286,6 +274,7 @@ char						*cut_the_end(char *text);
 void						choose_type_of_point(t_sector **stuffbox, int type);
 void						make_player_or_sprite(t_sdl *sdl);
 int							check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2);
+void						find_portals(t_sdl *sdl);
 void						check_the_touch(t_walls *walls, t_sector *head);
 void						set_sprite(t_sdl *sdl, int x, int y);
 void						load_click(t_sdl *sdl);
