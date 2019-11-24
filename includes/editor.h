@@ -6,7 +6,7 @@
 /*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/11/24 12:14:32 by djast            ###   ########.fr       */
+/*   Updated: 2019/11/24 15:28:04 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -197,6 +197,7 @@ typedef struct				s_sector
 	double					sh;
 	int						z;
 	int						total_num_of_obj;
+	int						local_intersection;
 	struct s_sector			*next;
 }							t_sector;
 
@@ -311,4 +312,7 @@ void						write_sprites(t_sdl *sdl, int fd, int last_id);
 void						write_sectors(t_sdl *sdl, int fd);
 void						write_objects(t_sdl *sdl, int fd);
 void						write_to_file(int fd, char *data, int numdata);
+int							is_clockwise(t_walls *wall);
+int							check_local_intersection(t_sdl *sdl,
+										t_sector *cur_sector, t_walls *wall);
 #endif

@@ -6,7 +6,7 @@
 /*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 11:20:10 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/24 12:15:10 by djast            ###   ########.fr       */
+/*   Updated: 2019/11/24 14:32:21 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void		input_field(t_sdl *sdl)
 	field->h = INPUT_FIELD_Y2 - INPUT_FIELD_Y1;
 	SDL_SetRenderDrawColor(sdl->renderer, 204, 204, 255, 255);
 	SDL_RenderFillRect(sdl->renderer, field);
-	free(field);
 	color_text = create_sdl_color(0, 0, 0, 255); // почему-то цвет не меняется
 	field->x = sdl->map_name->x;
 	field->y = sdl->map_name->y;

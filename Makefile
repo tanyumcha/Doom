@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+         #
+#    By: djast <djast@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/15 17:18:06 by djast             #+#    #+#              #
-#    Updated: 2019/11/21 14:53:50 by eharrag-         ###   ########.fr        #
+#    Updated: 2019/11/24 14:22:28 by djast            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,8 @@ EDITOR_FILES =	editor.c \
 				save_map.c \
 				save_utils.c \
 				write_to_file.c \
-				write_vertexes.c
+				write_vertexes.c \
+				clockwise.c
 
 SRC_DIRECTORY = ./sources/
 SRC_DIRECTORY_EDITOR = $(SRC_DIRECTORY)editor/

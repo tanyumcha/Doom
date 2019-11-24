@@ -6,7 +6,7 @@
 /*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:27:00 by djast             #+#    #+#             */
-/*   Updated: 2019/11/24 12:14:44 by djast            ###   ########.fr       */
+/*   Updated: 2019/11/24 14:46:23 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,7 @@ t_sector	*init_sector(void)
 	sector->cmn = 0;
 	sector->sh = 0;
 	sector->rh = 0;
+	sector->local_intersection = 0;
 	sector->next = NULL;
 	return (sector);
 }

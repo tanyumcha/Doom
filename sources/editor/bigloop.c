@@ -6,7 +6,7 @@
 /*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 11:26:54 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/24 13:15:55 by djast            ###   ########.fr       */
+/*   Updated: 2019/11/24 15:03:19 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,14 +123,13 @@ void	big_loop(t_sdl *sdl)
 				delete_last_command(sdl);
 			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_r ==
 					sdl->window_event.key.keysym.sym && sdl->is_input == 0)
-				reset(sdl);//, &(sdl->sectors), sdl->player, sdl->sprites);å
+				reset(sdl);
 			else if (sdl->window_event.type == SDL_MOUSEBUTTONDOWN &&
 					sdl->window_event.button.button == SDL_BUTTON_LEFT)
 			{
 				sdl->is_input = 0;
 				clicks0(sdl);
 			}
-			// load_click(sdl);
 			draw(sdl);
 		}
 	}
