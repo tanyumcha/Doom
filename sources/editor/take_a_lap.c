@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:46:30 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/23 16:04:09 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/24 15:29:55 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,16 +31,8 @@ void	save_wall(t_sector *sector, int i)
 		sector->walls[i - 1].x2 = sector->point[i].x;
 		sector->walls[i - 1].y2 = sector->point[i].y;
 		sector->walls[i - 1].wall_id = i - 1;
-		sector->walls[i - 1].portal = - 1;
+		sector->walls[i - 1].portal = -1;
 		sector->num_of_walls = sector->walls[i - 1].wall_id + 1;
-
-
-		// x3 = sdl->gried_field[i].x;
-		// y3 = sdl->gried_field[i].y;
-
-		// if ((x3 - x1) * (y2 - y1) - (y3 - y1) * (x2 - x1) == 0)
-		// 	if (((x3 > x1 && x3 < x2) || (x3 < x1 && x3 > x2)) ||
-		// 		((y3 > y1 && y3 < y2) || (y3 < y1 && y3 > y2)))
 
 		// printf("x1 = %d\n", cur_wall->x1);
 		// printf("y1 = %d\n", cur_wall->y1);
@@ -80,6 +72,7 @@ int		dot_in_used(t_sector *sector, int x, int y)
 void	make_wall(t_sdl *sdl)
 {
 	int			i;
+	int			j;
 	t_sector	*sector;
 
 	sector = get_last_sector(sdl->sectors);
@@ -94,17 +87,28 @@ void	make_wall(t_sdl *sdl)
 		if ((i = check_the_grid(sdl->grid_field, sdl->mouse_position.x, sdl->mouse_position.y)) >= 0)
 		{
 			if (sector->size == 0) // для первой точки
+				add_point(sdl, &sector, i);
+			else if (sector->size > 0 && dot_in_used(sector, sdl->grid_field[i].x, sdl->grid_field[i].y) == 0) // для всех, кроме первой и последней точки
 			{
+				cut_the_rope(sdl, sector, i); //ДЕЛЕНИЕ НА ОТРЕЗКИ
+				// i = cut_the_rope(sdl, sector, i); //ДЕЛЕНИЕ НА ОТРЕЗКИ
 				add_point(sdl, &sector, i);
 			}
-			else if (sector->size > 0 && dot_in_used(sector, sdl->grid_field[i].x, sdl->grid_field[i].y) == 0) // для всех, кроме первой и последней точки
-				add_point(sdl, &sector, i);
 			else if (sector->size > 2 && ((sdl->mouse_position.x >= sector->point[0].x - POINT_SIZE / 2 && //Для последней точки
 					sdl->mouse_position.x <= sector->point[0].x + POINT_SIZE / 2) &&
 					(sdl->mouse_position.y >= sector->point[0].y - POINT_SIZE / 2 &&
 					sdl->mouse_position.y <= sector->point[0].y + POINT_SIZE / 2)))
 			{
+				cut_the_rope(sdl, sector, i); //ДЕЛЕНИЕ НА ОТРЕЗКИ
 				add_point(sdl, &sector, i);
+				j = 0;
+				while (j < sector->size)
+				{
+					// printf("x = (%d; %d)\n", sector->point[j].x, sector->point[j].y);
+					printf("wall[%d]_point1 = (%d; %d)\n", j, sector->walls[j].x1, sector->walls[j].y1);
+					printf("wall[%d]_point2 = (%d; %d)\n", j, sector->walls[j].x2, sector->walls[j].y2);
+					j++;
+				}
 				sector->num_of_sector = sdl->count;
 				sector->next = init_sector();
 				sector = sector->next;

@@ -6,20 +6,21 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:48:45 by djast             #+#    #+#             */
-/*   Updated: 2019/11/23 17:22:27 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/24 10:59:30 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-void		write_world(t_sdl *sdl, int fd) // лишнее считает
+void		write_world(t_sdl *sdl, int fd)
 {
 	// int		sector_count;
 	char	*sectors;
 	int		i;
 
 	write(fd, "world:	1	", 9);
-	// sector_count = get_sector_count(sdl->sectors);
+	// sector_count = get_sector_count(sdl->sectors); // считает лишнее
+
 	// sectors = ft_itoa(sector_count);
 	sectors = ft_itoa(sdl->count);
 	write(fd, sectors, ft_strlen(sectors));
@@ -158,8 +159,8 @@ void		write_objects(t_sdl *sdl, int fd)
 
 			write_to_file(fd, char_id, cur_sector->walls[i].portal);
 			write(fd, "	", 1);
-			if (cur_sector->walls[i].portal == 1)
-				write(fd, "	1	1	null	flooring	ceiling	", 27); // НЕ РАБОТАЕТ
+			if (cur_sector->walls[i].portal > -1)
+				write(fd, "	1	1	null		flooring	ceiling	", 28);
 			else
 				write(fd, "	0	1	q_bricks_2	flooring	ceiling	", 33);
 			write_to_file(fd, char_id, id);
@@ -195,7 +196,6 @@ void		write_sectors(t_sdl *sdl, int fd)
 		i = 0;
 		write(fd, "sector: ", 8);
 		write_to_file(fd, char_id, cur_sector->num_of_sector);
-		printf("AAAAAAAAAAAAAAAA %d\n", cur_sector->num_of_sector);
 		// char_id = ft_itoa(cur_sector->num_of_sector);
 		// write(fd, char_id, ft_strlen(char_id));
 		// free(char_id);

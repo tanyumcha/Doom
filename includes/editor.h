@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/11/23 15:42:00 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/24 15:08:17 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -231,7 +231,9 @@ t_sprite					*init_sprite();
 void						big_loop(t_sdl *sdl);
 void						clicks3(t_sdl *sdl);
 void						save_the_grid(t_point *grid_field, SDL_Rect	grid);
+void						add_point(t_sdl *sdl, t_sector **sector, int i);
 void						make_wall(t_sdl *sdl);
+void						cut_the_rope(t_sdl *sdl, t_sector *sector, int i);
 int							check_the_grid(t_point *grid_field, int x, int y);
 void						redraw(t_sdl *sdl);
 void						draw_sidebar(t_sdl *sdl);
@@ -260,12 +262,11 @@ void						choose_sprite_color(t_sdl *sdl, t_sprite *sprites);
 void						draw_a_sector(t_sdl *sdl, t_sector *sector, int i);
 void						draw_a_point(t_sdl *sdl, t_point *point, int i);
 void						delete_player(t_point *player);
-void						remove_last_point(t_sector **head);
 void						reset(t_sdl *sdl);
 void						delete_last_command(t_sdl *sdl);
 void						delete_point(t_sector *sector);
 void						remove_last_sprite(t_sprite **sprites);
-void						remove_last_point(t_sector **head);
+void						remove_last_point(t_sdl *sdl, t_sector **head);
 void						add_command(t_sdl *sdl, t_commands **commands, int type);
 t_sector					*get_last_sector(t_sector *head);
 t_sprite					*find_last_sprite(t_sprite *sprites);
@@ -275,7 +276,8 @@ void						choose_type_of_point(t_sector **stuffbox, int type);
 void						make_player_or_sprite(t_sdl *sdl);
 int							check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2);
 void						find_portals(t_sdl *sdl);
-void						check_the_touch(t_walls *walls, t_sector *head);
+void						check_the_touch(t_sector *cur_sector, int i, t_sector *head);
+// void						check_the_touch(t_walls *walls, t_sector *head);
 void						set_sprite(t_sdl *sdl, int x, int y);
 void						load_click(t_sdl *sdl);
 int							bigscarycondition(t_sdl *sdl);

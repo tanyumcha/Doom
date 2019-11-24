@@ -6,7 +6,7 @@
 #    By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/15 17:18:06 by djast             #+#    #+#              #
-#    Updated: 2019/11/21 14:53:50 by eharrag-         ###   ########.fr        #
+#    Updated: 2019/11/24 12:13:47 by eharrag-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,6 +50,7 @@ EDITOR_FILES =	editor.c \
 				bigloop.c \
 				clicks.c \
 				take_a_lap.c \
+				cut_the_rope.c \
 				remover.c \
 				reset.c \
 				put_stuff.c \
