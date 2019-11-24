@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_sidebar.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 12:31:52 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/14 14:49:28 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/24 11:43:30 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ void	draw_buttons_on_sidebar(t_sdl *sdl)
 	jetpack_button(sdl, button);
 	wall_button(sdl, button);
 	save_button(sdl, button);
-	load_button(sdl, button);
+	status_text(sdl, button);
+	// load_button(sdl, button);
 	free(button);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_to_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:48:45 by djast             #+#    #+#             */
-/*   Updated: 2019/11/22 14:23:14 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/23 11:03:24 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,6 +144,7 @@ void		write_objects(t_sdl *sdl, int fd)
 	while (cur_sector != NULL)
 	{
 		i = 0;
+		cur_sector->total_num_of_obj = 0;
 		while (i < cur_sector->size - 1)
 		{
 			write(fd, "object:	", 8);
@@ -154,13 +155,13 @@ void		write_objects(t_sdl *sdl, int fd)
 
 			// с каким сектором касание
 			//СЕГА ГА ГА ГА
-			write(fd, "	", 2);
-			if(i > 0)
-			{
-				printf("Portal-la-la-la %D\n", sdl->walls->portal);
-				write_to_file(fd, char_id, sdl->walls->portal);
-			}
-			cur_wall = cur_wall->next;
+			write(fd, "	-1", 4);
+			// if(i > 0)
+			// {
+			// 	printf("Portal-la-la-la %D\n", sdl->walls->portal);
+			// 	write_to_file(fd, char_id, sdl->walls->portal);
+			// }
+			// cur_wall = cur_wall->next;
 
 			write(fd, "	0	1	floor_wall	ceil_wall	1	", 29);
 			write_to_file(fd, char_id, id);

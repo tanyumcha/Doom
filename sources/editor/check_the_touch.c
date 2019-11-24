@@ -19,10 +19,10 @@ int		point_on_segment(t_walls *cur_wall)
 		(cur_wall->x1 - cur_wall->neighbour_x1) * (cur_wall->neighbour_y2 - cur_wall->neighbour_y1) - (cur_wall->y1 - cur_wall->neighbour_y1) * (cur_wall->neighbour_x2 - cur_wall->neighbour_x1) == 0 &&
 		(cur_wall->x2 - cur_wall->neighbour_x1) * (cur_wall->neighbour_y2 - cur_wall->neighbour_y1) - (cur_wall->y2 - cur_wall->neighbour_y1) * (cur_wall->neighbour_x2 - cur_wall->neighbour_x1) == 0)
 	{
-		if (((cur_wall->neighbour_x1 >= cur_wall->x1 && cur_wall->neighbour_x1 <= cur_wall->x2) || (cur_wall->neighbour_x1 <= cur_wall->x1 && cur_wall->neighbour_x1 >= cur_wall->x2)) ||
-				((cur_wall->neighbour_x2 >= cur_wall->x1 && cur_wall->neighbour_x2 <= cur_wall->x2) || (cur_wall->neighbour_x2 <= cur_wall->x1 && cur_wall->neighbour_x2 >= cur_wall->x2)) ||
-				((cur_wall->x1 >= cur_wall->neighbour_x1 && cur_wall->x1 <= cur_wall->neighbour_x2) || (cur_wall->x1 <= cur_wall->neighbour_x1 && cur_wall->x1 >= cur_wall->neighbour_x2)) ||
-				((cur_wall->x2 >= cur_wall->neighbour_x1 && cur_wall->x2 <= cur_wall->neighbour_x2) || (cur_wall->x2 <= cur_wall->neighbour_x1 && cur_wall->x2 >= cur_wall->neighbour_x2)))
+		if (((cur_wall->neighbour_x1 > cur_wall->x1 && cur_wall->neighbour_x1 < cur_wall->x2) || (cur_wall->neighbour_x1 < cur_wall->x1 && cur_wall->neighbour_x1 > cur_wall->x2)) ||
+				((cur_wall->neighbour_x2 > cur_wall->x1 && cur_wall->neighbour_x2 < cur_wall->x2) || (cur_wall->neighbour_x2 < cur_wall->x1 && cur_wall->neighbour_x2 > cur_wall->x2)) ||
+				((cur_wall->x1 > cur_wall->neighbour_x1 && cur_wall->x1 < cur_wall->neighbour_x2) || (cur_wall->x1 < cur_wall->neighbour_x1 && cur_wall->x1 > cur_wall->neighbour_x2)) ||
+				((cur_wall->x2 > cur_wall->neighbour_x1 && cur_wall->x2 < cur_wall->neighbour_x2) || (cur_wall->x2 < cur_wall->neighbour_x1 && cur_wall->x2 > cur_wall->neighbour_x2)))
 			return (1);
 	}
 	return (0);
@@ -86,7 +86,7 @@ void	check_the_touch(t_walls *cur_wall, t_sector *head)
 // {
 // 	if ((x - x1) * (y2 - y1) - (y - y1) * (x2 - x1) == 0)
 // 	{
-// 		if ((x >= x1 && x <= x2) || (x <= x1 && x >= x2))
+// 		if ((x > x1 && x < x2) || (x < x1 && x > x2))
 // 			return (1);
 // 	}
 // 	return (0);

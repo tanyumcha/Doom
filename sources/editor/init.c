@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:27:00 by djast             #+#    #+#             */
-/*   Updated: 2019/11/22 13:16:36 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/24 12:14:44 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,8 @@ void		init_sdl(t_sdl *sdl)
 	sdl->sprites = NULL;
 	sdl->sprite_in_sector = 0;
 	sdl->count = -1;
+	sdl->status_code = 1;
+	sdl->is_input = 0;
 	sdl->map_name = init_input_field(INPUT_FIELD_X1, INPUT_FIELD_Y1,
 									INPUT_FIELD_X2, INPUT_FIELD_Y2);
 	init_player(sdl);

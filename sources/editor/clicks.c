@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clicks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 09:30:55 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/15 11:51:35 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/24 12:01:04 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ void	clicks6(t_sdl *sdl)
 		sdl->button_pushed = JETPACK_PUSH;
 		printf("Jetpack\n");
 	}
+	else
+		input_field_click(sdl);
 }
 
 void	clicks5(t_sdl *sdl)

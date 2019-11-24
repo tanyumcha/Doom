@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_input_field.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/05 11:20:10 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/11 15:20:39 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/24 12:15:10 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,3 +41,13 @@ void		input_field(t_sdl *sdl)
 		draw_text(sdl, sdl->map_name->text, *field, *color_text);
 	free(field);
 }
+
+void		input_field_click(t_sdl *sdl)
+{
+	if ((sdl->mouse_position.x > INPUT_FIELD_X1 &&
+			sdl->mouse_position.x < INPUT_FIELD_X2) &&
+			(sdl->mouse_position.y > INPUT_FIELD_Y1 &&
+			sdl->mouse_position.y < INPUT_FIELD_Y2))
+		sdl->is_input = 1;
+}
+

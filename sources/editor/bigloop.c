@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bigloop.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 11:26:54 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/22 14:09:58 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/24 13:15:55 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,15 @@ void	textinput(t_sdl *sdl)
 	}
 }
 
+void	delete_one_symbol(t_sdl *sdl)
+{
+	if (sdl->map_name->text_size > 0)
+	{
+		sdl->map_name->text_size--;
+		sdl->map_name->text[sdl->map_name->text_size] = '\0';
+	}
+}
+
 void	big_loop(t_sdl *sdl)
 {
 	while (1)
@@ -101,20 +110,26 @@ void	big_loop(t_sdl *sdl)
 				exit(0);
 			else if (bigscarycondition(sdl) == 1)
 				save_click(sdl);
-			else if (sdl->window_event.type == SDL_TEXTINPUT)
+			else if (sdl->window_event.type == SDL_KEYDOWN && sdl->is_input == 1 && SDLK_BACKSPACE ==
+					sdl->window_event.key.keysym.sym)
+				delete_one_symbol(sdl);
+			else if (sdl->window_event.type == SDL_TEXTINPUT && sdl->is_input == 1)
 				textinput(sdl);
 			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_ESCAPE ==
 					sdl->window_event.key.keysym.sym)
 				exit(0);
 			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_BACKSPACE ==
-					sdl->window_event.key.keysym.sym)
+					sdl->window_event.key.keysym.sym && sdl->is_input == 0)
 				delete_last_command(sdl);
 			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_r ==
-					sdl->window_event.key.keysym.sym)
+					sdl->window_event.key.keysym.sym && sdl->is_input == 0)
 				reset(sdl);//, &(sdl->sectors), sdl->player, sdl->sprites);å
 			else if (sdl->window_event.type == SDL_MOUSEBUTTONDOWN &&
 					sdl->window_event.button.button == SDL_BUTTON_LEFT)
+			{
+				sdl->is_input = 0;
 				clicks0(sdl);
+			}
 			// load_click(sdl);
 			draw(sdl);
 		}

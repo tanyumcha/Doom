@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/11/22 14:07:10 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/24 12:14:32 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,11 @@
 # define GRID_SIZE_Y 20
 # define XO 0
 # define YO 0
+
+# define CODE_ALREADY_EXIST -1
+# define CODE_OK 0
+# define CODE_NO_FILENAME -2
+# define CODE_NO_PLAYER -3
 
 # define COLOR_UNPUSHED 0
 # define COLOR_PUSHED 1
@@ -122,10 +127,10 @@
 # define BUTTON_SAVE_X2 BUTTON_PLAYER_X2
 # define BUTTON_SAVE_Y2 BUTTON_SAVE_Y1 + SIZE_WIN_Y * 0.05
 
-# define BUTTON_LOAD_X1 BUTTON_PLAYER_X1
-# define BUTTON_LOAD_Y1 BUTTON_PLAYER_Y1 * 16
-# define BUTTON_LOAD_X2 BUTTON_PLAYER_X2
-# define BUTTON_LOAD_Y2 BUTTON_LOAD_Y1 + SIZE_WIN_Y * 0.05
+# define BUTTON_STATUS_X1 BUTTON_PLAYER_X1
+# define BUTTON_STATUS_Y1 BUTTON_PLAYER_Y1 * 16
+# define BUTTON_STATUS_X2 BUTTON_PLAYER_X2
+# define BUTTON_STATUS_Y2 BUTTON_STATUS_Y1 + SIZE_WIN_Y * 0.05
 
 # define INPUT_FIELD_X1 BUTTON_PLAYER_X1
 # define INPUT_FIELD_Y1 BUTTON_PLAYER_Y1 * 14.5
@@ -225,6 +230,8 @@ typedef struct				s_sdl
 	int						type_pressed;
 	int						count;
 	int						sprite_in_sector;
+	int						status_code;
+	int						is_input;
 	struct s_point			grid_field[GRID_SIZE];
 	struct s_sector			*sectors;
 	struct s_walls			*walls;
@@ -242,6 +249,7 @@ void						init_player(t_sdl *sdl);
 t_sprite					*init_sprite();
 void						big_loop(t_sdl *sdl);
 void						clicks3(t_sdl *sdl);
+void						input_field_click(t_sdl *sdl);
 void						save_the_grid(t_point *grid_field, SDL_Rect	grid);
 void						make_wall(t_sdl *sdl);
 int							check_the_grid(t_point *grid_field, int x, int y);
@@ -262,7 +270,8 @@ void						jetpack_button(t_sdl *sdl, SDL_Rect *button);
 void						wall_button(t_sdl *sdl, SDL_Rect *button);
 void						input_field(t_sdl *sdl);
 void						save_button(t_sdl *sdl, SDL_Rect *button);
-void						load_button(t_sdl *sdl, SDL_Rect *button);
+// void						load_button(t_sdl *sdl, SDL_Rect *button);
+void						status_text(t_sdl *sdl, SDL_Rect *button);
 void						draw_button(t_sdl *sdl, SDL_Rect button, char *text, int color);
 void						draw_headline(t_sdl *sdl);
 void						draw_text(t_sdl *sdl, char *text, SDL_Rect button, SDL_Color color);
@@ -288,10 +297,10 @@ void						make_player_or_sprite(t_sdl *sdl);
 int							check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2);
 void						check_the_touch(t_walls *walls, t_sector *head);
 void						set_sprite(t_sdl *sdl, int x, int y);
-void						load_click(t_sdl *sdl);
+// void						load_click(t_sdl *sdl);
 int							bigscarycondition(t_sdl *sdl);
 void						save_click(t_sdl *sdl);
-void						save_map(t_sdl *sdl, char *map_name);
+int							save_map(t_sdl *sdl, char *map_name);
 void						write_world(t_sdl *sdl, int fd);
 int							get_sector_count(t_sector *sect);
 int							write_vertexes_wall(t_sdl *sdl, int fd);
