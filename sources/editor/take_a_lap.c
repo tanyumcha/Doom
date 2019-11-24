@@ -6,7 +6,7 @@
 /*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:46:30 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/24 16:06:09 by djast            ###   ########.fr       */
+/*   Updated: 2019/11/24 16:23:35 by djast            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,15 @@ int		dot_in_used(t_sector *sector, int x, int y)
 	return (0);
 }
 
+int		is_inside_sector(t_sdl *sdl, int x, int y)
+{
+	(void) sdl;
+	(void) x;
+	(void) y;
+	return (0);
+}
+
+
 void	make_wall(t_sdl *sdl)
 {
 	int			i;
@@ -109,38 +118,40 @@ void	make_wall(t_sdl *sdl)
 				walls->neighbour_x1 = sdl->grid_field[i].x;
 				walls->neighbour_y1 = sdl->grid_field[i].y;
 			}
-			printf("%d\n", check_local_intersection(sdl, sector, walls));
-			if (sector->size == 0) // для первой точки
+			if (is_inside_sector(sdl, sdl->grid_field[i].x, sdl->grid_field[i].y) == 0)
 			{
-				add_point(sdl, &sector, i);
-				sdl->count++;
-				sector->num_of_sector = sdl->count;
-			}
-			else if (sector->size > 0 && dot_in_used(sector, sdl->grid_field[i].x, sdl->grid_field[i].y) == 0 && check_local_intersection(sdl, sector, walls) < 2) // для всех, кроме первой и последней точки
-			{
-				if (sector->size > 1)
+				if (sector->size == 0) // для первой точки
 				{
-					if (is_clockwise(walls))
+					add_point(sdl, &sector, i);
+					sdl->count++;
+					sector->num_of_sector = sdl->count;
+				}
+				else if (sector->size > 0 && dot_in_used(sector, sdl->grid_field[i].x, sdl->grid_field[i].y) == 0 && check_local_intersection(sdl, sector, walls) < 2) // для всех, кроме первой и последней точки
+				{
+					if (sector->size > 1)
+					{
+						if (is_clockwise(walls))
+							add_point(sdl, &sector, i);
+					}
+					else
 						add_point(sdl, &sector, i);
 				}
-				else
-					add_point(sdl, &sector, i);
-			}
-			else if (sector->size > 2 && ((sdl->mouse_position.x >= sector->point[0].x - POINT_SIZE / 2 && //Для последней точки
-					sdl->mouse_position.x <= sector->point[0].x + POINT_SIZE / 2) &&
-					(sdl->mouse_position.y >= sector->point[0].y - POINT_SIZE / 2 &&
-					sdl->mouse_position.y <= sector->point[0].y + POINT_SIZE / 2)))
-			{
-				if (check_local_intersection(sdl, sector, walls) < 3)
+				else if (sector->size > 2 && ((sdl->mouse_position.x >= sector->point[0].x - POINT_SIZE / 2 && //Для последней точки
+						sdl->mouse_position.x <= sector->point[0].x + POINT_SIZE / 2) &&
+						(sdl->mouse_position.y >= sector->point[0].y - POINT_SIZE / 2 &&
+						sdl->mouse_position.y <= sector->point[0].y + POINT_SIZE / 2)))
 				{
-					sector->local_intersection = 0;
-					add_point(sdl, &sector, i);
-	//				sector->num_of_sector = sdl->count;
-					// printf("Portal is: %d", sector->neighbour);
-					sector->next = init_sector();
-					sector = sector->next;
-	//				sdl->count++;
-					printf("SAVE\n");
+					if (check_local_intersection(sdl, sector, walls) < 3)
+					{
+						sector->local_intersection = 0;
+						add_point(sdl, &sector, i);
+						// sector->num_of_sector = sdl->count;
+						// printf("Portal is: %d", sector->neighbour);
+						sector->next = init_sector();
+						sector = sector->next;
+						// sdl->count++;
+						printf("SAVE\n");
+					}
 				}
 			}
 		}
