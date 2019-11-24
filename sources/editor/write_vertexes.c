@@ -6,18 +6,11 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 16:19:28 by djast             #+#    #+#             */
-/*   Updated: 2019/11/20 12:40:41 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/24 10:58:33 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
-
-void		write_to_file(int fd, char *data, int numdata)
-{
-	data = ft_itoa(numdata);
-	write(fd, data, ft_strlen(data));
-	free(data);
-}
 
 int			write_vertexes_wall(t_sdl *sdl, int fd)
 {
@@ -97,5 +90,5 @@ void		write_vertexes_sprite(t_sdl *sdl, int fd, int last_id)
 		write(fd, "\n", 1);
 		cur_sprite = cur_sprite->next;
 	}
-	write(fd, "\n\n", 3);
+	write(fd, "\n\n", 2);
 }

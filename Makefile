@@ -50,6 +50,7 @@ EDITOR_FILES =	editor.c \
 				bigloop.c \
 				clicks.c \
 				take_a_lap.c \
+				cut_the_rope.c \
 				remover.c \
 				reset.c \
 				put_stuff.c \

@@ -12,45 +12,35 @@
 
 #include "editor.h"
 
-t_walls	*find_last_wall(t_walls *wall)
-{
-	if (wall == NULL)
-		return (NULL);
-	while (wall->next != NULL)
-		wall = wall->next;
-	return (wall);
-}
+// t_walls	*find_last_wall(t_walls *wall)
+// {
+// 	if (wall == NULL)
+// 		return (NULL);
+// 	while (wall->next != NULL)
+// 		wall = wall->next;
+// 	return (wall);
+// }
 
-void	save_wall(t_sdl *sdl, t_walls *walls, t_sector *sector, int i)
+void	save_wall(t_sector *sector, int i)
+// void	save_wall(t_sector *head, t_sector *sector, int i)
 {
-	t_walls	*cur_wall;
-
-	cur_wall = find_last_wall(walls);
 	if (i > 0)//сохраняем стену, с момента проставления второй точки сектора
 	{
-		if (cur_wall == NULL)
-		{
-			walls = init_wall();
-			cur_wall = walls;
-		}
-		else
-		{
-			cur_wall->next = init_wall();
-			cur_wall = cur_wall->next;
-		}
-		cur_wall->x1 = sector->point[i - 1].x;
-		cur_wall->y1 = sector->point[i - 1].y;
-		cur_wall->x2 = sector->point[i].x;
-		cur_wall->y2 = sector->point[i].y;
-		cur_wall->wall_id = i - 1;
+		sector->walls[i - 1].x1 = sector->point[i - 1].x;
+		sector->walls[i - 1].y1 = sector->point[i - 1].y;
+		sector->walls[i - 1].x2 = sector->point[i].x;
+		sector->walls[i - 1].y2 = sector->point[i].y;
+		sector->walls[i - 1].wall_id = i - 1;
+		sector->walls[i - 1].portal = -1;
+		sector->num_of_walls = sector->walls[i - 1].wall_id + 1;
 
 		// printf("x1 = %d\n", cur_wall->x1);
 		// printf("y1 = %d\n", cur_wall->y1);
 		// printf("x2 = %d\n", cur_wall->x2);
 		// printf("y2 = %d\n", cur_wall->y2);
 		// printf("wall id = %d\n", cur_wall->wall_id);
-		if (sector->num_of_sector > 0)
-			check_the_touch(cur_wall, sdl->sectors);// проверка начинается со второй точки второго сектора
+		// if (sector->num_of_sector > 0)
+		// 	check_the_touch(&sector->walls[i - 1], head);// проверка начинается со второй точки второго сектора
 	}
 }
 
@@ -59,11 +49,8 @@ void	add_point(t_sdl *sdl, t_sector **sector, int i)
 	(*sector)->point[(*sector)->size].x = sdl->grid_field[i].x;
 	(*sector)->point[(*sector)->size].y = sdl->grid_field[i].y;
 	if ((*sector)->size > 0)
-	{
-		save_wall(sdl, sdl->walls, (*sector), (*sector)->size);//сохраняем стену
-		// if ((*sector)->num_of_sector > 0)
-		// 	check_the_touch(sdl->sectors, (*sector), (*sector)->size);// проверка начинается со второй точки второго сектора
-	}
+		save_wall((*sector), (*sector)->size);//сохраняем стену
+		// save_wall(sdl->sectors, (*sector), (*sector)->size);//сохраняем стену
 	(*sector)->size++;
 	add_command(sdl, &(sdl->commands), WALL_TYPE);
 }
@@ -94,6 +81,7 @@ int		is_inside_sector(t_sdl *sdl, int x, int y)
 void	make_wall(t_sdl *sdl)
 {
 	int			i;
+	int			j;
 	t_sector	*sector;
 	t_walls		*walls;
 
@@ -123,11 +111,10 @@ void	make_wall(t_sdl *sdl)
 				if (sector->size == 0) // для первой точки
 				{
 					add_point(sdl, &sector, i);
-					sdl->count++;
-					sector->num_of_sector = sdl->count;
 				}
 				else if (sector->size > 0 && dot_in_used(sector, sdl->grid_field[i].x, sdl->grid_field[i].y) == 0 && check_local_intersection(sdl, sector, walls) < 2) // для всех, кроме первой и последней точки
 				{
+				cut_the_rope(sdl, sector, i); //ДЕЛЕНИЕ НА ОТРЕЗКИ
 					if (sector->size > 1)
 					{
 						if (is_clockwise(walls))
@@ -136,23 +123,28 @@ void	make_wall(t_sdl *sdl)
 					else
 						add_point(sdl, &sector, i);
 				}
-				else if (sector->size > 2 && ((sdl->mouse_position.x >= sector->point[0].x - POINT_SIZE / 2 && //Для последней точки
-						sdl->mouse_position.x <= sector->point[0].x + POINT_SIZE / 2) &&
-						(sdl->mouse_position.y >= sector->point[0].y - POINT_SIZE / 2 &&
-						sdl->mouse_position.y <= sector->point[0].y + POINT_SIZE / 2)))
-				{
+			else if (sector->size > 2 && ((sdl->mouse_position.x >= sector->point[0].x - POINT_SIZE / 2 && //Для последней точки
+					sdl->mouse_position.x <= sector->point[0].x + POINT_SIZE / 2) &&
+					(sdl->mouse_position.y >= sector->point[0].y - POINT_SIZE / 2 &&
+					sdl->mouse_position.y <= sector->point[0].y + POINT_SIZE / 2)))
+			{
 					if (check_local_intersection(sdl, sector, walls) < 3)
 					{
-						sector->local_intersection = 0;
-						add_point(sdl, &sector, i);
-						// sector->num_of_sector = sdl->count;
-						// printf("Portal is: %d", sector->neighbour);
-						sector->next = init_sector();
-						sector = sector->next;
-						// sdl->count++;
-						printf("SAVE\n");
-					}
+				cut_the_rope(sdl, sector, i); //ДЕЛЕНИЕ НА ОТРЕЗКИ
+				add_point(sdl, &sector, i);
+				j = 0;
+				while (j < sector->size)
+				{
+					// printf("x = (%d; %d)\n", sector->point[j].x, sector->point[j].y);
+					printf("wall[%d]_point1 = (%d; %d)\n", j, sector->walls[j].x1, sector->walls[j].y1);
+					printf("wall[%d]_point2 = (%d; %d)\n", j, sector->walls[j].x2, sector->walls[j].y2);
+					j++;
 				}
+				sector->num_of_sector = sdl->count;
+				sector->next = init_sector();
+				sector = sector->next;
+				sdl->count++;
+				printf("SAVE\n");
 			}
 		}
 	}

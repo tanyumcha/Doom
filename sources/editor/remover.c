@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:39:39 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/20 15:10:54 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/24 10:40:28 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	remove_last_sprite(t_sprite **sprites)
 	}
 }
 
-void	remove_last_point(t_sector **head)
+void	remove_last_point(t_sdl *sdl, t_sector **head)
 {
 	t_sector *cur_sector;
 	t_sector *prev_sector;
@@ -74,6 +74,7 @@ void	remove_last_point(t_sector **head)
 	{
 		prev_sector->next = NULL;
 		free(cur_sector);
+		sdl->count--;
 		delete_point(prev_sector);
 	}
 }

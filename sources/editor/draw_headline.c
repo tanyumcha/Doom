@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 14:23:36 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/10/21 14:52:47 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/24 11:00:31 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,6 @@ void	draw_headline(t_sdl *sdl)
 	bottomline.w = (int)SIZE_WIN_X * 0.8 - headline.x * 2;
 	bottomline.h = headline.h;
 	draw_text(sdl,
-		" Remove player - DELETE                  Full reset - R",
+		" Full reset - DELETE                  Have fun!",
 		bottomline, *(create_sdl_color(204, 153, 255, 255)));
 }

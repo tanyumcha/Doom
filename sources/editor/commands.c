@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 15:25:23 by djast             #+#    #+#             */
-/*   Updated: 2019/11/20 15:11:48 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/24 10:38:37 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	delete_last_command(t_sdl *sdl)
 	type = tmp->type;
 	free(tmp);
 	if (type == WALL_TYPE)
-		remove_last_point(&(sdl->sectors));
+		remove_last_point(sdl, &(sdl->sectors));
 	if (type == PLAYER_TYPE)
 		delete_player(sdl->player);
 	if (type == SPRITE_TYPE)

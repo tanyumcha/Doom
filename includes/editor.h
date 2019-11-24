@@ -160,9 +160,7 @@ typedef struct				s_point
 
 typedef struct				s_walls
 {
-	// t_polygone				polies_array[1];
 	int						portal;
-	// int						passble;
 	int						wall_id;
 	int						x1;
 	int						y1;
@@ -172,23 +170,13 @@ typedef struct				s_walls
 	int						neighbour_y1;
 	int						neighbour_x2;
 	int						neighbour_y2;
-	// int						polies_count;
-	// int						visible;
-	// int						status;
-	// t_wallobj				particles[128];
-	// int 					wallobjects_num;
-	// t_wallobj				*stuff;
-	// t_wobj					*wallobjects_array;
-	// t_image					*floor_wall_texture;
-	// int 					floor_wall_spread;
-	// t_image					*ceil_wall_texture;
-	// int 					ceil_wall_spread;
 	struct s_walls			*next;
 }							t_walls;
 
 typedef struct				s_sector
 {
-	t_point					point[100];
+	t_point					point[1000];
+	t_walls					walls[1000];
 	int						size;
 	int						num_of_sector;
 	int						type_of_point;
@@ -196,6 +184,7 @@ typedef struct				s_sector
 	double					rh;
 	double					sh;
 	int						z;
+	int						num_of_walls;
 	int						total_num_of_obj;
 	int						local_intersection;
 	struct s_sector			*next;
@@ -235,7 +224,6 @@ typedef struct				s_sdl
 	int						is_input;
 	struct s_point			grid_field[GRID_SIZE];
 	struct s_sector			*sectors;
-	struct s_walls			*walls;
 	struct s_commands		*commands;
 	struct s_point			*player;
 	struct s_sprite			*sprites;
@@ -252,7 +240,9 @@ void						big_loop(t_sdl *sdl);
 void						clicks3(t_sdl *sdl);
 void						input_field_click(t_sdl *sdl);
 void						save_the_grid(t_point *grid_field, SDL_Rect	grid);
+void						add_point(t_sdl *sdl, t_sector **sector, int i);
 void						make_wall(t_sdl *sdl);
+void						cut_the_rope(t_sdl *sdl, t_sector *sector, int i);
 int							check_the_grid(t_point *grid_field, int x, int y);
 void						redraw(t_sdl *sdl);
 void						draw_sidebar(t_sdl *sdl);
@@ -282,12 +272,11 @@ void						choose_sprite_color(t_sdl *sdl, t_sprite *sprites);
 void						draw_a_sector(t_sdl *sdl, t_sector *sector, int i);
 void						draw_a_point(t_sdl *sdl, t_point *point, int i);
 void						delete_player(t_point *player);
-void						remove_last_point(t_sector **head);
 void						reset(t_sdl *sdl);
 void						delete_last_command(t_sdl *sdl);
 void						delete_point(t_sector *sector);
 void						remove_last_sprite(t_sprite **sprites);
-void						remove_last_point(t_sector **head);
+void						remove_last_point(t_sdl *sdl, t_sector **head);
 void						add_command(t_sdl *sdl, t_commands **commands, int type);
 t_sector					*get_last_sector(t_sector *head);
 t_sprite					*find_last_sprite(t_sprite *sprites);
@@ -296,7 +285,9 @@ char						*cut_the_end(char *text);
 void						choose_type_of_point(t_sector **stuffbox, int type);
 void						make_player_or_sprite(t_sdl *sdl);
 int							check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2);
-void						check_the_touch(t_walls *walls, t_sector *head);
+void						find_portals(t_sdl *sdl);
+void						check_the_touch(t_sector *cur_sector, int i, t_sector *head);
+// void						check_the_touch(t_walls *walls, t_sector *head);
 void						set_sprite(t_sdl *sdl, int x, int y);
 // void						load_click(t_sdl *sdl);
 int							bigscarycondition(t_sdl *sdl);

@@ -40,34 +40,36 @@ t_sprite	*init_sprite(void)
 	return (sprite);
 }
 
-t_walls		*init_wall(void)
-{
-	t_walls	*wall;
+// t_walls		*init_wall(void)
+// {
+// 	t_walls	*wall;
 
-	wall = (t_walls *)malloc(sizeof(t_walls));
-	wall->portal = -1;
-	wall->wall_id = 0;
-	wall->x1 = 0;
-	wall->y1 = 0;
-	wall->x2 = 0;
-	wall->y2 = 0;
-	wall->neighbour_x1 = 0;
-	wall->neighbour_y1 = 0;
-	wall->neighbour_x2 = 0;
-	wall->neighbour_y2 = 0;
-	wall->next = NULL;
-	return (wall);
-}
+// 	wall = (t_walls *)malloc(sizeof(t_walls));
+// 	wall->portal = -1;
+// 	wall->wall_id = 0;
+// 	wall->x1 = 0;
+// 	wall->y1 = 0;
+// 	wall->x2 = 0;
+// 	wall->y2 = 0;
+// 	wall->neighbour_x1 = 0;
+// 	wall->neighbour_y1 = 0;
+// 	wall->neighbour_x2 = 0;
+// 	wall->neighbour_y2 = 0;
+// 	wall->next = NULL;
+// 	return (wall);
+// }
 
 t_sector	*init_sector(void)
 {
 	t_sector	*sector;
 
 	sector = (t_sector *)malloc(sizeof(t_sector));
-	ft_bzero(sector->point, 100);
+	ft_bzero(sector->point, 1000);
+	ft_bzero(sector->walls, 1000);
 	sector->size = 0;
 	sector->total_num_of_obj = 0;
 	sector->num_of_sector = 0;
+	sector->num_of_walls = 0;
 	sector->type_of_point = 0;
 	sector->z = 300;
 	sector->cmn = 0;
@@ -97,12 +99,11 @@ void		init_sdl(t_sdl *sdl)
 	sdl->font = TTF_OpenFont("resources/Samson.ttf", 200);
 	sdl->button_pushed = WALL_PUSH;
 	sdl->sectors = init_sector();
-	sdl->walls = NULL;
 	sdl->commands = NULL;
 	sdl->command_count = 0;
 	sdl->sprites = NULL;
 	sdl->sprite_in_sector = 0;
-	sdl->count = -1;
+	sdl->count = 0;
 	sdl->status_code = 1;
 	sdl->is_input = 0;
 	sdl->map_name = init_input_field(INPUT_FIELD_X1, INPUT_FIELD_Y1,

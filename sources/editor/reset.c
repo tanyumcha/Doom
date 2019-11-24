@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 10:48:39 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/20 15:12:03 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/23 16:08:38 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,5 @@ void	reset(t_sdl *sdl)//, t_sector **head, t_point *player, t_sprite *sprites)
 		delete_last_command(sdl);
 		sdl->command_count--;
 	}
+	sdl->count = 0;
 }

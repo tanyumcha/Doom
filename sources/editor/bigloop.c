@@ -121,9 +121,9 @@ void	big_loop(t_sdl *sdl)
 			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_BACKSPACE ==
 					sdl->window_event.key.keysym.sym && sdl->is_input == 0)
 				delete_last_command(sdl);
-			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_r ==
-					sdl->window_event.key.keysym.sym && sdl->is_input == 0)
-				reset(sdl);
+			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_DELETE ==
+					sdl->window_event.key.keysym.sym)
+				reset(sdl);//, &(sdl->sectors), sdl->player, sdl->sprites);
 			else if (sdl->window_event.type == SDL_MOUSEBUTTONDOWN &&
 					sdl->window_event.button.button == SDL_BUTTON_LEFT)
 			{

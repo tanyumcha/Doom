@@ -35,6 +35,7 @@ int		save_map(t_sdl *sdl, char *map_name)
 	int fd;
 	int last_id;
 
+	find_portals(sdl);
 	fd = create_file(map_name);
 	if (fd == -1)
 		return (0);
@@ -42,7 +43,6 @@ int		save_map(t_sdl *sdl, char *map_name)
 	write_player(sdl, fd);
 	last_id = write_vertexes_wall(sdl, fd);
 	write_vertexes_sprite(sdl, fd, last_id);
-	// write_polygone(sdl, fd);
 	write_objects(sdl, fd);
 	write_sprites(sdl, fd, last_id);
 	write_sectors(sdl, fd);
