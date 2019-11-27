@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:37:38 by djast             #+#    #+#             */
-/*   Updated: 2019/11/27 10:32:00 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/27 12:48:30 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void		save_click(t_sdl *sdl)
 	bzero(sdl->map_name->text, sizeof(char *));
 	sdl->map_name->text_size = 0;
 	sdl->status_code = CODE_OK;
-	printf("I want cookies!\n");
 }
 
 int			bigscarycondition(t_sdl *sdl)

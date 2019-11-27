@@ -6,13 +6,13 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 11:43:08 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/24 17:33:37 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/27 12:43:29 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-int		get_conditional_by_status(status, j)
+static int	get_conditional_by_status(int status, int j)
 {
 	if (status == 1)
 	{
@@ -32,25 +32,44 @@ int		get_conditional_by_status(status, j)
 }
 
 /*
- * x1 = sector->point[sector->size - 1].x;
- * y1 = sector->point[sector->size - 1].y;
- * x2 = sdl->grid_field[i].x;
- * y2 = sdl->grid_field[i].y;
- * check_x = sdl->grid_field[j].x;
- * check_y = sdl->grid_field[j].y;
- *
- * if ((check_x - x1) * (y2 - y1) - (check_y - y1) * (x2 - x1) == 0)
- * {
- * if (((check_x > x1 && check_x < x2) || (check_x < x1 && check_x > x2)) ||
- * ((check_y > y1 && check_y < y2) || (check_y < y1 && check_y > y2)))
- */
+**	x1 = sector->point[sector->size - 1].x;
+**	y1 = sector->point[sector->size - 1].y;
+**	x2 = sdl->grid_field[i].x;
+**	y2 = sdl->grid_field[i].y;
+**	check_x = sdl->grid_field[j].x;
+**	check_y = sdl->grid_field[j].y;
+**
+**	if ((check_x - x1) * (y2 - y1) - (check_y - y1) * (x2 - x1) == 0)
+**	{
+**	if (((check_x > x1 && check_x < x2) || (check_x < x1 && check_x > x2)) ||
+**	((check_y > y1 && check_y < y2) || (check_y < y1 && check_y > y2)))
+*/
 
-void	cut_the_rope(t_sdl *sdl, t_sector *sector, int i)
+int			point_on_segment(t_point *grid_field, t_point *point, int j, int i)
+{
+	if (((grid_field[j].x > point->x && grid_field[j].x < grid_field[i].x) ||
+		(grid_field[j].x < point->x && grid_field[j].x > grid_field[i].x)) ||
+		((grid_field[j].y > point->y && grid_field[j].y < grid_field[i].y) ||
+		(grid_field[j].y < point->y && grid_field[j].y > grid_field[i].y)))
+		return (1);
+	return (0);
+}
+
+int			points_on_line(t_point *grid_field, t_point *point, int j, int i)
+{
+	if ((grid_field[j].x - point->x) * (grid_field[i].y - point->y) -
+			(grid_field[j].y - point->y) * (grid_field[i].x - point->x) == 0)
+		return (1);
+	return (0);
+}
+
+void		cut_the_rope(t_sdl *sdl, t_sector *sector, int i)
 {
 	int j;
 	int status;
 
-	if (sector->point[sector->size - 1].y > sdl->grid_field[i].y || sector->point[sector->size - 1].x > sdl->grid_field[i].x)
+	if (sector->point[sector->size - 1].y > sdl->grid_field[i].y ||
+		sector->point[sector->size - 1].x > sdl->grid_field[i].x)
 	{
 		status = 1;
 		j = GRID_SIZE;
@@ -62,14 +81,11 @@ void	cut_the_rope(t_sdl *sdl, t_sector *sector, int i)
 	}
 	while (get_conditional_by_status(status, j))
 	{
-		if ((sdl->grid_field[j].x - sector->point[sector->size - 1].x) * (sdl->grid_field[i].y - sector->point[sector->size - 1].y) -
-				(sdl->grid_field[j].y - sector->point[sector->size - 1].y) * (sdl->grid_field[i].x - sector->point[sector->size - 1].x) == 0)
+		if (points_on_line(sdl->grid_field, &sector->point[sector->size - 1],
+			j, i) == 1)
 		{
-			// printf("I need your point\n");
-			if (((sdl->grid_field[j].x > sector->point[sector->size - 1].x && sdl->grid_field[j].x < sdl->grid_field[i].x) ||
-					(sdl->grid_field[j].x < sector->point[sector->size - 1].x && sdl->grid_field[j].x > sdl->grid_field[i].x)) ||
-					((sdl->grid_field[j].y > sector->point[sector->size - 1].y && sdl->grid_field[j].y < sdl->grid_field[i].y) ||
-					(sdl->grid_field[j].y < sector->point[sector->size - 1].y && sdl->grid_field[j].y > sdl->grid_field[i].y)))
+			if (point_on_segment(sdl->grid_field,
+					&sector->point[sector->size - 1], j, i) == 1)
 				add_point(sdl, &sector, j);
 		}
 		j = status == 1 ? j - 1 : j + 1;

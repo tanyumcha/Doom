@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clicks.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 09:30:55 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/24 12:01:04 by djast            ###   ########.fr       */
+/*   Updated: 2019/11/27 12:47:32 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	clicks6(t_sdl *sdl)
 	{
 		sdl->type_pressed = SPRITE_TYPE;
 		sdl->button_pushed = IMP_PUSH;
-		printf("Imp\n");
 	}
 	else if ((sdl->mouse_position.x > BUTTON_JETPACK_X1 &&
 			sdl->mouse_position.x < BUTTON_JETPACK_X2) &&
@@ -31,7 +30,6 @@ void	clicks6(t_sdl *sdl)
 	{
 		sdl->type_pressed = SPRITE_TYPE;
 		sdl->button_pushed = JETPACK_PUSH;
-		printf("Jetpack\n");
 	}
 	else
 		input_field_click(sdl);
@@ -47,7 +45,6 @@ void	clicks5(t_sdl *sdl)
 	{
 		sdl->type_pressed = SPRITE_TYPE;
 		sdl->button_pushed = AFRIT_PUSH;
-		printf("Afrit\n");
 	}
 	else if ((sdl->mouse_position.x > BUTTON_CACODEMON_X1 &&
 			sdl->mouse_position.x < BUTTON_CACODEMON_X2) &&
@@ -56,7 +53,6 @@ void	clicks5(t_sdl *sdl)
 	{
 		sdl->type_pressed = SPRITE_TYPE;
 		sdl->button_pushed = CACODEMON_PUSH;
-		printf("Cacodemon\n");
 	}
 	else
 		clicks6(sdl);
@@ -72,7 +68,6 @@ void	clicks4(t_sdl *sdl)
 	{
 		sdl->type_pressed = SPRITE_TYPE;
 		sdl->button_pushed = PLASMA_AMMO_PUSH;
-		printf("Plasma ammo\n");
 	}
 	else if ((sdl->mouse_position.x > BUTTON_BARREL_X1 &&
 			sdl->mouse_position.x < BUTTON_BARREL_X2) &&
@@ -81,7 +76,6 @@ void	clicks4(t_sdl *sdl)
 	{
 		sdl->type_pressed = SPRITE_TYPE;
 		sdl->button_pushed = BARREL_PUSH;
-		printf("Barrel\n");
 	}
 	else
 		clicks5(sdl);
@@ -97,7 +91,6 @@ void	clicks3(t_sdl *sdl)
 	{
 		sdl->type_pressed = SPRITE_TYPE;
 		sdl->button_pushed = RIFLE_AMMO_PUSH;
-		printf("Rifle ammo\n");
 	}
 	else if ((sdl->mouse_position.x > BUTTON_PLASMA_GUN_X1 &&
 			sdl->mouse_position.x < BUTTON_PLASMA_GUN_X2) &&
@@ -106,7 +99,6 @@ void	clicks3(t_sdl *sdl)
 	{
 		sdl->type_pressed = SPRITE_TYPE;
 		sdl->button_pushed = PLASMA_GUN_PUSH;
-		printf("Plasma gun\n");
 	}
 	else
 		clicks4(sdl);

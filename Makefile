@@ -6,7 +6,7 @@
 #    By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/15 17:18:06 by djast             #+#    #+#              #
-#    Updated: 2019/11/27 10:29:36 by eharrag-         ###   ########.fr        #
+#    Updated: 2019/11/27 13:59:05 by eharrag-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,6 +48,7 @@ EDITOR_FILES =	editor.c \
 				draw_grid.c \
 				init_grid.c \
 				bigloop.c \
+				events.c \
 				clicks.c \
 				take_a_lap.c \
 				cut_the_rope.c \
@@ -61,6 +62,7 @@ EDITOR_FILES =	editor.c \
 				save_map.c \
 				save_utils.c \
 				write_to_file.c \
+				write_objects.c \
 				write_vertexes.c \
 				clockwise.c
 

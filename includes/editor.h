@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/11/27 10:37:02 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/27 14:01:28 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,8 @@ typedef struct				s_sdl
 	int						sprite_in_sector;
 	int						status_code;
 	int						is_input;
+	int						id;
+	char					*char_id;
 	struct s_point			grid_field[GRID_SIZE];
 	struct s_sector			*sectors;
 	struct s_commands		*commands;
@@ -238,6 +240,9 @@ t_walls						*init_wall(void);
 void						init_player(t_sdl *sdl);
 t_sprite					*init_sprite();
 void						big_loop(t_sdl *sdl);
+void						text_events(t_sdl *sdl);
+void						textinput(t_sdl *sdl);
+void						exit_events(t_sdl *sdl);
 void						clicks3(t_sdl *sdl);
 void						input_field_click(t_sdl *sdl);
 void						delete_one_symbol(t_sdl *sdl);

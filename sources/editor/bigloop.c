@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 11:26:54 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/27 10:10:11 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/27 14:00:40 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ void	clicks2(t_sdl *sdl)
 	{
 		sdl->type_pressed = SPRITE_TYPE;
 		sdl->button_pushed = ARMOR_PUSH;
-		printf("Armor\n");
 	}
 	else if ((sdl->mouse_position.x > BUTTON_POWER_UP_X1 &&
 			sdl->mouse_position.x < BUTTON_POWER_UP_X2) &&
@@ -31,7 +30,6 @@ void	clicks2(t_sdl *sdl)
 	{
 		sdl->type_pressed = SPRITE_TYPE;
 		sdl->button_pushed = POWER_UP_PUSH;
-		printf("Power up\n");
 	}
 	else
 		clicks3(sdl);
@@ -47,7 +45,6 @@ void	clicks1(t_sdl *sdl)
 	{
 		sdl->type_pressed = PLAYER_TYPE;
 		sdl->button_pushed = PLAYER_PUSH;
-		printf("Player\n");
 	}
 	else if ((sdl->mouse_position.x > BUTTON_MEDKIT_X1 &&
 			sdl->mouse_position.x < BUTTON_MEDKIT_X2) &&
@@ -56,7 +53,6 @@ void	clicks1(t_sdl *sdl)
 	{
 		sdl->type_pressed = SPRITE_TYPE;
 		sdl->button_pushed = MEDKIT_PUSH;
-		printf("Medkit\n");
 	}
 	else
 		clicks2(sdl);
@@ -74,21 +70,11 @@ void	clicks0(t_sdl *sdl)
 	{
 		sdl->type_pressed = WALL_TYPE;
 		sdl->button_pushed = WALL_PUSH;
-		printf("Wall\n");
 	}
 	else
 		clicks1(sdl);
 	if (sdl->type_pressed == PLAYER_TYPE || sdl->type_pressed == SPRITE_TYPE)
 		make_player_or_sprite(sdl);
-}
-
-void	textinput(t_sdl *sdl)
-{
-	if (sdl->map_name->text_size + 1 < sdl->map_name->max_text_size)
-	{
-		ft_strcat(sdl->map_name->text, sdl->window_event.text.text);
-		sdl->map_name->text_size++;
-	}
 }
 
 void	big_loop(t_sdl *sdl)
@@ -97,18 +83,10 @@ void	big_loop(t_sdl *sdl)
 	{
 		if (SDL_PollEvent(&sdl->window_event))
 		{
-			if (SDL_QUIT == sdl->window_event.type)
-				exit(0);
-			else if (bigscarycondition(sdl) == 1)
+			text_events(sdl);
+			exit_events(sdl);
+			if (bigscarycondition(sdl) == 1)
 				save_click(sdl);
-			else if (sdl->window_event.type == SDL_KEYDOWN && sdl->is_input == 1 && SDLK_BACKSPACE ==
-					sdl->window_event.key.keysym.sym)
-				delete_one_symbol(sdl);
-			else if (sdl->window_event.type == SDL_TEXTINPUT && sdl->is_input == 1)
-				textinput(sdl);
-			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_ESCAPE ==
-					sdl->window_event.key.keysym.sym)
-				exit(0);
 			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_BACKSPACE ==
 					sdl->window_event.key.keysym.sym && sdl->is_input == 0)
 				delete_last_command(sdl);

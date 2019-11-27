@@ -6,23 +6,13 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:46:30 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/24 17:25:26 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/27 12:49:11 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-// t_walls	*find_last_wall(t_walls *wall)
-// {
-// 	if (wall == NULL)
-// 		return (NULL);
-// 	while (wall->next != NULL)
-// 		wall = wall->next;
-// 	return (wall);
-// }
-
 void	save_wall(t_sector *sector, int i)
-// void	save_wall(t_sector *head, t_sector *sector, int i)
 {
 	if (i > 0)//сохраняем стену, с момента проставления второй точки сектора
 	{
@@ -33,14 +23,6 @@ void	save_wall(t_sector *sector, int i)
 		sector->walls[i - 1].wall_id = i - 1;
 		sector->walls[i - 1].portal = -1;
 		sector->num_of_walls = sector->walls[i - 1].wall_id + 1;
-
-		// printf("x1 = %d\n", cur_wall->x1);
-		// printf("y1 = %d\n", cur_wall->y1);
-		// printf("x2 = %d\n", cur_wall->x2);
-		// printf("y2 = %d\n", cur_wall->y2);
-		// printf("wall id = %d\n", cur_wall->wall_id);
-		// if (sector->num_of_sector > 0)
-		// 	check_the_touch(&sector->walls[i - 1], head);// проверка начинается со второй точки второго сектора
 	}
 }
 
@@ -49,8 +31,7 @@ void	add_point(t_sdl *sdl, t_sector **sector, int i)
 	(*sector)->point[(*sector)->size].x = sdl->grid_field[i].x;
 	(*sector)->point[(*sector)->size].y = sdl->grid_field[i].y;
 	if ((*sector)->size > 0)
-		save_wall((*sector), (*sector)->size);//сохраняем стену
-		// save_wall(sdl->sectors, (*sector), (*sector)->size);//сохраняем стену
+		save_wall((*sector), (*sector)->size);
 	(*sector)->size++;
 	add_command(sdl, &(sdl->commands), WALL_TYPE);
 }
@@ -138,12 +119,7 @@ void	make_wall(t_sdl *sdl)
 						add_point(sdl, &sector, i);
 						j = 0;
 						while (j < sector->size)
-						{
-							// printf("x = (%d; %d)\n", sector->point[j].x, sector->point[j].y);
-							printf("wall[%d]_point1 = (%d; %d)\n", j, sector->walls[j].x1, sector->walls[j].y1);
-							printf("wall[%d]_point2 = (%d; %d)\n", j, sector->walls[j].x2, sector->walls[j].y2);
 							j++;
-						}
 						sector->num_of_sector = sdl->count;
 						sector->next = init_sector();
 						sector = sector->next;

@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:27:00 by djast             #+#    #+#             */
-/*   Updated: 2019/11/27 10:49:14 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/27 13:13:01 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,8 @@ void			init_sdl(t_sdl *sdl)
 	sdl->command_count = 0;
 	sdl->sprites = NULL;
 	sdl->sprite_in_sector = 0;
+	sdl->id = 0;
+	sdl->char_id = NULL;
 	sdl->count = 0;
 	sdl->num = 0;
 	sdl->status_code = 1;

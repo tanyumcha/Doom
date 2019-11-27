@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 16:19:28 by djast             #+#    #+#             */
-/*   Updated: 2019/11/27 10:52:18 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/27 13:12:00 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,25 +28,16 @@ int			write_vertexes_wall(t_sdl *sdl, int fd)
 	t_sector	*cur_sector;
 	int			i;
 	int			id;
-	char		*char_id;
 
 	cur_sector = sdl->sectors;
 	id = 0;
-	char_id = NULL;
 	while (cur_sector != NULL && cur_sector->size != 0)
 	{
 		i = 0;
 		while (i != cur_sector->size)
 		{
-			write_wall_string(fd, char_id, id++, &cur_sector->point[i]);
-			//write(fd, "vertex:	", 8);
-			//write_to_file(fd, char_id, id++);
-			//write(fd, "	", 1);
-			//write_to_file(fd, char_id, cur_sector->point[i].x * 4);
-			//write(fd, "	", 1);
-			//write_to_file(fd, char_id, cur_sector->point[i].y * 4);
-			//write(fd, "	", 1);
-			write_to_file(fd, char_id, cur_sector->z);
+			write_wall_string(fd, sdl->char_id, id++, &cur_sector->point[i]);
+			write_to_file(fd, sdl->char_id, cur_sector->z);
 			write(fd, "\n", 1);
 			i++;
 		}
@@ -60,21 +51,19 @@ void		write_vertexes_sprite(t_sdl *sdl, int fd, int last_id)
 {
 	t_sprite	*cur_sprite;
 	int			id;
-	char		*char_id;
 
 	cur_sprite = sdl->sprites;
 	id = last_id;
-	char_id = NULL;
 	while (cur_sprite != NULL)
 	{
 		write(fd, "vertex:	", 8);
-		write_to_file(fd, char_id, id++);
+		write_to_file(fd, sdl->char_id, id++);
 		write(fd, "	", 1);
-		write_to_file(fd, char_id, cur_sprite->x * 4);
+		write_to_file(fd, sdl->char_id, cur_sprite->x * 4);
 		write(fd, "	", 1);
-		write_to_file(fd, char_id, cur_sprite->y * 4);
+		write_to_file(fd, sdl->char_id, cur_sprite->y * 4);
 		write(fd, "	", 1);
-		write_to_file(fd, char_id, sdl->sectors->z);
+		write_to_file(fd, sdl->char_id, sdl->sectors->z);
 		write(fd, "\n", 1);
 		cur_sprite = cur_sprite->next;
 	}
