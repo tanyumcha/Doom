@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:46:30 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/27 12:49:11 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/27 14:45:36 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,11 +89,10 @@ void	make_wall(t_sdl *sdl)
 			}
 			if (is_inside_sector(sdl, sdl->grid_field[i].x, sdl->grid_field[i].y) == 0)
 			{
-				if (sector->size == 0) // для первой точки
+				if (sector->size == 0) // для первой точки первого сектора
 					add_point(sdl, &sector, i);
 				else if (sector->size > 0 && dot_in_used(sector, sdl->grid_field[i].x, sdl->grid_field[i].y) == 0 && check_local_intersection(sdl, sector, walls) < 2) // для всех, кроме первой и последней точки
 				{
-
 					if (sector->size > 1)
 					{
 						if (is_clockwise(walls))

@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:27:00 by djast             #+#    #+#             */
-/*   Updated: 2019/11/27 13:13:01 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/27 14:56:25 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_sector		*init_sector(void)
 	sector->sh = 0;
 	sector->rh = 0;
 	sector->local_intersection = 0;
+	sector->portal_advent = 0;
 	sector->next = NULL;
 	return (sector);
 }

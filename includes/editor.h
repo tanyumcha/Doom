@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/11/27 14:01:28 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/27 15:26:42 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,12 +185,13 @@ typedef struct				s_sector
 	double					sh;
 	int						z;
 	int						num_of_walls;
+	int						portal_advent;
 	int						total_num_of_obj;
 	int						local_intersection;
 	struct s_sector			*next;
 }							t_sector;
 
-typedef struct 				s_commands
+typedef struct				s_commands
 {
 	int						type;
 	struct s_commands		*next;
@@ -269,9 +270,11 @@ void						wall_button(t_sdl *sdl, SDL_Rect *button);
 void						input_field(t_sdl *sdl);
 void						save_button(t_sdl *sdl, SDL_Rect *button);
 void						status_text(t_sdl *sdl, SDL_Rect *button);
-void						draw_button(t_sdl *sdl, SDL_Rect button, char *text, int color);
+void						draw_button(t_sdl *sdl, SDL_Rect button, char *text,
+										int color);
 void						draw_headline(t_sdl *sdl);
-void						draw_text(t_sdl *sdl, char *text, SDL_Rect button, SDL_Color color);
+void						draw_text(t_sdl *sdl, char *text, SDL_Rect button,
+										SDL_Color color);
 void						draw_grid(t_sdl *sdl);
 void						draw(t_sdl *sdl);
 void						choose_sprite_color(t_sdl *sdl, t_sprite *sprites);
@@ -283,7 +286,8 @@ void						delete_last_command(t_sdl *sdl);
 void						delete_point(t_sector *sector);
 void						remove_last_sprite(t_sprite **sprites);
 void						remove_last_point(t_sdl *sdl, t_sector **head);
-void						add_command(t_sdl *sdl, t_commands **commands, int type);
+void						add_command(t_sdl *sdl, t_commands **commands,
+										int type);
 t_sector					*get_last_sector(t_sector *head);
 t_sprite					*find_last_sprite(t_sprite *sprites);
 SDL_Color					*create_sdl_color(int r, int g, int b, int a);
@@ -291,9 +295,11 @@ SDL_Rect					*create_rect(int x, int y, int w, int h);
 char						*cut_the_end(char *text);
 void						choose_type_of_point(t_sector **stuffbox, int type);
 void						make_player_or_sprite(t_sdl *sdl);
-int							check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2);
+int							check_intersection(t_sdl *sdl, t_sector *head,
+												int x2, int y2);
 void						find_portals(t_sdl *sdl);
-void						check_the_touch(t_sector *cur_sector, int i, t_sector *head);
+void						check_the_touch(t_sector *cur_sector, int i,
+											t_sector *head);
 void						set_sprite(t_sdl *sdl, int x, int y);
 int							bigscarycondition(t_sdl *sdl);
 void						save_click(t_sdl *sdl);
@@ -303,7 +309,8 @@ int							get_sector_count(t_sector *sect);
 int							write_vertexes_wall(t_sdl *sdl, int fd);
 void						write_polygone(t_sdl *sdl, int fd);
 void						write_player(t_sdl *sdl, int fd);
-void						write_vertexes_sprite(t_sdl *sdl, int fd, int last_id);
+void						write_vertexes_sprite(t_sdl *sdl, int fd,
+													int last_id);
 void						write_sprites(t_sdl *sdl, int fd, int last_id);
 void						write_sectors(t_sdl *sdl, int fd);
 void						write_objects(t_sdl *sdl, int fd);

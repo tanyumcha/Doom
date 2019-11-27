@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 13:49:10 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/27 12:46:38 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/27 15:22:18 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,20 @@
 ** int y4 = cur_wall->neighbour_y2 = head->point[j].y;
 */
 
+int		check_segments(t_walls *wall, t_point *point1, t_point *point2)
+{
+	if (((wall->x1 == point1->x &&
+			wall->y1 == point1->y) &&
+			(wall->x2 == point2->x &&
+			wall->y2 == point2->y)) ||
+			((wall->x1 = point2->x &&
+			wall->y1 == point2->y) &&
+			(wall->x2 == point1->x &&
+			wall->y2 == point1->y)))
+		return (1);
+	return (0);
+}
+
 void	check_the_touch(t_sector *cur_sector, int num, t_sector *head)
 {
 	int	j;
@@ -39,15 +53,12 @@ void	check_the_touch(t_sector *cur_sector, int num, t_sector *head)
 		{
 			if (cur_sector->num_of_sector != head->num_of_sector)
 			{
-				if ((((cur_sector->walls[num].x1 == head->point[j - 1].x &&
-						cur_sector->walls[num].y1 == head->point[j - 1].y) &&
-						(cur_sector->walls[num].x2 == head->point[j].x &&
-						cur_sector->walls[num].y2 == head->point[j].y)) ||
-						((cur_sector->walls[num].x1 = head->point[j].x &&
-						cur_sector->walls[num].y1 == head->point[j].y) &&
-						(cur_sector->walls[num].x2 == head->point[j - 1].x &&
-						cur_sector->walls[num].y2 == head->point[j - 1].y))))
+				if (check_segments(&cur_sector->walls[num], &head->point[j - 1],
+						&head->point[j]) == 1 && cur_sector->portal_advent == 0)
+				{
 					cur_sector->walls[num].portal = head->num_of_sector;
+					cur_sector->portal_advent = 1;
+				}
 			}
 			j++;
 		}
