@@ -6,24 +6,22 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 16:34:40 by djast             #+#    #+#             */
-/*   Updated: 2019/11/11 15:16:58 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/27 10:32:56 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-char	*cut_the_end(char *text)
+SDL_Rect	*create_rect(int x, int y, int w, int h)
 {
-	int	i;
+	SDL_Rect *r;
 
-	i = 0;
-	while (text[i])
-	{
-		if (text[i] == '.')
-			text[i] = '\0';
-		i++;
-	}
-	return (text);
+	r = (SDL_Rect *)malloc(sizeof(SDL_Rect));
+	r->x = x;
+	r->y = y;
+	r->w = w;
+	r->h = h;
+	return (r);
 }
 
 void		choose_sprite_color(t_sdl *sdl, t_sprite *sprites)

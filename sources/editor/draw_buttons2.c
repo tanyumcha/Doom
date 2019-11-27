@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_buttons2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 08:37:22 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/24 12:10:54 by djast            ###   ########.fr       */
+/*   Updated: 2019/11/27 10:17:01 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,39 +56,3 @@ void	save_button(t_sdl *sdl, SDL_Rect *button)
 	button->h = BUTTON_SAVE_Y2 - BUTTON_SAVE_Y1;
 	draw_button(sdl, *button, " SAVE THE MAP", SAVE_BUTTON);
 }
-
-void	status_text(t_sdl *sdl, SDL_Rect *button)
-{
-	SDL_Color *color_text;
-
-	button->x = BUTTON_STATUS_X1;
-	button->y = BUTTON_STATUS_Y1;
-	button->w = BUTTON_STATUS_X2 - BUTTON_STATUS_X1;
-	button->h = BUTTON_STATUS_Y2 - BUTTON_STATUS_Y1;
-	if (sdl->status_code == CODE_ALREADY_EXIST)
-	{
-			color_text = create_sdl_color(255, 0, 0, 255);
-			draw_text(sdl, "File already exist", *button, *color_text);
-	}
-	else if (sdl->status_code == CODE_OK)
-	{
-			color_text = create_sdl_color(0, 255, 0, 255);
-			draw_text(sdl, "Save complete", *button, *color_text);
-	}
-	else if (sdl->status_code == CODE_NO_FILENAME)
-	{
-			color_text = create_sdl_color(255, 0, 0, 255);
-			draw_text(sdl, "Empty filename", *button, *color_text);
-	}
-	else if (sdl->status_code == CODE_NO_PLAYER)
-	{
-			color_text = create_sdl_color(255, 0, 0, 255);
-			draw_text(sdl, "No player on the map", *button, *color_text);
-	}
-}
-
-// void	load_button(t_sdl *sdl, SDL_Rect *button)
-// {
-
-// 	draw_button(sdl, *button, " LOAD THE MAP", SAVE_BUTTON);
-// }

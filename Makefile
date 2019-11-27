@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: djast <djast@student.42.fr>                +#+  +:+       +#+         #
+#    By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/15 17:18:06 by djast             #+#    #+#              #
-#    Updated: 2019/11/24 14:22:28 by djast            ###   ########.fr        #
+#    Updated: 2019/11/27 10:29:36 by eharrag-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,6 @@ EDITOR_FILES =	editor.c \
 				take_a_lap.c \
 				cut_the_rope.c \
 				remover.c \
-				reset.c \
 				put_stuff.c \
 				commands.c \
 				utils.c \

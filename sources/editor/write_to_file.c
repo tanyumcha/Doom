@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   write_to_file.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:48:45 by djast             #+#    #+#             */
-/*   Updated: 2019/11/23 11:03:24 by djast            ###   ########.fr       */
+/*   Updated: 2019/11/27 10:39:01 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,10 @@
 
 void		write_world(t_sdl *sdl, int fd)
 {
-	// int		sector_count;
 	char	*sectors;
 	int		i;
 
 	write(fd, "world:	1	", 9);
-	// sector_count = get_sector_count(sdl->sectors); // считает лишнее
-
-	// sectors = ft_itoa(sector_count);
 	sectors = ft_itoa(sdl->count);
 	write(fd, sectors, ft_strlen(sectors));
 	write(fd, "	", 1);
@@ -40,62 +36,18 @@ void		write_world(t_sdl *sdl, int fd)
 	write(fd, "\n", 1);
 }
 
-// void			write_polygone(t_sdl *sdl, int fd)
-// {
-// 	t_sector	*cur_sector;
-// 	int			i;
-// 	int			id;
-// 	char		*char_id;
-
-// 	cur_sector = sdl->sectors;
-// 	id = 1;
-// 	while (cur_sector != NULL)
-// 	{
-// 		i = 0;
-// 		while (i < cur_sector->size - 1)
-// 		{
-// 			write(fd, "polygone:	", 10);
-// 			char_id = ft_itoa(id);
-// 			write(fd, char_id, ft_strlen(char_id));
-// 			free(char_id);
-// 			write(fd, "	1	0xFF0000	bricks	2	", 21);
-// 			char_id = ft_itoa(id);
-// 			write(fd, char_id, ft_strlen(char_id));
-// 			free(char_id);
-// 			write(fd, ",", 1);
-// 			char_id = ft_itoa(id - 1);
-// 			write(fd, char_id, ft_strlen(char_id));
-// 			free(char_id);
-// 			write(fd, "\n", 1);
-// 			id++;
-// 			i++;
-// 		}
-// 		id++;
-// 		write(fd, "\n", 1);
-// 		cur_sector = cur_sector->next;
-// 	}
-// }
-
-void			write_player(t_sdl *sdl, int fd)
+void		write_player(t_sdl *sdl, int fd)
 {
-	char		*char_id = NULL;
+	char	*char_id;
 
+	char_id = NULL;
 	write(fd, "player:	0	2000\n\n", 16);
 	write(fd, "vertex:	2000	", 13);
 	write_to_file(fd, char_id, sdl->player->x * 4);
-	// char_id = ft_itoa(sdl->player->x * 4);
-	// write(fd, char_id, ft_strlen(char_id));
-	// free(char_id);
 	write(fd, "	", 1);
 	write_to_file(fd, char_id, sdl->player->y * 4);
-	// char_id = ft_itoa(sdl->player->y * 4);
-	// write(fd, char_id, ft_strlen(char_id));
-	// free(char_id);
 	write(fd, "	", 1);
 	write_to_file(fd, char_id, sdl->sectors->z);
-	// char_id = ft_itoa(sdl->sectors->z);
-	// write(fd, char_id, ft_strlen(char_id));
-	// free(char_id);
 	write(fd, "\n\n", 2);
 }
 
@@ -104,28 +56,20 @@ void		write_sprites(t_sdl *sdl, int fd, int last_id)
 	t_sprite	*cur_sprite;
 	int			id;
 	int			i;
-	char		*char_id = NULL;
+	char		*char_id;
 
 	cur_sprite = sdl->sprites;
 	id = last_id;
 	i = 0;
+	char_id = NULL;
 	while (cur_sprite != NULL)
 	{
 		write(fd, "sobjct:	", 8);
 		write_to_file(fd, char_id, i++);
-		// char_id = ft_itoa(i++);
-		// write(fd, char_id, ft_strlen(char_id));
-		// free(char_id);
 		write(fd, "	0	", 3);
 		write_to_file(fd, char_id, cur_sprite->type);
-		// char_id = ft_itoa(cur_sprite->type);
-		// write(fd, char_id, ft_strlen(char_id));
-		// free(char_id);
 		write(fd, "	", 1);
 		write_to_file(fd, char_id, id++);
-		// char_id = ft_itoa(id++);
-		// write(fd, char_id, ft_strlen(char_id));
-		// free(char_id);
 		write(fd, "\n", 1);
 		cur_sprite = cur_sprite->next;
 	}
@@ -138,11 +82,12 @@ void		write_objects(t_sdl *sdl, int fd)
 	int			i;
 	int			id;
 	int			count;
-	char		*char_id = NULL;
+	char		*char_id;
 
 	cur_sector = sdl->sectors;
 	id = 0;
 	count = 0;
+	char_id = NULL;
 	while (cur_sector != NULL)
 	{
 		i = 0;
@@ -151,13 +96,7 @@ void		write_objects(t_sdl *sdl, int fd)
 		{
 			write(fd, "object:	", 8);
 			write_to_file(fd, char_id, count);
-			// char_id = ft_itoa(id);
-			// write(fd, char_id, ft_strlen(char_id));
-			// free(char_id);
-
-			// с каким сектором касание
 			write(fd, "	", 1);
-
 			write_to_file(fd, char_id, cur_sector->walls[i].portal);
 			write(fd, "	", 1);
 			if (cur_sector->walls[i].portal > -1)
@@ -167,16 +106,12 @@ void		write_objects(t_sdl *sdl, int fd)
 			write_to_file(fd, char_id, id);
 			write(fd, " ", 1);
 			write_to_file(fd, char_id, id + 1);
-			// char_id = ft_itoa(id);
-			// write(fd, char_id, ft_strlen(char_id));
-			// free(char_id);
 			write(fd, "\n", 1);
 			id++;
 			cur_sector->total_num_of_obj++;
 			i++;
 			count++;
 		}
-		printf("i %d\n", i);
 		write(fd, "\n", 1);
 		id++;
 		cur_sector = cur_sector->next;
@@ -187,37 +122,24 @@ void		write_sectors(t_sdl *sdl, int fd)
 {
 	t_sector	*cur_sector;
 	int			i;
-	int			num;
-	char		*char_id = NULL;
+	char		*char_id;
 
 	cur_sector = sdl->sectors;
-	num = 0;
+	char_id = NULL;
 	while (cur_sector->next != NULL)
 	{
 		i = 0;
 		write(fd, "sector: ", 8);
 		write_to_file(fd, char_id, cur_sector->num_of_sector);
-		// char_id = ft_itoa(cur_sector->num_of_sector);
-		// write(fd, char_id, ft_strlen(char_id));
-		// free(char_id);
 		write(fd, "	0	675	q_floor_5	q_floor_3	0xFF0000	", 36);
-
-		// обход стен по часовой стрелке!!!
-
 		write_to_file(fd, char_id, cur_sector->total_num_of_obj);
-		// char_id = ft_itoa(cur_sector->total_num_of_obj);
-		// write(fd, char_id, ft_strlen(char_id));
-		// free(char_id);
 		write(fd, "\t", 1);
 		while (i < cur_sector->total_num_of_obj)
 		{
-			write_to_file(fd, char_id, num);
-			// char_id = ft_itoa(num);
-			// write(fd, char_id, ft_strlen(char_id));
-			// free(char_id);
+			write_to_file(fd, char_id, sdl->num);
 			write(fd, " ", 1);
 			i++;
-			num++;
+			sdl->num++;
 		}
 		write(fd, "\n", 1);
 		cur_sector = cur_sector->next;

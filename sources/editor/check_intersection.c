@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_intersection.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 09:55:28 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/24 15:27:35 by djast            ###   ########.fr       */
+/*   Updated: 2019/11/24 17:29:20 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,30 +65,35 @@ void	find_local_intersection(t_sector *head, int i, t_walls *wall)
 			(head->point[i].x - head->point[i + 1].x) -
 			(wall->neighbour_x1 - head->point[i + 1].x) *
 			(head->point[i].y - head->point[i + 1].y);
-	head->sh = (wall->neighbour_y1 - head->point[i + 1].y) * (wall->x2 - wall->neighbour_x1) -
-			(wall->neighbour_x1 - head->point[i + 1].x) * (wall->y2 - wall->neighbour_y1);
+	head->sh = (wall->neighbour_y1 - head->point[i + 1].y) *
+			(wall->x2 - wall->neighbour_x1) - (wall->neighbour_x1 -
+			head->point[i + 1].x) * (wall->y2 - wall->neighbour_y1);
 }
 
-int		check_local_intersection(t_sdl *sdl, t_sector *cur_sector, t_walls *wall)
+int		check_local_intersection(t_sdl *sdl, t_sector *cur_sect, t_walls *wall)
 {
 	int		i;
 	int		count;
 
 	count = 0;
 	i = 0;
-	while (i + 1 < cur_sector->size)
+	while (i + 1 < cur_sect->size)
 	{
-		cur_sector->cmn = (wall->x2 - wall->neighbour_x1) * (cur_sector->point[i].y - cur_sector->point[i + 1].y) -
-				(wall->y2 - wall->neighbour_y1) * (cur_sector->point[i].x - cur_sector->point[i + 1].x);
-		if (cur_sector->cmn == 0)
+		cur_sect->cmn = (wall->x2 - wall->neighbour_x1) *
+				(cur_sect->point[i].y - cur_sect->point[i + 1].y) -
+				(wall->y2 - wall->neighbour_y1) * (cur_sect->point[i].x -
+				cur_sect->point[i + 1].x);
+		if (cur_sect->cmn == 0)
 		{
 			i++;
 			continue ;
 		}
-		find_local_intersection(cur_sector, i, wall);
-		if (cur_sector->rh / cur_sector->cmn >= 0 && cur_sector->rh / cur_sector->cmn <= 1 &&
-				cur_sector->sh / cur_sector->cmn >= 0 && cur_sector->sh / cur_sector->cmn <= 1)
-			count = count_intersection(sdl, cur_sector, count);
+		find_local_intersection(cur_sect, i, wall);
+		if (cur_sect->rh / cur_sect->cmn >= 0 &&
+				cur_sect->rh / cur_sect->cmn <= 1 &&
+				cur_sect->sh / cur_sect->cmn >= 0 &&
+				cur_sect->sh / cur_sect->cmn <= 1)
+			count = count_intersection(sdl, cur_sect, count);
 		i++;
 	}
 	return (count);

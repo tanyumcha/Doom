@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:39:39 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/24 10:40:28 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/27 10:29:24 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,4 +77,14 @@ void	remove_last_point(t_sdl *sdl, t_sector **head)
 		sdl->count--;
 		delete_point(prev_sector);
 	}
+}
+
+void	reset(t_sdl *sdl)
+{
+	while (sdl->command_count > 0)
+	{
+		delete_last_command(sdl);
+		sdl->command_count--;
+	}
+	sdl->count = 0;
 }

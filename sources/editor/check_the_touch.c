@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 13:49:10 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/24 15:34:20 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/27 10:13:53 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,15 @@
  * (x1, y1, x2, y2, x4, y4)
  * (x3, y3, x4, y4, x1, y1)
  * (x3, y3, x4, y4, x2, y2)
-
+ *
  * int x1 = cur_wall->x1;
  * int y1 = cur_wall->y1;
  * int x2 = cur_wall->x2;
  * int y2 = cur_wall->y2;
- * int x3 = cur_wall->neighbour_x1;
- * int y3 = cur_wall->neighbour_y1;
- * int x4 = cur_wall->neighbour_x2;
- * int y4 = cur_wall->neighbour_y2;
+ * int x3 = cur_wall->neighbour_x1 = head->point[j].x;
+ * int y3 = cur_wall->neighbour_y1 = head->point[j - 1].y;
+ * int x4 = cur_wall->neighbour_x2 = head->point[j].x;
+ * int y4 = cur_wall->neighbour_y2 = head->point[j].y;
  */
 
 // int		point_on_segment(t_walls *cur_wall)
@@ -95,7 +95,6 @@
 // }
 
 void	check_the_touch(t_sector *cur_sector, int num, t_sector *head)
-// void	check_the_touch(t_walls *cur_wall, t_sector *head)
 {
 	int	j;
 
@@ -106,21 +105,15 @@ void	check_the_touch(t_sector *cur_sector, int num, t_sector *head)
 		{
 			if (cur_sector->num_of_sector != head->num_of_sector)
 			{
-				cur_sector->walls[num].neighbour_x1 = head->point[j - 1].x;
-				cur_sector->walls[num].neighbour_y1 = head->point[j - 1].y;
-				cur_sector->walls[num].neighbour_x2 = head->point[j].x;
-				cur_sector->walls[num].neighbour_y2 = head->point[j].y;
-				if ((((cur_sector->walls[num].x1 == cur_sector->walls[num].neighbour_x1 && cur_sector->walls[num].y1 == cur_sector->walls[num].neighbour_y1) &&
-						(cur_sector->walls[num].x2 == cur_sector->walls[num].neighbour_x2 && cur_sector->walls[num].y2 == cur_sector->walls[num].neighbour_y2)) ||
-						((cur_sector->walls[num].x1 = cur_sector->walls[num].neighbour_x2 && cur_sector->walls[num].y1 == cur_sector->walls[num].neighbour_y2) &&
-						(cur_sector->walls[num].x2 == cur_sector->walls[num].neighbour_x1 && cur_sector->walls[num].y2 == cur_sector->walls[num].neighbour_y1))))
-				{
-					// 	// printf("OK! On segment\n");
-					// 	if (cur_sector->walls[num].wall_id != head->walls[i].wall_id)
-							cur_sector->walls[num].portal = head->num_of_sector;
-						// printf("Portal is: %d\n", head->num_of_sector);
-						// printf("Portal is: %d\n", cur_wall->portal);
-				}
+				if ((((cur_sector->walls[num].x1 == head->point[j - 1].x &&
+						cur_sector->walls[num].y1 == head->point[j - 1].y) &&
+						(cur_sector->walls[num].x2 == head->point[j].x &&
+						cur_sector->walls[num].y2 == head->point[j].y)) ||
+						((cur_sector->walls[num].x1 = head->point[j].x &&
+						cur_sector->walls[num].y1 == head->point[j].y) &&
+						(cur_sector->walls[num].x2 == head->point[j - 1].x &&
+						cur_sector->walls[num].y2 == head->point[j - 1].y))))
+					cur_sector->walls[num].portal = head->num_of_sector;
 			}
 			j++;
 		}

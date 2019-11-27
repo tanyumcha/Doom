@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:27:00 by djast             #+#    #+#             */
-/*   Updated: 2019/11/24 14:46:23 by djast            ###   ########.fr       */
+/*   Updated: 2019/11/27 10:49:14 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_input_field	*init_input_field(int x1, int y1, int x2, int y2)
 	return (field);
 }
 
-t_sprite	*init_sprite(void)
+t_sprite		*init_sprite(void)
 {
 	t_sprite	*sprite;
 
@@ -40,26 +40,7 @@ t_sprite	*init_sprite(void)
 	return (sprite);
 }
 
-// t_walls		*init_wall(void)
-// {
-// 	t_walls	*wall;
-
-// 	wall = (t_walls *)malloc(sizeof(t_walls));
-// 	wall->portal = -1;
-// 	wall->wall_id = 0;
-// 	wall->x1 = 0;
-// 	wall->y1 = 0;
-// 	wall->x2 = 0;
-// 	wall->y2 = 0;
-// 	wall->neighbour_x1 = 0;
-// 	wall->neighbour_y1 = 0;
-// 	wall->neighbour_x2 = 0;
-// 	wall->neighbour_y2 = 0;
-// 	wall->next = NULL;
-// 	return (wall);
-// }
-
-t_sector	*init_sector(void)
+t_sector		*init_sector(void)
 {
 	t_sector	*sector;
 
@@ -80,14 +61,14 @@ t_sector	*init_sector(void)
 	return (sector);
 }
 
-void		init_player(t_sdl *sdl)
+void			init_player(t_sdl *sdl)
 {
 	sdl->player = (t_point *)malloc(sizeof(t_point));
 	sdl->player->x = 0;
 	sdl->player->y = 0;
 }
 
-void		init_sdl(t_sdl *sdl)
+void			init_sdl(t_sdl *sdl)
 {
 	SDL_Init(SDL_INIT_VIDEO);
 	sdl->window = SDL_CreateWindow("Wolf3d", SDL_WINDOWPOS_UNDEFINED,
@@ -104,6 +85,7 @@ void		init_sdl(t_sdl *sdl)
 	sdl->sprites = NULL;
 	sdl->sprite_in_sector = 0;
 	sdl->count = 0;
+	sdl->num = 0;
 	sdl->status_code = 1;
 	sdl->is_input = 0;
 	sdl->map_name = init_input_field(INPUT_FIELD_X1, INPUT_FIELD_Y1,

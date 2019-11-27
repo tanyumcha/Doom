@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   editor.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/11/24 15:28:04 by djast            ###   ########.fr       */
+/*   Updated: 2019/11/27 10:37:02 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -219,6 +219,7 @@ typedef struct				s_sdl
 	int						button_pushed;
 	int						type_pressed;
 	int						count;
+	int						num;
 	int						sprite_in_sector;
 	int						status_code;
 	int						is_input;
@@ -239,6 +240,7 @@ t_sprite					*init_sprite();
 void						big_loop(t_sdl *sdl);
 void						clicks3(t_sdl *sdl);
 void						input_field_click(t_sdl *sdl);
+void						delete_one_symbol(t_sdl *sdl);
 void						save_the_grid(t_point *grid_field, SDL_Rect	grid);
 void						add_point(t_sdl *sdl, t_sector **sector, int i);
 void						make_wall(t_sdl *sdl);
@@ -261,7 +263,6 @@ void						jetpack_button(t_sdl *sdl, SDL_Rect *button);
 void						wall_button(t_sdl *sdl, SDL_Rect *button);
 void						input_field(t_sdl *sdl);
 void						save_button(t_sdl *sdl, SDL_Rect *button);
-// void						load_button(t_sdl *sdl, SDL_Rect *button);
 void						status_text(t_sdl *sdl, SDL_Rect *button);
 void						draw_button(t_sdl *sdl, SDL_Rect button, char *text, int color);
 void						draw_headline(t_sdl *sdl);
@@ -281,15 +282,14 @@ void						add_command(t_sdl *sdl, t_commands **commands, int type);
 t_sector					*get_last_sector(t_sector *head);
 t_sprite					*find_last_sprite(t_sprite *sprites);
 SDL_Color					*create_sdl_color(int r, int g, int b, int a);
+SDL_Rect					*create_rect(int x, int y, int w, int h);
 char						*cut_the_end(char *text);
 void						choose_type_of_point(t_sector **stuffbox, int type);
 void						make_player_or_sprite(t_sdl *sdl);
 int							check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2);
 void						find_portals(t_sdl *sdl);
 void						check_the_touch(t_sector *cur_sector, int i, t_sector *head);
-// void						check_the_touch(t_walls *walls, t_sector *head);
 void						set_sprite(t_sdl *sdl, int x, int y);
-// void						load_click(t_sdl *sdl);
 int							bigscarycondition(t_sdl *sdl);
 void						save_click(t_sdl *sdl);
 int							save_map(t_sdl *sdl, char *map_name);
@@ -305,5 +305,5 @@ void						write_objects(t_sdl *sdl, int fd);
 void						write_to_file(int fd, char *data, int numdata);
 int							is_clockwise(t_walls *wall);
 int							check_local_intersection(t_sdl *sdl,
-										t_sector *cur_sector, t_walls *wall);
+										t_sector *cur_sect, t_walls *wall);
 #endif

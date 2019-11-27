@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   bigloop.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: djast <djast@student.42.fr>                +#+  +:+       +#+        */
+/*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 11:26:54 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/24 15:03:19 by djast            ###   ########.fr       */
+/*   Updated: 2019/11/27 10:10:11 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,15 +91,6 @@ void	textinput(t_sdl *sdl)
 	}
 }
 
-void	delete_one_symbol(t_sdl *sdl)
-{
-	if (sdl->map_name->text_size > 0)
-	{
-		sdl->map_name->text_size--;
-		sdl->map_name->text[sdl->map_name->text_size] = '\0';
-	}
-}
-
 void	big_loop(t_sdl *sdl)
 {
 	while (1)
@@ -123,7 +114,7 @@ void	big_loop(t_sdl *sdl)
 				delete_last_command(sdl);
 			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_DELETE ==
 					sdl->window_event.key.keysym.sym)
-				reset(sdl);//, &(sdl->sectors), sdl->player, sdl->sprites);
+				reset(sdl);
 			else if (sdl->window_event.type == SDL_MOUSEBUTTONDOWN &&
 					sdl->window_event.button.button == SDL_BUTTON_LEFT)
 			{

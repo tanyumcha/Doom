@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 11:43:08 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/24 15:26:26 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/24 17:33:37 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void	cut_the_rope(t_sdl *sdl, t_sector *sector, int i)
 					((sdl->grid_field[j].y > sector->point[sector->size - 1].y && sdl->grid_field[j].y < sdl->grid_field[i].y) ||
 					(sdl->grid_field[j].y < sector->point[sector->size - 1].y && sdl->grid_field[j].y > sdl->grid_field[i].y)))
 				add_point(sdl, &sector, j);
-
 		}
 		j = status == 1 ? j - 1 : j + 1;
 	}
