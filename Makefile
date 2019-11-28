@@ -6,7 +6,7 @@
 #    By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/15 17:18:06 by djast             #+#    #+#              #
-#    Updated: 2019/11/27 13:59:05 by eharrag-         ###   ########.fr        #
+#    Updated: 2019/11/28 12:37:00 by eharrag-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ EDITOR_FILES =	editor.c \
 				events.c \
 				clicks.c \
 				take_a_lap.c \
+				points_of_sect.c \
 				cut_the_rope.c \
 				remover.c \
 				put_stuff.c \

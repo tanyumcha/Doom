@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:46:30 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/27 14:45:36 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:31:23 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,33 +36,48 @@ void	add_point(t_sdl *sdl, t_sector **sector, int i)
 	add_command(sdl, &(sdl->commands), WALL_TYPE);
 }
 
-int		dot_in_used(t_sector *sector, int x, int y)
+int		is_inside_sector(t_sdl *sdl, int x, int y)
 {
-	int i;
+	(void)sdl;
+	(void)x;
+	(void)y;
+	return (0);
+}
 
-	i = 0;
-	while (i < sector->size)
+void	check_wall(t_walls *walls, t_sector *sector, t_point *grid_field)
+{
+	walls->x1 = sector->point[sector->size - 2].x;//Дима, проверь, плз!
+	walls->y1 = sector->point[sector->size - 2].y;
+	walls->x2 = sector->point[sector->size - 1].x;
+	walls->y2 = sector->point[sector->size - 1].y;
+	walls->neighbour_x1 = grid_field->x;
+	walls->neighbour_y1 = grid_field->y;
+}
+
+int		check_point(t_sector *head, t_sector *sector, int x, int y)
+{
+	int	i;
+
+	while (head != NULL)
 	{
-		if (sector->point[i].x == x && sector->point[i].y == y)
-			return (1);
-		i++;
+		i = 0;
+		while (i < head->size)
+		{
+			if (sector->num_of_sector != head->num_of_sector)
+			{
+				if (head->point[i].x == x && head->point[i].y == y)
+					return (1);
+			}
+			i++;
+		}
+		head = head->next;
 	}
 	return (0);
 }
 
-int		is_inside_sector(t_sdl *sdl, int x, int y)
-{
-	(void) sdl;
-	(void) x;
-	(void) y;
-	return (0);
-}
-
-
 void	make_wall(t_sdl *sdl)
 {
 	int			i;
-	int			j;
 	t_sector	*sector;
 	t_walls		*walls;
 
@@ -74,59 +89,29 @@ void	make_wall(t_sdl *sdl)
 		sector = sdl->sectors;
 	}
 	SDL_GetMouseState(&sdl->mouse_position.x, &sdl->mouse_position.y);
-	if (sdl->mouse_position.x < (int)(SIZE_WIN_X * 0.8))
+	// if (sdl->mouse_position.x < SIZE_WIN_X * 0.8)//видимо нет необходимости, так как точки можем ставить только в грид
+	// {
+	if ((i = check_the_grid(sdl->grid_field, sdl->mouse_position.x,
+							sdl->mouse_position.y)) >= 0)
 	{
-		if ((i = check_the_grid(sdl->grid_field, sdl->mouse_position.x, sdl->mouse_position.y)) >= 0)
+		if (sector->size > 1)
 		{
-			if (sector->size > 1)
-			{
-				walls->x1 = sector->point[sector->size - 2].x;
-				walls->y1 = sector->point[sector->size - 2].y;
-				walls->x2 = sector->point[sector->size - 1].x;
-				walls->y2 = sector->point[sector->size - 1].y;
-				walls->neighbour_x1 = sdl->grid_field[i].x;
-				walls->neighbour_y1 = sdl->grid_field[i].y;
-			}
-			if (is_inside_sector(sdl, sdl->grid_field[i].x, sdl->grid_field[i].y) == 0)
-			{
-				if (sector->size == 0) // для первой точки первого сектора
-					add_point(sdl, &sector, i);
-				else if (sector->size > 0 && dot_in_used(sector, sdl->grid_field[i].x, sdl->grid_field[i].y) == 0 && check_local_intersection(sdl, sector, walls) < 2) // для всех, кроме первой и последней точки
-				{
-					if (sector->size > 1)
-					{
-						if (is_clockwise(walls))
-						{
-							cut_the_rope(sdl, sector, i); //ДЕЛЕНИЕ НА ОТРЕЗКИ
-							add_point(sdl, &sector, i);
-						}
-					}
-					else
-					{
-						cut_the_rope(sdl, sector, i); //ДЕЛЕНИЕ НА ОТРЕЗКИ
-						add_point(sdl, &sector, i);
-					}
-				}
-				else if (sector->size > 2 && ((sdl->mouse_position.x >= sector->point[0].x - POINT_SIZE / 2 && //Для последней точки
-						sdl->mouse_position.x <= sector->point[0].x + POINT_SIZE / 2) &&
-						(sdl->mouse_position.y >= sector->point[0].y - POINT_SIZE / 2 &&
-						sdl->mouse_position.y <= sector->point[0].y + POINT_SIZE / 2)))
-				{
-					if (check_local_intersection(sdl, sector, walls) < 3 && is_clockwise(walls))
-					{
-						cut_the_rope(sdl, sector, i); //ДЕЛЕНИЕ НА ОТРЕЗКИ
-						add_point(sdl, &sector, i);
-						j = 0;
-						while (j < sector->size)
-							j++;
-						sector->num_of_sector = sdl->count;
-						sector->next = init_sector();
-						sector = sector->next;
-						sdl->count++;
-						printf("SAVE\n");
-					}
-				}
-			}
+			check_wall(walls, sector, &sdl->grid_field[i]);//Дима, проверь, плз!
+			// walls->x1 = sector->point[sector->size - 2].x;
+			// walls->y1 = sector->point[sector->size - 2].y;
+			// walls->x2 = sector->point[sector->size - 1].x;
+			// walls->y2 = sector->point[sector->size - 1].y;
+			// walls->neighbour_x1 = sdl->grid_field[i].x;
+			// walls->neighbour_y1 = sdl->grid_field[i].y;
 		}
+		// if (is_inside_sector(sdl, sector->num_of_sector, sdl->grid_field[i].x,
+		// 					sdl->grid_field[i].y) == 0)
+		// if (check_sect_intersects(sdl, sector->num_of_sector, sdl->grid_field[i].x, sdl->grid_field[i].y) % 2 == 0)
+		if (check_intersection(sdl, sdl->sectors, sdl->grid_field[i].x, sdl->grid_field[i].y) % 2 == 0 ||
+				(check_intersection(sdl, sdl->sectors, sdl->grid_field[i].x, sdl->grid_field[i].y) % 2 == 1 &&
+				check_point(sdl->sectors, sector, sdl->grid_field[i].x, sdl->grid_field[i].y) == 1))
+			which_of_points(sdl, sector, walls, i);
+	// }
 	}
+	free(walls);
 }

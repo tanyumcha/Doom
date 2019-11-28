@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/11/27 15:26:42 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/28 14:15:10 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -250,6 +250,8 @@ void						delete_one_symbol(t_sdl *sdl);
 void						save_the_grid(t_point *grid_field, SDL_Rect	grid);
 void						add_point(t_sdl *sdl, t_sector **sector, int i);
 void						make_wall(t_sdl *sdl);
+void						which_of_points(t_sdl *sdl, t_sector *sector,
+											t_walls *walls, int i);
 void						cut_the_rope(t_sdl *sdl, t_sector *sector, int i);
 int							check_the_grid(t_point *grid_field, int x, int y);
 void						redraw(t_sdl *sdl);
@@ -318,4 +320,6 @@ void						write_to_file(int fd, char *data, int numdata);
 int							is_clockwise(t_walls *wall);
 int							check_local_intersection(t_sdl *sdl,
 										t_sector *cur_sect, t_walls *wall);
+int							check_sect_intersects(t_sdl *sdl,
+										int num_of_sector, int x, int y);
 #endif

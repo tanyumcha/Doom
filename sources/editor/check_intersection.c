@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 09:55:28 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/24 17:29:20 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:31:44 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int		count_intersection(t_sdl *sdl, t_sector *head, int count)
 	count++;
 	if (count % 2 == 1)
 		sdl->sprite_in_sector = head->num_of_sector;
+	printf("Count = %d\n", count);
 	return (count);
 }
 
@@ -39,20 +40,23 @@ int		check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2)
 	while (head != NULL)
 	{
 		i = 0;
-		while (i + 1 < head->size)
+		if (head->num_of_sector != -1)
 		{
-			head->cmn = (x2 - XO) * (head->point[i].y - head->point[i + 1].y) -
-					(y2 - YO) * (head->point[i].x - head->point[i + 1].x);
-			if (head->cmn == 0)
+			while (i + 1 < head->size)
 			{
+				head->cmn = (x2 - XO) * (head->point[i].y - head->point[i + 1].y) -
+						(y2 - YO) * (head->point[i].x - head->point[i + 1].x);
+				if (head->cmn == 0)
+				{
+					i++;
+					continue ;
+				}
+				find_intersection(head, i, x2, y2);
+				if (head->rh / head->cmn >= 0 && head->rh / head->cmn <= 1 &&
+						head->sh / head->cmn >= 0 && head->sh / head->cmn <= 1)
+					count = count_intersection(sdl, head, count);
 				i++;
-				continue ;
 			}
-			find_intersection(head, i, x2, y2);
-			if (head->rh / head->cmn >= 0 && head->rh / head->cmn <= 1 &&
-					head->sh / head->cmn >= 0 && head->sh / head->cmn <= 1)
-				count = count_intersection(sdl, head, count);
-			i++;
 		}
 		head = head->next;
 	}
@@ -98,3 +102,38 @@ int		check_local_intersection(t_sdl *sdl, t_sector *cur_sect, t_walls *wall)
 	}
 	return (count);
 }
+
+// int		check_sect_intersects(t_sdl *sdl, int num_of_sector, int x, int y)
+// {
+// 	int			i;
+// 	int			count;
+// 	t_sector	*cur_sect;
+
+// 	count = 0;
+// 	cur_sect = sdl->sectors;
+// 	while (cur_sect != NULL)
+// 	{
+// 		i = 0;
+// 		if (cur_sect->num_of_sector != num_of_sector)
+// 		{
+// 			while (i + 1 < cur_sect->size)
+// 			{
+// 				cur_sect->cmn = (x - XO) * (cur_sect->point[i].y - cur_sect->point[i + 1].y) -
+// 						(y - YO) * (cur_sect->point[i].x - cur_sect->point[i + 1].x);
+// 				if (cur_sect->cmn == 0)
+// 				{
+// 					i++;
+// 					continue ;
+// 				}
+// 				find_intersection(cur_sect, i, x, y);
+// 				if (cur_sect->rh / cur_sect->cmn >= 0 && cur_sect->rh / cur_sect->cmn <= 1 &&
+// 						cur_sect->sh / cur_sect->cmn >= 0 && cur_sect->sh / cur_sect->cmn <= 1)
+// 					count = count_intersection(sdl, cur_sect, count);
+// 				printf("Intersects = %d\n", count);
+// 				i++;
+// 			}
+// 		}
+// 		cur_sect = cur_sect->next;
+// 	}
+// 	return (count);
+// }
