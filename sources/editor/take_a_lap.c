@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:46:30 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/28 15:31:23 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/28 15:47:23 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,8 +108,9 @@ void	make_wall(t_sdl *sdl)
 		// 					sdl->grid_field[i].y) == 0)
 		// if (check_sect_intersects(sdl, sector->num_of_sector, sdl->grid_field[i].x, sdl->grid_field[i].y) % 2 == 0)
 		if (check_intersection(sdl, sdl->sectors, sdl->grid_field[i].x, sdl->grid_field[i].y) % 2 == 0 ||
-				(check_intersection(sdl, sdl->sectors, sdl->grid_field[i].x, sdl->grid_field[i].y) % 2 == 1 &&
-				check_point(sdl->sectors, sector, sdl->grid_field[i].x, sdl->grid_field[i].y) == 1))
+				((check_intersection(sdl, sdl->sectors, sdl->grid_field[i].x, sdl->grid_field[i].y) % 2 == 1 &&
+				check_point(sdl->sectors, sector, sdl->grid_field[i].x, sdl->grid_field[i].y) == 1) //&&
+				// check_sect_intersects(tsdl->sectors, sector, walls) == 0)) //ДОПИСАТЬ!!!
 			which_of_points(sdl, sector, walls, i);
 	// }
 	}
