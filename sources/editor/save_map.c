@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:37:38 by djast             #+#    #+#             */
-/*   Updated: 2019/11/29 10:14:40 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/29 13:30:09 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,9 @@ int			save_map(t_sdl *sdl, char *map_name)
 	int fd;
 	int last_id;
 
-	// if (check_overlays(sdl) == 0)
-	// {
+	if (check_overlays(sdl) == 0)
+	{
+		sdl->save_click = 1;
 		find_portals(sdl);
 		fd = create_file(map_name);
 		if (fd == -1)
@@ -49,12 +50,9 @@ int			save_map(t_sdl *sdl, char *map_name)
 		write_sprites(sdl, fd, last_id);
 		write_sectors(sdl, fd);
 		close(fd);
-	// }
-	// else
-	// {
-	// 	sdl->status_code = CODE_OVERLAY;
-	// 	return (0);
-	// }
+	}
+	else
+		sdl->is_overlay = 1;
 	return (1);
 }
 
@@ -74,6 +72,11 @@ void		save_click(t_sdl *sdl)
 	if (save_map(sdl, sdl->map_name->text) == 0)
 	{
 		sdl->status_code = CODE_ALREADY_EXIST;
+		return ;
+	}
+	if (sdl->is_overlay == 1)
+	{
+		sdl->status_code = CODE_OVERLAY;
 		return ;
 	}
 	bzero(sdl->map_name->text, sizeof(char *));

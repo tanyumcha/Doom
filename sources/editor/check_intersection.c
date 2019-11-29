@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 09:55:28 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/29 10:18:08 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/29 13:17:04 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,11 @@ int		check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2)
 	while (head != NULL)
 	{
 		i = 0;
-		if (head->num_of_sector != -1 || head->check == 1)
+		// printf("Sector = %d\tOverlay = %d\tCheck = %d\n", head->num_of_sector, sdl->is_overlay, head->check);
+		if ((head->num_of_sector != -1 && head->check == 0) || (sdl->is_overlay == 0 && head->check == 0))
 		{
+			if (head->num_of_sector != -1 && head->check == 0 && (sdl->player->x > 0 && sdl->player->y > 0))
+				printf("Ok = %d\n", head->num_of_sector);
 			while (i + 1 < head->size)
 			{
 				head->cmn = (x2 - XO) * (head->point[i].y - head->point[i + 1].y) -
@@ -54,12 +57,18 @@ int		check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2)
 				find_intersection(head, i, x2, y2);
 				if (head->rh / head->cmn >= 0 && head->rh / head->cmn <= 1 &&
 						head->sh / head->cmn >= 0 && head->sh / head->cmn <= 1)
-					count = count_intersection(sdl, head, count);
+					{
+						count = count_intersection(sdl, head, count);
+						// printf("cur_dot: (%d; %d)\n", x2, y2);
+						// printf("dot: (%d; %d)\n", head->point[i].x, head->point[i].y);
+						// printf("Is check! count: %d\n", count);
+					}
 				i++;
 			}
 		}
 		head = head->next;
 	}
+	// printf("\n");
 	return (count);
 }
 

@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:27:00 by djast             #+#    #+#             */
-/*   Updated: 2019/11/29 09:59:38 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/29 13:32:38 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void			init_sdl(t_sdl *sdl)
 	sdl->sectors = init_sector();
 	sdl->commands = NULL;
 	sdl->command_count = 0;
+	sdl->is_overlay = -1;
 	sdl->sprites = NULL;
 	sdl->sprite_in_sector = 0;
 	sdl->id = 0;
@@ -92,8 +93,8 @@ void			init_sdl(t_sdl *sdl)
 	sdl->num = 0;
 	sdl->status_code = 1;
 	sdl->is_input = 0;
+	sdl->save_click = 0;
 	sdl->map_name = init_input_field(INPUT_FIELD_X1, INPUT_FIELD_Y1,
 									INPUT_FIELD_X2, INPUT_FIELD_Y2);
 	init_player(sdl);
-	SDL_ShowCursor(1);
 }

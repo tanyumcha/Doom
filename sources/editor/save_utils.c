@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:51:43 by djast             #+#    #+#             */
-/*   Updated: 2019/11/27 10:21:43 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/29 10:33:49 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ void	choose_the_status(t_sdl *sdl, SDL_Rect *button)
 	{
 		color_text = create_sdl_color(255, 0, 0, 255);
 		draw_text(sdl, "No player on the map", *button, *color_text);
+	}
+	else if (sdl->status_code == CODE_OVERLAY)
+	{
+		color_text = create_sdl_color(255, 0, 0, 255);
+		draw_text(sdl, "Got a match of sectors", *button, *color_text);
 	}
 	free(color_text);
 }

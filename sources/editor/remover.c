@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:39:39 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/27 10:29:24 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/29 13:28:27 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	delete_point(t_sector *sector)
 	sector->point[sector->size - 1].x = 0;
 	sector->point[sector->size - 1].y = 0;
 	sector->size--;
+	sector->num_of_sector = -1;
 }
 
 void	remove_last_sprite(t_sprite **sprites)
@@ -73,6 +74,7 @@ void	remove_last_point(t_sdl *sdl, t_sector **head)
 	else if (cur_sector->size == 0)
 	{
 		prev_sector->next = NULL;
+		// prev_sector->num_of_sector = -1;
 		free(cur_sector);
 		sdl->count--;
 		delete_point(prev_sector);
