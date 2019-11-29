@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:37:38 by djast             #+#    #+#             */
-/*   Updated: 2019/11/29 13:30:09 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/29 13:59:15 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ static int	create_file(char *map_name)
 
 	ft_strcpy(filename, "resources/");
 	ft_strcat(filename, map_name);
+	ft_strcat(filename, ".txt");
 	fd = open(filename, O_WRONLY);
 	if (fd == -1)
 	{
@@ -68,7 +69,6 @@ void		save_click(t_sdl *sdl)
 		sdl->status_code = CODE_NO_PLAYER;
 		return ;
 	}
-	ft_strcat(sdl->map_name->text, ".txt");
 	if (save_map(sdl, sdl->map_name->text) == 0)
 	{
 		sdl->status_code = CODE_ALREADY_EXIST;
@@ -79,7 +79,7 @@ void		save_click(t_sdl *sdl)
 		sdl->status_code = CODE_OVERLAY;
 		return ;
 	}
-	bzero(sdl->map_name->text, sizeof(char *));
+	bzero(sdl->map_name->text, ft_strlen(sdl->map_name->text));
 	sdl->map_name->text_size = 0;
 	sdl->status_code = CODE_OK;
 }

@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/11/29 13:30:37 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/29 14:00:17 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -306,7 +306,8 @@ int							check_intersection(t_sdl *sdl, t_sector *head,
 void						find_portals(t_sdl *sdl);
 void						check_the_touch(t_sector *cur_sector, int i,
 											t_sector *head);
-int							check_point(t_sector *head, int num_of_sector, int x, int y);
+int							check_point(t_sector *head, int num_of_sector,
+										int x, int y);
 int							check_overlays(t_sdl *sdl);
 void						set_sprite(t_sdl *sdl, int x, int y);
 int							bigscarycondition(t_sdl *sdl);

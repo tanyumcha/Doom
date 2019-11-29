@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 11:26:54 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/27 14:00:40 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/29 13:52:27 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,29 +77,35 @@ void	clicks0(t_sdl *sdl)
 		make_player_or_sprite(sdl);
 }
 
+void	main_events(t_sdl *sdl)
+{
+	text_events(sdl);
+	if (bigscarycondition(sdl) == 1)
+		save_click(sdl);
+	else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_BACKSPACE ==
+			sdl->window_event.key.keysym.sym && sdl->is_input == 0)
+		delete_last_command(sdl);
+	else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_DELETE ==
+			sdl->window_event.key.keysym.sym)
+		reset(sdl);
+	else if (sdl->window_event.type == SDL_MOUSEBUTTONDOWN &&
+			sdl->window_event.button.button == SDL_BUTTON_LEFT)
+	{
+		sdl->is_input = 0;
+		clicks0(sdl);
+	}
+	draw(sdl);
+}
+
 void	big_loop(t_sdl *sdl)
 {
 	while (1)
 	{
 		if (SDL_PollEvent(&sdl->window_event))
 		{
-			text_events(sdl);
 			exit_events(sdl);
-			if (bigscarycondition(sdl) == 1)
-				save_click(sdl);
-			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_BACKSPACE ==
-					sdl->window_event.key.keysym.sym && sdl->is_input == 0)
-				delete_last_command(sdl);
-			else if (sdl->window_event.type == SDL_KEYDOWN && SDLK_DELETE ==
-					sdl->window_event.key.keysym.sym)
-				reset(sdl);
-			else if (sdl->window_event.type == SDL_MOUSEBUTTONDOWN &&
-					sdl->window_event.button.button == SDL_BUTTON_LEFT)
-			{
-				sdl->is_input = 0;
-				clicks0(sdl);
-			}
-			draw(sdl);
+			if (sdl->save_click == 0)
+				main_events(sdl);
 		}
 	}
 }
