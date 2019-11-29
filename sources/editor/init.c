@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/14 17:27:00 by djast             #+#    #+#             */
-/*   Updated: 2019/11/28 13:57:06 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/29 09:59:38 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ t_sector		*init_sector(void)
 	sector->num_of_sector = -1;
 	sector->num_of_walls = 0;
 	sector->type_of_point = 0;
+	sector->check = 0;
 	sector->z = 300;
 	sector->cmn = 0;
 	sector->sh = 0;

@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 09:55:28 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/28 15:47:30 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/29 10:18:08 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int		count_intersection(t_sdl *sdl, t_sector *head, int count)
 {
 	count++;
-	if (count % 2 == 1)
+	if (count % 2 == 1 && sdl->type_pressed == SPRITE_TYPE)
 		sdl->sprite_in_sector = head->num_of_sector;
-	printf("Count = %d\n", count);
+	// printf("Count = %d\n", count);
 	return (count);
 }
 
@@ -40,7 +40,7 @@ int		check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2)
 	while (head != NULL)
 	{
 		i = 0;
-		if (head->num_of_sector != -1)
+		if (head->num_of_sector != -1 || head->check == 1)
 		{
 			while (i + 1 < head->size)
 			{

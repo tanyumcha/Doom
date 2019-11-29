@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/11/28 14:15:10 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/29 10:13:43 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@
 # define CODE_OK 0
 # define CODE_NO_FILENAME -2
 # define CODE_NO_PLAYER -3
+# define CODE_OVERLAY -4
 
 # define COLOR_UNPUSHED 0
 # define COLOR_PUSHED 1
@@ -184,6 +185,7 @@ typedef struct				s_sector
 	double					rh;
 	double					sh;
 	int						z;
+	int						check;
 	int						num_of_walls;
 	int						portal_advent;
 	int						total_num_of_obj;
@@ -302,6 +304,7 @@ int							check_intersection(t_sdl *sdl, t_sector *head,
 void						find_portals(t_sdl *sdl);
 void						check_the_touch(t_sector *cur_sector, int i,
 											t_sector *head);
+int							check_overlays(t_sdl *sdl);
 void						set_sprite(t_sdl *sdl, int x, int y);
 int							bigscarycondition(t_sdl *sdl);
 void						save_click(t_sdl *sdl);

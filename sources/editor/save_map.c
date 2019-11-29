@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:37:38 by djast             #+#    #+#             */
-/*   Updated: 2019/11/27 12:48:30 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/29 10:14:40 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,26 @@ int			save_map(t_sdl *sdl, char *map_name)
 	int fd;
 	int last_id;
 
-	find_portals(sdl);
-	fd = create_file(map_name);
-	if (fd == -1)
-		return (0);
-	write_world(sdl, fd);
-	write_player(sdl, fd);
-	last_id = write_vertexes_wall(sdl, fd);
-	write_vertexes_sprite(sdl, fd, last_id);
-	write_objects(sdl, fd);
-	write_sprites(sdl, fd, last_id);
-	write_sectors(sdl, fd);
-	close(fd);
+	// if (check_overlays(sdl) == 0)
+	// {
+		find_portals(sdl);
+		fd = create_file(map_name);
+		if (fd == -1)
+			return (0);
+		write_world(sdl, fd);
+		write_player(sdl, fd);
+		last_id = write_vertexes_wall(sdl, fd);
+		write_vertexes_sprite(sdl, fd, last_id);
+		write_objects(sdl, fd);
+		write_sprites(sdl, fd, last_id);
+		write_sectors(sdl, fd);
+		close(fd);
+	// }
+	// else
+	// {
+	// 	sdl->status_code = CODE_OVERLAY;
+	// 	return (0);
+	// }
 	return (1);
 }
 
