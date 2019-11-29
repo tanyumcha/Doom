@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 13:04:24 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/27 13:13:46 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/29 14:45:57 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,16 +44,6 @@ void		write_objects(t_sdl *sdl, int fd)
 			write_to_file(fd, sdl->char_id, count);
 			write(fd, "	", 1);
 			write_obj_string(fd, sdl->char_id, sdl->id, &cur_sector->walls[i]);
-			// write_to_file(fd, char_id, cur_sector->walls[i].portal);
-			// write(fd, "	", 1);
-			// if (cur_sector->walls[i].portal > -1)
-			// 	write(fd, "	1	1	null		flooring	ceiling	", 28);
-			// else
-			// 	write(fd, "	0	1	q_bricks_2	flooring	ceiling	", 33);
-			// write_to_file(fd, char_id, id);
-			// write(fd, " ", 1);
-			// write_to_file(fd, char_id, id + 1);
-			// write(fd, "\n", 1);
 			sdl->id++;
 			cur_sector->total_num_of_obj++;
 			i++;

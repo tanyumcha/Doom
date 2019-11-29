@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/11/29 14:00:17 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/29 14:53:20 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,6 +254,7 @@ void						delete_one_symbol(t_sdl *sdl);
 void						save_the_grid(t_point *grid_field, SDL_Rect	grid);
 void						add_point(t_sdl *sdl, t_sector **sector, int i);
 void						make_wall(t_sdl *sdl);
+void						save_wall(t_sector *sector, int i);
 void						which_of_points(t_sdl *sdl, t_sector *sector,
 											t_walls *walls, int i);
 void						cut_the_rope(t_sdl *sdl, t_sector *sector, int i);
@@ -283,6 +284,7 @@ void						draw_text(t_sdl *sdl, char *text, SDL_Rect button,
 										SDL_Color color);
 void						draw_grid(t_sdl *sdl);
 void						draw(t_sdl *sdl);
+void						status_text(t_sdl *sdl, SDL_Rect *button);
 void						choose_sprite_color(t_sdl *sdl, t_sprite *sprites);
 void						draw_a_sector(t_sdl *sdl, t_sector *sector, int i);
 void						draw_a_point(t_sdl *sdl, t_point *point, int i);
@@ -303,6 +305,8 @@ void						choose_type_of_point(t_sector **stuffbox, int type);
 void						make_player_or_sprite(t_sdl *sdl);
 int							check_intersection(t_sdl *sdl, t_sector *head,
 												int x2, int y2);
+int							count_intersection(t_sdl *sdl, t_sector *head,
+												int count);
 void						find_portals(t_sdl *sdl);
 void						check_the_touch(t_sector *cur_sector, int i,
 											t_sector *head);

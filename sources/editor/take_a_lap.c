@@ -6,25 +6,11 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:46:30 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/29 13:44:52 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/29 14:54:30 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
-
-void	save_wall(t_sector *sector, int i)
-{
-	if (i > 0)//сохраняем стену, с момента проставления второй точки сектора
-	{
-		sector->walls[i - 1].x1 = sector->point[i - 1].x;
-		sector->walls[i - 1].y1 = sector->point[i - 1].y;
-		sector->walls[i - 1].x2 = sector->point[i].x;
-		sector->walls[i - 1].y2 = sector->point[i].y;
-		sector->walls[i - 1].wall_id = i - 1;
-		sector->walls[i - 1].portal = -1;
-		sector->num_of_walls = sector->walls[i - 1].wall_id + 1;
-	}
-}
 
 void	add_point(t_sdl *sdl, t_sector **sector, int i)
 {
@@ -36,17 +22,9 @@ void	add_point(t_sdl *sdl, t_sector **sector, int i)
 	add_command(sdl, &(sdl->commands), WALL_TYPE);
 }
 
-int		is_inside_sector(t_sdl *sdl, int x, int y)
-{
-	(void)sdl;
-	(void)x;
-	(void)y;
-	return (0);
-}
-
 void	check_wall(t_walls *walls, t_sector *sector, t_point *grid_field)
 {
-	walls->x1 = sector->point[sector->size - 2].x;//Дима, проверь, плз!
+	walls->x1 = sector->point[sector->size - 2].x;
 	walls->y1 = sector->point[sector->size - 2].y;
 	walls->x2 = sector->point[sector->size - 1].x;
 	walls->y2 = sector->point[sector->size - 1].y;
@@ -55,7 +33,6 @@ void	check_wall(t_walls *walls, t_sector *sector, t_point *grid_field)
 }
 
 int		check_point(t_sector *head, int num_of_sector, int x, int y)
-// int		check_point(t_sector *head, t_sector *sector, int x, int y)
 {
 	int	i;
 
@@ -66,10 +43,8 @@ int		check_point(t_sector *head, int num_of_sector, int x, int y)
 		{
 			while (i < head->size)
 			{
-				// printf("%d %d | %d %d\n", head->point[i].x, x, head->point[i].y, y);
 				if (head->point[i].x == x && head->point[i].y == y)
 				{
-					// printf("dot on the wall\n");
 					return (1);
 				}
 				i++;
@@ -77,6 +52,18 @@ int		check_point(t_sector *head, int num_of_sector, int x, int y)
 		}
 		head = head->next;
 	}
+	return (0);
+}
+
+int		checks(t_sdl *sdl, t_sector *sector, int i)
+{
+	if (check_intersection(sdl, sdl->sectors, sdl->grid_field[i].x,
+			sdl->grid_field[i].y) % 2 == 0 ||
+			((check_intersection(sdl, sdl->sectors, sdl->grid_field[i].x,
+			sdl->grid_field[i].y) % 2 == 1 &&
+			check_point(sdl->sectors, sector->num_of_sector,
+			sdl->grid_field[i].x, sdl->grid_field[i].y) == 1)))
+		return (1);
 	return (0);
 }
 
@@ -96,30 +83,13 @@ void	make_wall(t_sdl *sdl)
 			sector = sdl->sectors;
 		}
 		SDL_GetMouseState(&sdl->mouse_position.x, &sdl->mouse_position.y);
-		// if (sdl->mouse_position.x < SIZE_WIN_X * 0.8)//видимо нет необходимости, так как точки можем ставить только в грид
-		// {
 		if ((i = check_the_grid(sdl->grid_field, sdl->mouse_position.x,
 								sdl->mouse_position.y)) >= 0)
 		{
 			if (sector->size > 1)
-			{
-				check_wall(walls, sector, &sdl->grid_field[i]);//Дима, проверь, плз!
-				// walls->x1 = sector->point[sector->size - 2].x;
-				// walls->y1 = sector->point[sector->size - 2].y;
-				// walls->x2 = sector->point[sector->size - 1].x;
-				// walls->y2 = sector->point[sector->size - 1].y;
-				// walls->neighbour_x1 = sdl->grid_field[i].x;
-				// walls->neighbour_y1 = sdl->grid_field[i].y;
-			}
-			// if (is_inside_sector(sdl, sector->num_of_sector, sdl->grid_field[i].x,
-			// 					sdl->grid_field[i].y) == 0)
-			// if (check_sect_intersects(sdl, sector->num_of_sector, sdl->grid_field[i].x, sdl->grid_field[i].y) % 2 == 0)
-			if (check_intersection(sdl, sdl->sectors, sdl->grid_field[i].x, sdl->grid_field[i].y) % 2 == 0 ||
-					((check_intersection(sdl, sdl->sectors, sdl->grid_field[i].x, sdl->grid_field[i].y) % 2 == 1 &&
-					check_point(sdl->sectors, sector->num_of_sector, sdl->grid_field[i].x, sdl->grid_field[i].y) == 1))) //&&
-					// check_sect_intersects(tsdl->sectors, sector, walls) == 0)) //ДОПИСАТЬ!!!
+				check_wall(walls, sector, &sdl->grid_field[i]);
+			if (checks(sdl, sector, i) == 1)
 				which_of_points(sdl, sector, walls, i);
-		// }
 		}
 	}
 	free(walls);

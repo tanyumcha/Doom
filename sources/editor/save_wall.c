@@ -1,43 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   save_utils.c                                       :+:      :+:    :+:   */
+/*   save_wall.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/10/19 11:51:43 by djast             #+#    #+#             */
-/*   Updated: 2019/11/29 14:06:22 by eharrag-         ###   ########.fr       */
+/*   Created: 2019/11/29 14:52:19 by eharrag-          #+#    #+#             */
+/*   Updated: 2019/11/29 14:52:45 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-char	*cut_the_end(char *text)
+void	save_wall(t_sector *sector, int i)
 {
-	int	i;
-
-	i = 0;
-	while (text[i])
+	if (i > 0)
 	{
-		if (text[i] == '.')
-			text[i] = '\0';
-		i++;
+		sector->walls[i - 1].x1 = sector->point[i - 1].x;
+		sector->walls[i - 1].y1 = sector->point[i - 1].y;
+		sector->walls[i - 1].x2 = sector->point[i].x;
+		sector->walls[i - 1].y2 = sector->point[i].y;
+		sector->walls[i - 1].wall_id = i - 1;
+		sector->walls[i - 1].portal = -1;
+		sector->num_of_walls = sector->walls[i - 1].wall_id + 1;
 	}
-	return (text);
-}
-
-void	delete_one_symbol(t_sdl *sdl)
-{
-	if (sdl->map_name->text_size > 0)
-	{
-		sdl->map_name->text_size--;
-		sdl->map_name->text[sdl->map_name->text_size] = '\0';
-	}
-}
-
-void	write_to_file(int fd, char *data, int numdata)
-{
-	data = ft_itoa(numdata);
-	write(fd, data, ft_strlen(data));
-	free(data);
 }

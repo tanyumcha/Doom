@@ -6,29 +6,42 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 09:55:28 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/29 13:17:04 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/11/29 14:40:33 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-int		count_intersection(t_sdl *sdl, t_sector *head, int count)
+int		check_condition(t_sdl *sdl, t_sector *sector, int count)
 {
-	count++;
-	if (count % 2 == 1 && sdl->type_pressed == SPRITE_TYPE)
-		sdl->sprite_in_sector = head->num_of_sector;
-	// printf("Count = %d\n", count);
+	if (sector->rh / sector->cmn >= 0 && sector->rh / sector->cmn <= 1 &&
+			sector->sh / sector->cmn >= 0 && sector->sh / sector->cmn <= 1)
+		count = count_intersection(sdl, sector, count);
 	return (count);
 }
 
-void	find_intersection(t_sector *head, int i, int x2, int y2)
+void	find_intersection(t_sector *sector, int i, int x2, int y2)
 {
-	head->rh = (YO - head->point[i + 1].y) *
-			(head->point[i].x - head->point[i + 1].x) -
-			(XO - head->point[i + 1].x) *
-			(head->point[i].y - head->point[i + 1].y);
-	head->sh = (YO - head->point[i + 1].y) * (x2 - XO) -
-			(XO - head->point[i + 1].x) * (y2 - YO);
+	sector->rh = (YO - sector->point[i + 1].y) *
+			(sector->point[i].x - sector->point[i + 1].x) -
+			(XO - sector->point[i + 1].x) *
+			(sector->point[i].y - sector->point[i + 1].y);
+	sector->sh = (YO - sector->point[i + 1].y) * (x2 - XO) -
+			(XO - sector->point[i + 1].x) * (y2 - YO);
+}
+
+void	calculate_cmn(t_sector *sector, int i, int x2, int y2)
+{
+	sector->cmn = (x2 - XO) * (sector->point[i].y - sector->point[i + 1].y) -
+		(y2 - YO) * (sector->point[i].x - sector->point[i + 1].x);
+}
+
+int		cond(t_sdl *sdl, t_sector *head)
+{
+	if ((head->num_of_sector != -1 && head->check == 0) ||
+			(sdl->is_overlay == 0 && head->check == 0))
+		return (1);
+	return (0);
 }
 
 int		check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2)
@@ -40,106 +53,22 @@ int		check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2)
 	while (head != NULL)
 	{
 		i = 0;
-		// printf("Sector = %d\tOverlay = %d\tCheck = %d\n", head->num_of_sector, sdl->is_overlay, head->check);
-		if ((head->num_of_sector != -1 && head->check == 0) || (sdl->is_overlay == 0 && head->check == 0))
+		if (cond(sdl, head) == 1)
 		{
-			if (head->num_of_sector != -1 && head->check == 0 && (sdl->player->x > 0 && sdl->player->y > 0))
-				printf("Ok = %d\n", head->num_of_sector);
 			while (i + 1 < head->size)
 			{
-				head->cmn = (x2 - XO) * (head->point[i].y - head->point[i + 1].y) -
-						(y2 - YO) * (head->point[i].x - head->point[i + 1].x);
+				calculate_cmn(head, i, x2, y2);
 				if (head->cmn == 0)
 				{
 					i++;
 					continue ;
 				}
 				find_intersection(head, i, x2, y2);
-				if (head->rh / head->cmn >= 0 && head->rh / head->cmn <= 1 &&
-						head->sh / head->cmn >= 0 && head->sh / head->cmn <= 1)
-					{
-						count = count_intersection(sdl, head, count);
-						// printf("cur_dot: (%d; %d)\n", x2, y2);
-						// printf("dot: (%d; %d)\n", head->point[i].x, head->point[i].y);
-						// printf("Is check! count: %d\n", count);
-					}
+				count = check_condition(sdl, head, count);
 				i++;
 			}
 		}
 		head = head->next;
 	}
-	// printf("\n");
 	return (count);
 }
-
-void	find_local_intersection(t_sector *head, int i, t_walls *wall)
-{
-	head->rh = (wall->neighbour_y1 - head->point[i + 1].y) *
-			(head->point[i].x - head->point[i + 1].x) -
-			(wall->neighbour_x1 - head->point[i + 1].x) *
-			(head->point[i].y - head->point[i + 1].y);
-	head->sh = (wall->neighbour_y1 - head->point[i + 1].y) *
-			(wall->x2 - wall->neighbour_x1) - (wall->neighbour_x1 -
-			head->point[i + 1].x) * (wall->y2 - wall->neighbour_y1);
-}
-
-int		check_local_intersection(t_sdl *sdl, t_sector *cur_sect, t_walls *wall)
-{
-	int		i;
-	int		count;
-
-	count = 0;
-	i = 0;
-	while (i + 1 < cur_sect->size)
-	{
-		cur_sect->cmn = (wall->x2 - wall->neighbour_x1) *
-				(cur_sect->point[i].y - cur_sect->point[i + 1].y) -
-				(wall->y2 - wall->neighbour_y1) * (cur_sect->point[i].x -
-				cur_sect->point[i + 1].x);
-		if (cur_sect->cmn == 0)
-		{
-			i++;
-			continue ;
-		}
-		find_local_intersection(cur_sect, i, wall);
-		if (cur_sect->rh / cur_sect->cmn >= 0 &&
-				cur_sect->rh / cur_sect->cmn <= 1 &&
-				cur_sect->sh / cur_sect->cmn >= 0 &&
-				cur_sect->sh / cur_sect->cmn <= 1)
-			count = count_intersection(sdl, cur_sect, count);
-		i++;
-	}
-	return (count);
-}
-
-// int		check_sect_intersects(t_sector *head, t_sector *cur_sect, t_walls *wall) // ВОТ ЭТО ДОПИСАТЬ!
-// {
-// 	int		i;
-// 	int		count;
-
-// 	count = 0;
-// 	i = 0;
-// 	if (cur_sect->num_of_sector != head->num_of_sector)
-// 	{
-// 		while (i + 1 < head->size)
-// 		{
-// 			head->cmn = (wall->x2 - wall->neighbour_x1) *
-// 					(head->point[i].y - head->point[i + 1].y) -
-// 					(wall->y2 - wall->neighbour_y1) * (head->point[i].x -
-// 					head->point[i + 1].x);
-// 			if (head->cmn == 0)
-// 			{
-// 				i++;
-// 				continue ;
-// 			}
-// 			find_local_intersection(head, i, wall);
-// 			if (head->rh / head->cmn >= 0 &&
-// 					head->rh / head->cmn <= 1 &&
-// 					head->sh / head->cmn >= 0 &&
-// 					head->sh / head->cmn <= 1)
-// 				count = count_intersection(sdl, head, count);
-// 			i++;
-// 		}
-// 	}
-// 	return (count);
-// }

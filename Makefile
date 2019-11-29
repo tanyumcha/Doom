@@ -6,7 +6,7 @@
 #    By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/02/15 17:18:06 by djast             #+#    #+#              #
-#    Updated: 2019/11/29 10:20:32 by eharrag-         ###   ########.fr        #
+#    Updated: 2019/11/29 14:53:35 by eharrag-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,6 +51,7 @@ EDITOR_FILES =	editor.c \
 				events.c \
 				clicks.c \
 				take_a_lap.c \
+				save_wall.c \
 				points_of_sect.c \
 				cut_the_rope.c \
 				remover.c \
@@ -59,10 +60,12 @@ EDITOR_FILES =	editor.c \
 				utils.c \
 				init.c \
 				check_intersection.c \
+				check_local_intersects.c \
 				check_the_touch.c \
 				check_overlays.c \
 				save_map.c \
 				save_utils.c \
+				status_text.c \
 				write_to_file.c \
 				write_objects.c \
 				write_vertexes.c \
