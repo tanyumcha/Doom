@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:48:45 by djast             #+#    #+#             */
-/*   Updated: 2019/11/27 13:12:55 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/12/03 14:26:42 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void		write_sectors(t_sdl *sdl, int fd)
 		i = 0;
 		write(fd, "sector: ", 8);
 		write_to_file(fd, sdl->char_id, cur_sector->num_of_sector);
-		write(fd, "	0	675	q_floor_5	q_floor_3	0xFF0000	", 36);
+		write(fd, "	0	675	q_floor_5	q_floor_3	0xFFFFFF	", 36);
 		write_to_file(fd, sdl->char_id, cur_sector->total_num_of_obj);
 		write(fd, "\t", 1);
 		while (i < cur_sector->total_num_of_obj)

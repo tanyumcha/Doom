@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/24 11:43:08 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/27 12:43:29 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/12/03 12:52:37 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void		cut_the_rope(t_sdl *sdl, t_sector *sector, int i)
 		{
 			if (point_on_segment(sdl->grid_field,
 					&sector->point[sector->size - 1], j, i) == 1)
-				add_point(sdl, &sector, j);
+				add_point(sdl, sector, j);
 		}
 		j = status == 1 ? j - 1 : j + 1;
 	}

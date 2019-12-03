@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/21 13:49:10 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/27 15:22:18 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/12/03 12:56:27 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@
 ** int y4 = cur_wall->neighbour_y2 = head->point[j].y;
 */
 
-int		check_segments(t_walls *wall, t_point *point1, t_point *point2)
+int		check_segments(t_walls *wall, t_walls *checkwall)
 {
-	if (((wall->x1 == point1->x &&
-			wall->y1 == point1->y) &&
-			(wall->x2 == point2->x &&
-			wall->y2 == point2->y)) ||
-			((wall->x1 = point2->x &&
-			wall->y1 == point2->y) &&
-			(wall->x2 == point1->x &&
-			wall->y2 == point1->y)))
+	if (((wall->x1 == checkwall->x2 &&
+			wall->y1 == checkwall->y2) &&
+			(wall->x2 == checkwall->x1 &&
+			wall->y2 == checkwall->y1)) ||
+			((wall->x1 == checkwall->x1 &&
+			wall->y1 == checkwall->y1) &&
+			(wall->x2 == checkwall->x2 &&
+			wall->y2 == checkwall->y2)))
 		return (1);
 	return (0);
 }
@@ -48,17 +48,14 @@ void	check_the_touch(t_sector *cur_sector, int num, t_sector *head)
 
 	while (head != NULL)
 	{
-		j = 1;
-		while (j < head->size)
+		j = 0;
+		while (j < head->num_of_walls)
 		{
 			if (cur_sector->num_of_sector != head->num_of_sector)
 			{
-				if (check_segments(&cur_sector->walls[num], &head->point[j - 1],
-						&head->point[j]) == 1 && cur_sector->portal_advent == 0)
-				{
+				if (check_segments(&cur_sector->walls[num],
+									&head->walls[j]) == 1)
 					cur_sector->walls[num].portal = head->num_of_sector;
-					cur_sector->portal_advent = 1;
-				}
 			}
 			j++;
 		}

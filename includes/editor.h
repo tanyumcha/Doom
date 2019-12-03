@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/11/29 14:53:20 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/12/03 12:50:59 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,7 +252,7 @@ void						clicks3(t_sdl *sdl);
 void						input_field_click(t_sdl *sdl);
 void						delete_one_symbol(t_sdl *sdl);
 void						save_the_grid(t_point *grid_field, SDL_Rect	grid);
-void						add_point(t_sdl *sdl, t_sector **sector, int i);
+void						add_point(t_sdl *sdl, t_sector *sector, int i);
 void						make_wall(t_sdl *sdl);
 void						save_wall(t_sector *sector, int i);
 void						which_of_points(t_sdl *sdl, t_sector *sector,

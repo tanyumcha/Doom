@@ -6,19 +6,19 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:46:30 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/29 14:54:30 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/12/03 14:10:33 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
 
-void	add_point(t_sdl *sdl, t_sector **sector, int i)
+void	add_point(t_sdl *sdl, t_sector *sector, int i)
 {
-	(*sector)->point[(*sector)->size].x = sdl->grid_field[i].x;
-	(*sector)->point[(*sector)->size].y = sdl->grid_field[i].y;
-	if ((*sector)->size > 0)
-		save_wall((*sector), (*sector)->size);
-	(*sector)->size++;
+	sector->point[sector->size].x = sdl->grid_field[i].x;
+	sector->point[sector->size].y = sdl->grid_field[i].y;
+	if (sector->size > 0)
+		save_wall(sector, sector->size);
+	sector->size++;
 	add_command(sdl, &(sdl->commands), WALL_TYPE);
 }
 

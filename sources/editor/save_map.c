@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:37:38 by djast             #+#    #+#             */
-/*   Updated: 2019/11/29 13:59:15 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/12/03 14:24:09 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ int			save_map(t_sdl *sdl, char *map_name)
 	int fd;
 	int last_id;
 
-	if (check_overlays(sdl) == 0)
+	if (check_overlays(sdl) == 1)
+		sdl->is_overlay = 1;
+	else
 	{
 		sdl->save_click = 1;
 		find_portals(sdl);
@@ -52,8 +54,6 @@ int			save_map(t_sdl *sdl, char *map_name)
 		write_sectors(sdl, fd);
 		close(fd);
 	}
-	else
-		sdl->is_overlay = 1;
 	return (1);
 }
 

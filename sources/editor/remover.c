@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:39:39 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/29 13:45:17 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/12/03 13:42:35 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,5 @@ void	reset(t_sdl *sdl)
 		sdl->command_count--;
 	}
 	sdl->count = 0;
+	sdl->button_pushed = WALL_PUSH;
 }

@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 12:17:33 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/29 14:41:56 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/12/03 12:52:01 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	last_point(t_sdl *sdl, t_sector *sector, t_walls *walls, int i)
 			is_clockwise(walls))
 		{
 			cut_the_rope(sdl, sector, i);
-			add_point(sdl, &sector, i);
+			add_point(sdl, sector, i);
 			sector->num_of_sector = sdl->count;
 			sdl->count++;
 			sector->next = init_sector();
@@ -58,13 +58,13 @@ void	mid_points(t_sdl *sdl, t_sector *sector, t_walls *walls, int i)
 			if (is_clockwise(walls))
 			{
 				cut_the_rope(sdl, sector, i);
-				add_point(sdl, &sector, i);
+				add_point(sdl, sector, i);
 			}
 		}
 		else
 		{
 			cut_the_rope(sdl, sector, i);
-			add_point(sdl, &sector, i);
+			add_point(sdl, sector, i);
 		}
 	}
 }
@@ -72,7 +72,7 @@ void	mid_points(t_sdl *sdl, t_sector *sector, t_walls *walls, int i)
 void	which_of_points(t_sdl *sdl, t_sector *sector, t_walls *walls, int i)
 {
 	if (sector->size == 0)
-		add_point(sdl, &sector, i);
+		add_point(sdl, sector, i);
 	else
 	{
 		mid_points(sdl, sector, walls, i);
