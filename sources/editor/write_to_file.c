@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:48:45 by djast             #+#    #+#             */
-/*   Updated: 2019/12/03 14:26:42 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/12/06 11:05:44 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void		write_sprites(t_sdl *sdl, int fd, int last_id)
 		write(fd, "sobjct:	", 8);
 		write_to_file(fd, sdl->char_id, i++);
 		write(fd, "	0	", 3);
-		write_to_file(fd, sdl->char_id, cur_sprite->type);
+		write_to_file(fd, sdl->char_id, cur_sprite->type - 1);
 		write(fd, "	", 1);
 		write_to_file(fd, sdl->char_id, id++);
 		write(fd, "\n", 1);
