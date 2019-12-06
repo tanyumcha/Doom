@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 14:05:42 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/29 14:39:56 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/12/06 15:15:05 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,17 @@ void	choose_the_status2(t_sdl *sdl, SDL_Rect *button)
 	SDL_Color *color_text;
 
 	color_text = NULL;
-	if (sdl->status_code == CODE_OVERLAY)
+	if (sdl->status_code == CODE_OVERLAY_OR_DOUBLEPORT &&
+		sdl->is_overlay == 1)
 	{
 		color_text = create_sdl_color(255, 0, 0, 255);
 		draw_text(sdl, "Got a match of sectors", *button, *color_text);
+	}
+	else if (sdl->status_code == CODE_OVERLAY_OR_DOUBLEPORT &&
+			sdl->is_doubleport == 1)
+	{
+		color_text = create_sdl_color(255, 0, 0, 255);
+		draw_text(sdl, "Double portal is not allowed", *button, *color_text);
 	}
 	free(color_text);
 }

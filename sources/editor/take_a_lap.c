@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/08 12:46:30 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/12/03 14:10:33 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/12/06 13:23:44 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,18 @@ int		check_point(t_sector *head, int num_of_sector, int x, int y)
 
 int		checks(t_sdl *sdl, t_sector *sector, int i)
 {
-	if (check_intersection(sdl, sdl->sectors, sdl->grid_field[i].x,
-			sdl->grid_field[i].y) % 2 == 0 ||
-			((check_intersection(sdl, sdl->sectors, sdl->grid_field[i].x,
+	if ((check_intersect_l(sdl, sdl->sectors, sdl->grid_field[i].x,
+			sdl->grid_field[i].y) % 2 == 0 &&
+			check_intersect_r(sdl, sdl->sectors, sdl->grid_field[i].x,
+			sdl->grid_field[i].y) % 2 == 0) ||
+			(check_intersect_l(sdl, sdl->sectors, sdl->grid_field[i].x,
 			sdl->grid_field[i].y) % 2 == 1 &&
 			check_point(sdl->sectors, sector->num_of_sector,
-			sdl->grid_field[i].x, sdl->grid_field[i].y) == 1)))
+			sdl->grid_field[i].x, sdl->grid_field[i].y) == 1) ||
+			(check_intersect_r(sdl, sdl->sectors, sdl->grid_field[i].x,
+			sdl->grid_field[i].y) % 2 == 1 &&
+			check_point(sdl->sectors, sector->num_of_sector,
+			sdl->grid_field[i].x, sdl->grid_field[i].y) == 1))
 		return (1);
 	return (0);
 }

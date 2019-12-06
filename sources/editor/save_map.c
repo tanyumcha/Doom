@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/19 11:37:38 by djast             #+#    #+#             */
-/*   Updated: 2019/12/03 14:24:09 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/12/06 15:15:38 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,28 +31,38 @@ static int	create_file(char *map_name)
 	return (fd);
 }
 
-int			save_map(t_sdl *sdl, char *map_name)
+int			saving(t_sdl *sdl, char *map_name)
 {
 	int fd;
 	int last_id;
 
+	sdl->save_click = 1;
+	fd = create_file(map_name);
+	if (fd == -1)
+		return (0);
+	write_world(sdl, fd);
+	write_player(sdl, fd);
+	last_id = write_vertexes_wall(sdl, fd);
+	write_vertexes_sprite(sdl, fd, last_id);
+	write_objects(sdl, fd);
+	write_sprites(sdl, fd, last_id);
+	write_sectors(sdl, fd);
+	close(fd);
+	return (1);
+}
+
+int			save_map(t_sdl *sdl, char *map_name)
+{
+	find_portals(sdl);
+	if (check_doubleport(sdl) == 1)
+		sdl->is_doubleport = 1;
 	if (check_overlays(sdl) == 1)
 		sdl->is_overlay = 1;
-	else
+	if (sdl->is_doubleport == 0 &&
+		sdl->is_overlay == 0)
 	{
-		sdl->save_click = 1;
-		find_portals(sdl);
-		fd = create_file(map_name);
-		if (fd == -1)
+		if (saving(sdl, map_name) == 0)
 			return (0);
-		write_world(sdl, fd);
-		write_player(sdl, fd);
-		last_id = write_vertexes_wall(sdl, fd);
-		write_vertexes_sprite(sdl, fd, last_id);
-		write_objects(sdl, fd);
-		write_sprites(sdl, fd, last_id);
-		write_sectors(sdl, fd);
-		close(fd);
 	}
 	return (1);
 }
@@ -74,9 +84,9 @@ void		save_click(t_sdl *sdl)
 		sdl->status_code = CODE_ALREADY_EXIST;
 		return ;
 	}
-	if (sdl->is_overlay == 1)
+	if (sdl->is_overlay == 1 || sdl->is_doubleport == 1)
 	{
-		sdl->status_code = CODE_OVERLAY;
+		sdl->status_code = CODE_OVERLAY_OR_DOUBLEPORT;
 		return ;
 	}
 	bzero(sdl->map_name->text, ft_strlen(sdl->map_name->text));

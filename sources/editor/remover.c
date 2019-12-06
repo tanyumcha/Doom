@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/10 14:39:39 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/12/03 13:42:35 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/12/06 13:47:22 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,15 @@ void	reset(t_sdl *sdl)
 		delete_last_command(sdl);
 		sdl->command_count--;
 	}
+	delete_player(sdl->player);
+	sdl->command_count = 0;
+	sdl->commands = NULL;
 	sdl->count = 0;
+	sdl->status_code = 1;
+	sdl->save_click = 0;
+	sdl->count = 0;
+	sdl->is_overlay = -1;
+	sdl->is_doubleport = 0;
+	sdl->type_pressed = WALL_TYPE;
 	sdl->button_pushed = WALL_PUSH;
 }

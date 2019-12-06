@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_intersection.c                               :+:      :+:    :+:   */
+/*   check_intersect_l.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/16 09:55:28 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/11/29 14:40:33 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/12/06 11:24:25 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		cond(t_sdl *sdl, t_sector *head)
 	return (0);
 }
 
-int		check_intersection(t_sdl *sdl, t_sector *head, int x2, int y2)
+int		check_intersect_l(t_sdl *sdl, t_sector *head, int x2, int y2)
 {
 	int		i;
 	int		count;

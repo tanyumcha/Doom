@@ -6,11 +6,55 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 09:51:37 by eharrag-          #+#    #+#             */
-/*   Updated: 2019/12/03 14:23:42 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/12/06 14:44:00 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "editor.h"
+
+int		num_of_the_same_portals(t_sector *cur_sector, t_sector *head)
+{
+	int	count;
+	int num;
+
+	count = 0;
+	num = 0;
+	if (cur_sector->num_of_sector != head->num_of_sector)
+	{
+		while (num < cur_sector->num_of_walls)
+		{
+			if (cur_sector->walls[num].portal > -1 &&
+					cur_sector->walls[num].portal == head->num_of_sector)
+				count++;
+			num++;
+		}
+	}
+	return (count);
+}
+
+int		check_doubleport(t_sdl *sdl)
+{
+	t_sector	*cur_sector;
+	t_sector	*head;
+
+	sdl->is_doubleport = 0;
+	cur_sector = sdl->sectors;
+	while (cur_sector->next != NULL)
+	{
+		head = sdl->sectors;
+		while (head->next != NULL)
+		{
+			if (num_of_the_same_portals(cur_sector, head) > 1)
+			{
+				sdl->is_doubleport = 1;
+				return (1);
+			}
+			head = head->next;
+		}
+		cur_sector = cur_sector->next;
+	}
+	return (0);
+}
 
 int		check_overlays(t_sdl *sdl)
 {
@@ -25,7 +69,9 @@ int		check_overlays(t_sdl *sdl)
 		cur_sector->check = 1;
 		while (i < cur_sector->size)
 		{
-			if (check_intersection(sdl, sdl->sectors, cur_sector->point[i].x,
+			if (check_intersect_l(sdl, sdl->sectors, cur_sector->point[i].x,
+					cur_sector->point[i].y) % 2 == 1 &&
+					check_intersect_r(sdl, sdl->sectors, cur_sector->point[i].x,
 					cur_sector->point[i].y) % 2 == 1 &&
 					check_point(sdl->sectors, cur_sector->num_of_sector,
 					cur_sector->point[i].x, cur_sector->point[i].y) == 0)

@@ -6,7 +6,7 @@
 /*   By: eharrag- <eharrag-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/09/15 12:59:27 by djast             #+#    #+#             */
-/*   Updated: 2019/12/03 12:50:59 by eharrag-         ###   ########.fr       */
+/*   Updated: 2019/12/06 15:11:47 by eharrag-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,13 @@
 # define GRID_SIZE_Y 20
 # define XO 0
 # define YO 0
+# define X1 SIZE_WIN_X - 1
 
 # define CODE_ALREADY_EXIST -1
 # define CODE_OK 0
 # define CODE_NO_FILENAME -2
 # define CODE_NO_PLAYER -3
-# define CODE_OVERLAY -4
+# define CODE_OVERLAY_OR_DOUBLEPORT -4
 
 # define COLOR_UNPUSHED 0
 # define COLOR_PUSHED 1
@@ -227,6 +228,7 @@ typedef struct				s_sdl
 	int						status_code;
 	int						is_input;
 	int						is_overlay;
+	int						is_doubleport;
 	int						id;
 	int						save_click;
 	char					*char_id;
@@ -303,16 +305,17 @@ SDL_Rect					*create_rect(int x, int y, int w, int h);
 char						*cut_the_end(char *text);
 void						choose_type_of_point(t_sector **stuffbox, int type);
 void						make_player_or_sprite(t_sdl *sdl);
-int							check_intersection(t_sdl *sdl, t_sector *head,
+int							check_intersect_l(t_sdl *sdl, t_sector *head,
+												int x2, int y2);
+int							check_intersect_r(t_sdl *sdl, t_sector *head,
 												int x2, int y2);
 int							count_intersection(t_sdl *sdl, t_sector *head,
 												int count);
 void						find_portals(t_sdl *sdl);
-void						check_the_touch(t_sector *cur_sector, int i,
-											t_sector *head);
 int							check_point(t_sector *head, int num_of_sector,
 										int x, int y);
 int							check_overlays(t_sdl *sdl);
+int							check_doubleport(t_sdl *sdl);
 void						set_sprite(t_sdl *sdl, int x, int y);
 int							bigscarycondition(t_sdl *sdl);
 void						save_click(t_sdl *sdl);
